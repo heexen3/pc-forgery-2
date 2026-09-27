@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "MS Sans Serif", Tahoma, Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #008080;
+
+}
+
+button {
+    padding: 4px 12px;
+
+    background-color: #c0c0c0;
+    color: #000000;
+
+    border: 2px outset #ffffff;
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+button:active {
+    /* Borde */
+    border: 2px inset #ffffff;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    font-family: "MS Shell Dlg";
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
