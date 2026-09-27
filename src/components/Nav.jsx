@@ -27,7 +27,7 @@ function Nav() {
       </button>
       <nav id="menu-navegacion" className={menuAbierto ? "menu-abierto" : ""}>
         <a href="/">Inicio</a>
-        <a href="/tienda">Tienda</a>
+        <a href="/Shop">Tienda</a>
         <a href="/arma-tu-pc">Arma tu PC</a>
         <a href="/comunidad">Comunidad</a>
         <a href="/noticias">Noticias</a>

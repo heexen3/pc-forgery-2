@@ -1,0 +1,48 @@
+@import url(./App.css);
+@import url(./components/Header.css);
+@import url(./components/Footer.css);
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 13px;
+    color: #000000;
+}
+
+input {
+    padding: 4px;
+    box-sizing: border-box;
+
+    background-color: #ffffff;
+    color: #000000;
+
+    border: 2px inset #ffffff;
+
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 13px;
+}
+
+.formulario-registro {
+    width: 90%;
+    max-width: 400px;
+
+    margin: 40px auto;
+    padding: 20px;
+
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+}
+
+.registro {
+    padding-top: 10px;
+}
+
+.login-boton {
+    text-decoration: underline;
+    color: mediumblue;
+}

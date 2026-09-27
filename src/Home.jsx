@@ -6,7 +6,6 @@ import './App.css'
 function Home() {
   return (
     <>
-    <Nav />
     <main>
       <section className="hero">
         <div className="hero-titulo">
