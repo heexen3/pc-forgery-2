@@ -1,0 +1,165 @@
+@import url(./App.css);
+@import url(./components/Header.css);
+@import url(./components/Footer.css);
+
+
+/* VENTANAS / SECCIONES */
+
+.hero,
+.primer-pc,
+.comunidad {
+    width: 94%;
+    margin: 10px auto;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    max-width: 96%;
+}
+
+.what-to-do {
+    margin: 10px auto;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    width: 95%;
+    max-width: 400px;
+}
+
+
+/* HERO */
+
+.hero-titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-titulo h1 {
+    font-family: "MS Shell Dlg", "MS Sans Serif";
+
+    margin: 10px auto;
+    margin-left: 5px;
+
+    font-size: 30px;
+}
+
+.hero-titulo img {
+    max-height: 48px;
+    margin: 10px;
+}
+
+.hero-contenido p {
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.hero-contenido a {
+    display: block;
+    width: fit-content;
+    margin: 10px auto;
+    padding: 4px 12px;
+
+    background-color: #c0c0c0;
+    color: #000000;
+    border: 2px outset #ffffff;
+
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.hero-contenido a:active {
+    border: 2px inset #ffffff;
+}
+
+
+/* ¿POR DÓNDE EMPIEZO? */
+
+.wtd-contenido {
+    width: fit-content;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.wtd-nosotros,
+.wtd-armado,
+.wtd-diy {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.wtd-nosotros h3,
+.wtd-armado h3,
+.wtd-diy h3 {
+    font-family: "MS Shell Dlg";
+    font-style: italic;
+    text-align: center;
+}
+
+/* GUIA BÁSICA */
+
+.guia-contenido {
+    padding: 10px;
+}
+
+.guia-contenido p {
+    font-size: 14px;
+}
+
+.guia-titulo, .guia-respuesta{
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin: 5px auto;
+    gap: 15px;
+}
+
+.guia-titulo h2, .guia-respuesta h2 {
+    font-family: "MS Shell Dlg";
+    font-style: italic;
+    font-size: 30px;
+}
+
+.comunidad-contenido {
+    padding: 10px;
+}
+
+.comunidad-destacado {
+    margin-bottom: 10px;
+}
+
+.comunidad-destacado h3 {
+    font-family: "MS Shell Dlg";
+    font-size: 24px;
+}
+
+.comunidad-destacado p {
+    font-size: 14px;
+}
+
+.destacado-pie {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.contenido-ventana.oculto {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .hero,
+    .primer-pc,
+    .comunidad {
+        width: 90%;
+        max-width: 1280px;
+        margin: 10px auto;
+    }
+
+    .what-to-do {
+        width: 65%;
+        max-width: 450px;
+        margin: 10px auto;
+    }
+}

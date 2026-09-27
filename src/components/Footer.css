@@ -1,0 +1,16 @@
+/* footer */
+footer {
+    /* caja con contenido */
+    width: 90%;
+    max-width: 1200px;
+    /* vacio y margen */
+    margin: 10px auto 10px;
+    padding: 6px 10px;
+    box-sizing: border-box;
+    /* colores, borde y fuente */
+    background-color: #c0c0c0;
+    border: 2px inset #ffffff;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 12px;
+
+}

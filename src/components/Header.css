@@ -1,0 +1,68 @@
+@import url(nav.css);
+header {
+    width: 95%;
+    max-width: 1200px;
+    margin: 15px auto 0;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-sizing: border-box;
+}
+
+.barra-ventana {
+    /* div/caja de la barra del titulo */
+    height: 33px;
+    display: flex;
+    align-items: center;
+    
+    justify-content: space-between;
+    /* espacio */
+    padding: 0 5px;
+    /* Colores, background y fuente */
+    background: linear-gradient(
+        to right,
+        #000080,
+        #537d99
+    );
+    color: #ffffff;
+    /* Fuente */
+    font-family: "MS Sans Serif", Arial, Helvetica;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.botones-windows {
+    display: flex;
+    gap: 5px;
+}
+
+.botones-windows button {
+    /* Caja botones */
+    width: 23px;
+    height: 23px;
+    /* Espacio vacío */
+    padding: 0;
+    /* Colores, background y fuente */
+    background-color: #c0c0c0;
+    color: #000000;
+    /* Borde */
+    border: 2px outset #ffffff;
+    /* Fuente */
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    /* Altura fuente */
+    line-height: 15px;
+}
+
+.botones-windows button:active {
+    /* Borde */
+    border: 2px inset #ffffff;
+}
+
+.barra-titulo .wlogo {
+    height: 24px;
+}
