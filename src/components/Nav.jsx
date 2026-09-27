@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import './Header.css'
+import './Nav.css'
 
 
 function Nav() {
