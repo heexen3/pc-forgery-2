@@ -6,7 +6,7 @@ function VentanaColapsable({titulo, className, children}) {
     return (
     <section className={className}>
       <div className="barra-ventana">
-        <img src="/img/wlogo.svg" alt="" className="wlogo" width="25px" />
+        <img src="/wlogo.svg" alt="" className="wlogo" width="25px" />
         <span>{titulo}</span>
         <div className="botones-windows">
           <button

@@ -7,7 +7,7 @@ function Home() {
     <main>
       <section className="hero">
         <div className="hero-titulo">
-          <img src="/img/computer.png" alt="" />
+          <img src="/computer.png" alt="" />
           <h1>¡Bienvenido a PC Forgery!</h1>
         </div>
         <div className="hero-contenido">

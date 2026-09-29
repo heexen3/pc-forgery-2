@@ -1,0 +1,137 @@
+/* Mobile */
+
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 15px auto;
+}
+
+.titulo-noticias {
+    display: flex;
+    align-items: center;
+    gap:15px;
+    margin: 5px;
+    padding: 10px;
+}
+
+.titulo-noticias h1 {
+    font-size: 36px;
+}
+
+
+.lista-noticias {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 10px;
+}
+
+.noticia {
+    padding: 10px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-sizing: border-box;
+}
+
+.noticia-titulo {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.noticia-meta {
+    font-size: 12px;
+    color: #333333;
+    margin-bottom: 6px;
+}
+
+
+.noticia-resumen {
+    font-size: 14px;
+}
+
+.noticia-link {
+    display: block;
+    color: #000000;
+}
+
+.boton-volver {
+    display: inline-block;
+    margin: 10px;
+
+    padding: 4px 12px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.boton-volver:active {
+    border: 2px inset #ffffff;
+}
+
+.contenedor-noticia-detalle {
+    padding-bottom: 15px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-sizing: border-box;
+}
+
+.contenedor-noticia-detalle .noticia-meta {
+    font-size: 12px;
+    color: #333333;
+    margin: 0px 10px;
+}
+
+.contenedor-noticia-detalle h1 {
+    margin: 0 10px;
+}
+
+.noticia-imagen-principal {
+    display: block;
+    width: 80%;
+    max-height: 400px;
+    object-fit: cover;
+    margin-top: 10px;
+    border: 2px inset #ffffff;
+}
+
+.noticia-imagen-secundaria {
+    display: block;
+    width: 100%;
+    max-height: 220px;
+    object-fit: fill;
+
+    margin: 10px 0;
+    border: 2px inset #ffffff;
+}
+
+.noticia-cuerpo {
+    margin: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.noticia-cuerpo p {
+    margin-bottom: 12px;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+
+    .lista-noticias {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .noticia {
+        width: calc(33.33% - 7px);
+    }
+
+    .contenedor-noticia-detalle {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+}
