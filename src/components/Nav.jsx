@@ -1,11 +1,19 @@
 import { useState } from 'react'
 import "../components/Header.css"
-
+import { useNavigate, Link } from 'react-router-dom';
+import BotonesWindows from './BotonesWindows'
 
 function Nav() {
     // logica
     const [menuAbierto, setMenuAbierto] = useState(false);
+    const navigate = useNavigate()
 
+    const usuario = JSON.parse(localStorage.getItem("usuarioActual"))
+
+    function cerrarSesion() {
+        localStorage.removeItem("usuarioActual")
+        navigate("/Home")
+    }
     // renderizado
     return (
     <header>
@@ -14,11 +22,7 @@ function Nav() {
           <img src="/wlogo.svg" alt="" className="wlogo" width="25px" />
           <span>PC Forgery</span>
         </div>
-        <div className="botones-windows">
-          <button>_</button>
-          <button>□</button>
-          <button>×</button>
-        </div>
+        <BotonesWindows/>
       </div>
       <button className="boton-menu" 
       id="boton-menu"
@@ -33,11 +37,35 @@ function Nav() {
         <a href="/noticias">Noticias</a>
         <a href="/nosotros">Quiénes somos</a>
         <a href="/contacto">Contacto</a>
-        <a href="/login" id="login-link">Login</a>
-        <a href="/usuario" id="usuario-link" style={{ display: "none" }}>Usuario</a>
-        <a href="/admin" id="admin-link" style={{ display: "none" }}>Admin</a>
-        <a href="/historial" id="admin-historial-link" style={{ display: "none" }}>Ver Historial</a>
-        <a href="#" id="logout-link" style={{ display: "none" }}>Cerrar sesión</a>
+        {!usuario && (
+            <Link to="/Login">
+                Login
+            </Link>
+        )}
+
+        {usuario && usuario.rol === "usuario" && (
+            <Link to="/Usuario">
+                Usuario
+            </Link>
+        )}
+
+        {usuario && usuario.rol === "admin" && (
+            <>
+                <Link to="/Admin">
+                    Admin
+                </Link>
+
+                <Link to="/Historial">
+                    Ver Historial
+                </Link>
+            </>
+        )}
+
+        {usuario && (
+            <a onClick={cerrarSesion}>
+                Cerrar sesión
+            </a>
+        )}
       </nav>
     </header>)
 }

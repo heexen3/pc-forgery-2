@@ -1,19 +1,20 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Login.css"
+import ValidacionLogin from "./components/ValidacionLogin"
 
 
 function Login() {
     // Lógica
-
+    const navigate = useNavigate()
     // Renderizado
     return(
         <main>
-        <section class="formulario-login">
+        <section className="formulario-login">
             <h1>Iniciar sesión</h1>
-            <form>
-            <label for="usuario" >Correo electrónico o Nombre de usuario:</label>
-            <input type="text" id="usuario" name="usuario" minlength="3" required placeholder="john_doe OR john.doe@example.com" />
-            <label for="password">Contraseña:</label>
+            <form onSubmit={(event) => ValidacionLogin(event,navigate)}>
+            <label htmlFor="usuario" >Correo electrónico o Nombre de usuario:</label>
+            <input type="text" id="usuario" name="usuario" minLength="3" required placeholder="john_doe OR john.doe@example.com" />
+            <label htmlFor="password">Contraseña:</label>
             <input type="password" id="password" name="password" required placeholder="password" />
             <button type="submit" id="btnInicio">Iniciar sesión</button>
         </form>
