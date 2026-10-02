@@ -1,0 +1,549 @@
+/* =======================================================
+   MOBILE FIRST / ESTRUCTURA BASE (< 768px)
+   Estética Retro Windows 95 optimizada para dispositivos móviles
+======================================================= */
+
+.wizard-container {
+    width: 95%;
+    max-width: 1200px;
+    margin: 15px auto 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: "MS Shell Dlg", "MS Sans Serif", Tahoma, Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+/* Ventanas Retro con biselado clásico de Windows 95 */
+.window {
+    width: 100%;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: inset 1px 1px 0px #ffffff, inset -1px -1px 0px #808080;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.wizard-window {
+    width: 100%;
+}
+
+.summary-window {
+    width: 100%;
+}
+
+/* Barra de título con degradado retro */
+.window-header {
+    min-height: 34px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 8px;
+    background: linear-gradient(to right, #000080, #537d99);
+    color: #ffffff;
+    gap: 8px;
+    box-sizing: border-box;
+}
+
+.window-title {
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Controles superiores de ventana (_ □ X) */
+.window-controls {
+    display: flex;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.window-controls button {
+    width: 22px;
+    height: 22px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    color: #000000;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 16px;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.window-controls button:active {
+    border: 2px inset #ffffff;
+}
+
+/* Barra superior de pestañas de navegación con scroll horizontal táctil */
+#wizard-steps.wizard-steps {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: flex-end !important;
+    gap: 4px;
+    padding: 6px 6px 0 6px;
+    background-color: #c0c0c0;
+    border-top: none;
+    border-bottom: 2px solid #808080;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Ocultar barra de scroll tosca en webkit manteniendo funcionalidad de deslizamiento */
+.wizard-steps::-webkit-scrollbar {
+    height: 4px;
+}
+.wizard-steps::-webkit-scrollbar-thumb {
+    background: #808080;
+}
+
+.step-tab {
+    flex-shrink: 0;
+    min-height: 38px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    border-bottom: none;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-family: inherit;
+    color: #000000;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.step-tab:active {
+    border: 2px inset #ffffff;
+}
+
+.step-tab.active {
+    background-color: #000080;
+    color: #ffffff;
+    font-weight: bold;
+    border-bottom: none;
+}
+
+/* Área central de contenido */
+.wizard-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+/* Globo de ayuda Clippy */
+.clippy-helper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background-color: #ffffe1;
+    border: 1px solid #000000;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.clippy-img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.clippy-dialog {
+    font-size: 12px;
+    line-height: 1.35;
+    color: #000000;
+    word-break: break-word;
+}
+
+/* Grilla / Contenedor de selección de productos */
+.grid-productos {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 55vh;
+    min-height: 180px;
+    overflow-y: auto;
+    padding: 8px;
+    background-color: #ffffff;
+    border: 2px inset #ffffff;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+}
+
+/* Tarjeta individual de componente - Disposición móvil optimizada */
+.item-card {
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 65px 1fr;
+    gap: 8px 10px;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.item-card.selected {
+    background-color: #dbe4f0;
+    outline: 2px dashed #000080;
+}
+
+.item-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    justify-self: center;
+    align-self: center;
+}
+
+.item-title {
+    font-size: 13px;
+    margin: 0;
+    grid-column: 2;
+    font-weight: bold;
+    color: #000000;
+    line-height: 1.25;
+}
+
+.item-specs {
+    font-size: 11px;
+    color: #333333;
+    grid-column: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px 6px;
+}
+
+.item-specs span {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1px 4px;
+    border: 1px solid #a0a0a0;
+    border-radius: 2px;
+    white-space: nowrap;
+}
+
+.item-price {
+    font-size: 14px;
+    font-weight: bold;
+    color: #006600;
+    margin: 0;
+    grid-column: 2;
+}
+
+/* Botón de la tarjeta extendido en móvil para facilitar toque */
+.item-card .btn-retro {
+    grid-column: 1 / span 2;
+    width: 100%;
+    margin-top: 4px;
+    min-height: 40px;
+    font-weight: bold;
+}
+
+/* Botones retro estándar con objetivo táctil amplio */
+.btn-retro {
+    padding: 8px 14px;
+    min-height: 38px;
+    font-size: 13px;
+    font-family: inherit;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    color: #000000;
+    cursor: pointer;
+    box-sizing: border-box;
+    touch-action: manipulation;
+    user-select: none;
+}
+
+.btn-retro:active:not(:disabled) {
+    border: 2px inset #ffffff;
+    background-color: #b0b0b0;
+}
+
+.btn-retro:disabled {
+    color: #808080;
+    text-shadow: 1px 1px 0px #ffffff;
+    cursor: not-allowed;
+}
+
+.btn-selected {
+    background-color: #000080;
+    color: #ffffff;
+    font-weight: bold;
+    border: 2px inset #ffffff;
+}
+
+.btn-primary {
+    font-weight: bold;
+    background-color: #000080;
+    color: #ffffff;
+}
+
+/* Barra inferior con Anterior / Siguiente */
+.wizard-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    padding: 10px;
+    border-top: 2px solid #808080;
+    background-color: #c0c0c0;
+    box-sizing: border-box;
+}
+
+.wizard-actions .btn-retro {
+    flex: 1;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+/* =======================================================
+   BARRA LATERAL / PANEL DE RESUMEN
+======================================================= */
+
+.summary-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.summary-list {
+    list-style: none;
+    margin: 0;
+    padding: 8px;
+    background-color: #ffffff;
+    border: 2px inset #ffffff;
+    min-height: 140px;
+    max-height: 220px;
+    overflow-y: auto;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-sizing: border-box;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 4px;
+    border-bottom: 1px dotted #cccccc;
+    gap: 8px;
+}
+
+.summary-item span:first-child {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.summary-item span:last-child {
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+/* Semáforo de compatibilidad */
+.compatibility-box {
+    padding: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    border: 2px inset #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.3;
+    box-sizing: border-box;
+}
+
+.status-ok {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 8px 0;
+    border-top: 2px solid #808080;
+    color: #000000;
+}
+
+.summary-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.summary-buttons .btn-retro {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Mensaje cuando no hay productos compatibles */
+.empty-msg {
+    text-align: center;
+    padding: 30px 10px;
+    color: #555555;
+    font-size: 13px;
+}
+
+/* Ocultar contenido al colapsar ventana */
+.contenido-ventana.oculto {
+    display: none;
+}
+
+/* =======================================================
+   TABLET PEQUEÑA / MOBILE LANDSCAPE (>= 576px)
+======================================================= */
+
+@media (min-width: 576px) {
+    .grid-productos {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .item-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        justify-content: space-between;
+    }
+
+    .item-img {
+        width: 70px;
+        height: 70px;
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .item-title {
+        grid-column: auto;
+        text-align: center;
+    }
+
+    .item-specs {
+        grid-column: auto;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .item-price {
+        grid-column: auto;
+    }
+
+    .item-card .btn-retro {
+        grid-column: auto;
+        width: 100%;
+    }
+}
+
+/* =======================================================
+   TABLET (>= 768px)
+======================================================= */
+
+@media (min-width: 768px) {
+    .wizard-container {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .wizard-window {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .summary-window {
+        width: 280px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 15px;
+    }
+
+    .window-title {
+        font-size: 14px;
+    }
+
+    .clippy-img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .clippy-dialog {
+        font-size: 13px;
+    }
+
+    .grid-productos {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        max-height: 480px;
+    }
+
+    .wizard-actions {
+        justify-content: flex-end;
+    }
+
+    .wizard-actions .btn-retro {
+        flex: initial;
+        min-width: 110px;
+        min-height: 38px;
+        font-size: 13px;
+    }
+}
+
+/* =======================================================
+   PC DESKTOP (>= 1024px)
+======================================================= */
+
+@media (min-width: 1024px) {
+    .summary-window {
+        width: 320px;
+    }
+
+    .grid-productos {
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        max-height: 520px;
+    }
+}
