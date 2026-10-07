@@ -1,0 +1,96 @@
+@import url(./App.css);
+@import url(./components/Header.css);
+@import url(./components/Footer.css);
+.contenido {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.contenido {
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+
+    margin-bottom: 15px;
+}
+
+.admin-titulo h2 {
+    font-family: "MS Shell Dlg";
+    font-style: normal;
+    color: #ffffff;
+    padding-top: 10px;
+}
+
+.admin-titulo {
+    height: 33px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    
+    padding: 0 5px;
+    background: linear-gradient(
+        to right,
+        #000080,
+        #537d99
+    );
+    margin-bottom: 4px;
+}
+
+.contenido-botones {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    
+}
+
+.historial-contenedor {
+    display: flex;
+    flex-direction: column;
+}
+ /* Botones */
+.btn-admin {
+    background-color: #c0c0c0;
+    color: #000000;
+    border: 2px outset #ffffff;
+    border-radius: 0;
+    padding: 6px 12px;
+}
+
+.btn-admin:hover {
+    background-color: #c0c0c0;
+    color: #000000;
+    border: 2px outset #ffffff;
+}
+
+.btn-admin:active {
+    border: 2px inset #ffffff;
+}
+/* Historial */
+
+.historial-contenedor {
+    padding: 10px;
+    overflow-x: auto;
+}
+
+.historial-tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.historial-tabla th,
+.historial-tabla td {
+    border: 1px solid #000000;
+    padding: 8px;
+    text-align: center;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .contenido-botones {
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+}

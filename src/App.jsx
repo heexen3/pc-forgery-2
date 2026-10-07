@@ -8,6 +8,8 @@ import Shop from './Shop.jsx'
 import Product from './Product.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
+import Admin from './Admin.jsx'
+
 function App() {
     return (
       <>
@@ -22,6 +24,8 @@ function App() {
                 {/* Registro y Login */}
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Register" element={<Register />} />
+                {/* Rutas de usuario y admin */}
+                <Route path="/Admin" element={<Admin />} />
                 {/* si el usuario pone cualquier otra ruta va a ir al Home*/}
                 <Route path="*" element={<Home />} />
             </Routes>
