@@ -1,6 +1,8 @@
+
 @import url(./App.css);
 @import url(./components/Header.css);
 @import url(./components/Footer.css);
+
 .contenido {
     width: 90%;
     max-width: 1200px;
@@ -10,9 +12,10 @@
 .contenido {
     background-color: #c0c0c0;
     border: 2px outset #ffffff;
-
     margin-bottom: 15px;
 }
+
+/* Título */
 
 .admin-titulo h2 {
     font-family: "MS Shell Dlg";
@@ -26,7 +29,7 @@
     display: flex;
     width: 100%;
     align-items: center;
-    
+
     padding: 0 5px;
     background: linear-gradient(
         to right,
@@ -36,18 +39,67 @@
     margin-bottom: 4px;
 }
 
+/* Columnas de administración */
+
+.admin-menu .contenido {
+    width: 100%;
+    margin: 0 0 15px;
+}
+
+.admin-vista .contenido {
+    width: 100%;
+    margin: 0 0 15px;
+}
+
+/* Botones del menú y contenido */
+
 .contenido-botones {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    
+    gap: 8px;
 }
 
-.historial-contenedor {
-    display: flex;
-    flex-direction: column;
+/* Menú de administración */
+
+.admin-menu .contenido-botones button {
+    background-color: #c0c0c0;
+    color: #000000;
+    border: 2px outset #ffffff;
+    border-radius: 0;
+    padding: 6px 12px;
+    text-align: center;
 }
- /* Botones */
+
+.admin-menu .contenido-botones button:hover {
+    background-color: #c0c0c0;
+    color: #000000;
+}
+
+.admin-menu .contenido-botones button:active {
+    border: 2px inset #ffffff;
+}
+
+/* Panel de administración */
+
+.admin-panel {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* Columnas */
+
+.admin-menu .contenido,
+.admin-vista .contenido {
+    width: 100%;
+    margin: 0 0 15px;
+}
+
+/* Botones */
+
 .btn-admin {
     background-color: #c0c0c0;
     color: #000000;
@@ -65,9 +117,12 @@
 .btn-admin:active {
     border: 2px inset #ffffff;
 }
+
 /* Historial */
 
 .historial-contenedor {
+    display: flex;
+    flex-direction: column;
     padding: 10px;
     overflow-x: auto;
 }
@@ -85,12 +140,17 @@
 }
 
 /* Tablet */
-@media (min-width: 768px) {
-    .contenido-botones {
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 
-}
+@media (min-width: 768px) {
+    .admin-menu .contenido-botones {
+        padding: 5px;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .admin-vista .contenido-botones {
+        padding: 5px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
