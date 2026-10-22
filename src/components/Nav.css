@@ -1,0 +1,164 @@
+/* MOBILE */
+
+header {
+    width: 95%;
+    max-width: 1200px;
+    margin: 15px auto 0;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-sizing: border-box;
+}
+
+.barra-ventana {
+    /* div/caja de la barra del titulo */
+    height: 33px;
+    display: flex;
+    align-items: center;
+    
+    justify-content: space-between;
+    /* espacio */
+    padding: 0 5px;
+    /* Colores, background y fuente */
+    background: linear-gradient(
+        to right,
+        #000080,
+        #537d99
+    );
+    color: #ffffff;
+    /* Fuente */
+    font-family: "MS Sans Serif", Arial, Helvetica;
+}
+
+.marca {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.botones-windows {
+    display: flex;
+    gap: 5px;
+}
+
+.botones-windows button {
+    /* Caja botones */
+    width: 23px;
+    height: 23px;
+    /* Espacio vacío */
+    padding: 0;
+    /* Colores, background y fuente */
+    background-color: #c0c0c0;
+    color: #000000;
+    /* Borde */
+    border: 2px outset #ffffff;
+    /* Fuente */
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    /* Altura fuente */
+    line-height: 15px;
+}
+
+.botones-windows button:active {
+    /* Borde */
+    border: 2px inset #ffffff;
+}
+
+.barra-titulo .wlogo {
+    height: 24px;
+}
+
+
+.boton-menu {
+    display: block;
+
+    width: 100%;
+    padding: 7px 10px;
+
+    text-align: left;
+
+    background-color: #c0c0c0;
+    color: #000000;
+
+    border: 2px outset #ffffff;
+
+    font-family: "MS Sans Serif", Arial, Helvetica, sans-serif;
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+header nav {
+    display: none;
+
+    flex-direction: column;
+    align-items: stretch;
+
+    background-color: #c0c0c0;
+
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+
+    padding: 2px;
+}
+
+header nav.menu-abierto {
+    display: flex;
+}
+
+header nav a {
+    padding: 7px 9px;
+
+    color: #000000;
+    text-decoration: none;
+
+    font-family: "MS Sans Serif", Arial, Helvetica, sans-serif;
+    font-size: 13px;
+
+    white-space: nowrap;
+}
+
+header nav a:hover {
+    background-color: #000080;
+    color: #ffffff;
+}
+
+
+/* TABLET */
+
+@media (min-width: 768px) {
+
+    .boton-menu {
+        display: none;
+    }
+
+    header nav {
+        display: flex;
+
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+
+        height: 25px;
+
+        padding: 0 0 0 5px;
+    }
+
+    header nav a {
+        padding: 5px 10px;
+        font-size: 15px;
+    }
+
+}
+
+
+/* PC */
+
+@media (min-width: 1024px) {
+
+    nav a {
+        padding: 5px 12px;
+    }
+
+}
+

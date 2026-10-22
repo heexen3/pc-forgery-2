@@ -1,0 +1,62 @@
+@import url(./App.css);
+@import url(./components/Header.css);
+@import url(./components/Footer.css);
+
+/* mobile */
+.contacto-contenido {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.contacto-titulo {
+    height: 33px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    padding: 0 5px;
+    background: linear-gradient(to right,
+            #000080,
+            #537d99);
+    margin-bottom: 4px;
+}
+
+.contacto-info {
+    width: 100%;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+
+}
+
+.contacto-formulario {
+    width: 100%;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    padding: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.contacto-formulario p {
+    padding-left: 30px;
+}
+
+.formulario {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contacto-titulo h2 {
+    font-size: 24px;
+    color: #ffffff;
+    font-weight: normal;
+}
+
+@media (min-width: 768px) {
+    .formulario {
+        width: 500px;
+    }
+}

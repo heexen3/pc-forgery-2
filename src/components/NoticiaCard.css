@@ -1,0 +1,32 @@
+.noticia {
+    padding: 10px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-sizing: border-box;
+}
+
+.noticia-titulo {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.noticia-meta {
+    font-size: 12px;
+    color: #333333;
+    margin-bottom: 6px;
+}
+
+.noticia-resumen {
+    font-size: 14px;
+}
+
+.noticia-link {
+    display: block;
+    color: #000000;
+}
+
+@media (min-width: 768px) {
+    .noticia {
+        width: calc(33.33% - 7px);
+    }
+}

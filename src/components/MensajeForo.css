@@ -1,0 +1,20 @@
+.mensaje {
+    padding: 8px;
+    margin-top: 8px;
+    background-color: #f0f0f0;
+    border: 1px solid #808080;
+}
+
+.mensaje-original {
+    background-color: #e8e8f8;
+}
+
+.mensaje-autor {
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.mensaje-texto {
+    font-size: 13px;
+}
