@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import bootstrapCSS from "bootstrap/dist/css/bootstrap.min.css?url"
 import adminCSS from "./Admin.css?url"
-import BotonesWindows from "./components/BotonesWindows"
+import Usuarios from "./components/admin/Usuarios"
+import Reportes from "./components/admin/Reportes"
+import PerfilAdmin from "./components/admin/PerfilAdmin"
 function Admin() {
     // Lógica
     const [vista, setVista] = useState("comandos")
@@ -45,6 +47,18 @@ return (
                             onClick={() => setVista("historial")}
                         >
                             Historial
+                        </button>
+                        
+                        <button onClick={() => setVista("reportes")}>
+                            Ver Reportes
+                        </button>
+                        
+                        <button onClick={() => setVista("usuarios")}>
+                            Ver Usuarios
+                        </button>
+                        
+                        <button onClick={() => setVista("perfil")}>
+                            Ver Perfil Admin
                         </button>
                     </div>
                 </section>
@@ -93,6 +107,12 @@ return (
                         </div>
                     </section>
                 )}
+
+                {vista === "usuarios" && <Usuarios />}
+
+                {vista === "reportes" && <Reportes />}
+
+                {vista === "perfil" && <PerfilAdmin />}
 
             </div>
         </div>

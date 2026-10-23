@@ -154,3 +154,21 @@
         justify-content: space-between;
     }
 }
+
+/* Ajuste del título en tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .admin-titulo {
+        height: auto;
+        min-height: 33px;
+        padding: 5px 8px;
+        box-sizing: border-box;
+    }
+
+    .admin-titulo h2 {
+        font-size: 18px;
+        line-height: 1.2;
+        padding-top: 0;
+        margin: 0;
+        overflow-wrap: anywhere;
+    }
+}
