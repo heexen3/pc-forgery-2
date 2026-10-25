@@ -1,8 +1,8 @@
 import { useState } from "react"
-import NuevoUsuario from "./NuevoUsuario"
-import MostrarUsuarios from "./MostrarUsuarios"
-import EditarUsuario from "./EditarUsuario"
-import HistorialCompras from "./HistorialCompras"
+import NuevoUsuario from "./NuevoUsuario.jsx"
+import MostrarUsuarios from "./MostrarUsuarios.jsx"
+import EditarUsuario from "./EditarUsuario.jsx"
+import HistorialCompras from "./HistorialCompras.jsx"
 
 function Usuarios() {
     const [vistaUsuario, setVistaUsuario] = useState("mostrar")

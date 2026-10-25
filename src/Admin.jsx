@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import bootstrapCSS from "bootstrap/dist/css/bootstrap.min.css?url"
 import adminCSS from "./Admin.css?url"
-import Usuarios from "./components/admin/Usuarios"
-import Reportes from "./components/admin/Reportes"
-import PerfilAdmin from "./components/admin/PerfilAdmin"
+import Usuarios from "./components/admin/Usuarios.jsx"
+import Reportes from "./components/admin/Reportes.jsx"
+import PerfilAdmin from "./components/admin/PerfilAdmin.jsx"
+
 function Admin() {
     // Lógica
     const [vista, setVista] = useState("comandos")

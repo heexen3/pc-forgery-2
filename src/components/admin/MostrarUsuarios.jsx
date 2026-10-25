@@ -31,8 +31,8 @@ function MostrarUsuarios() {
                         <tbody>
                             {usuarios.map((usuario, indice) => (
                                 <tr key={usuario.correo || indice}>
-                                    <td>{usuario.nombre}</td>
-                                    <td>{usuario.correo}</td>
+                                    <td>{usuario.nombre || usuario.usuario}</td>
+                                    <td>{usuario.correo || usuario.email}</td>
                                     <td>{usuario.rol}</td>
                                 </tr>
                             ))}

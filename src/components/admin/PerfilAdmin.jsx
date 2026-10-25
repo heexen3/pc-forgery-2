@@ -13,8 +13,8 @@ function PerfilAdmin() {
         const usuarioActual = obtenerPerfilAdmin()
 
         if (usuarioActual) {
-            setNombre(usuarioActual.nombre || "")
-            setCorreo(usuarioActual.correo || "")
+            setNombre(usuarioActual.nombre || usuarioActual.usuario || "")
+            setCorreo(usuarioActual.correo || usuarioActual.email || "")
         } else {
             setMensaje("No se encontró una sesión activa.")
         }
@@ -26,6 +26,15 @@ function PerfilAdmin() {
         const resultado = guardarPerfilAdmin(nombre, correo)
 
         setMensaje(resultado.mensaje)
+
+        if (resultado.correcto) {
+            const usuarioActual = obtenerPerfilAdmin()
+
+            if (usuarioActual) {
+                setNombre(usuarioActual.nombre || usuarioActual.usuario || "")
+                setCorreo(usuarioActual.correo || usuarioActual.email || "")
+            }
+        }
     }
 
     return (

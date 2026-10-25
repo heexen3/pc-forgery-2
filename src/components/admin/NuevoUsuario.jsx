@@ -14,7 +14,8 @@ function NuevoUsuario() {
         ) || []
 
         const correoExiste = usuariosGuardados.some(
-            usuario => usuario.correo === correo
+            usuario =>
+                (usuario.correo || usuario.email)?.toLowerCase() === correo.trim().toLowerCase()
         )
 
         if (correoExiste) {
@@ -23,8 +24,8 @@ function NuevoUsuario() {
         }
 
         const nuevoUsuario = {
-            nombre: nombre,
-            correo: correo,
+            nombre: nombre.trim(),
+            correo: correo.trim(),
             contrasena: contrasena,
             rol: rol
         }

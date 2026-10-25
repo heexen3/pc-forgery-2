@@ -20,12 +20,12 @@ function EditarUsuario() {
         setCorreoSeleccionado(correoUsuario)
 
         const usuarioSeleccionado = usuarios.find(
-            usuario => usuario.correo === correoUsuario
+            usuario => (usuario.correo || usuario.email) === correoUsuario
         )
 
         if (usuarioSeleccionado) {
-            setNombre(usuarioSeleccionado.nombre || "")
-            setCorreo(usuarioSeleccionado.correo || "")
+            setNombre(usuarioSeleccionado.nombre || usuarioSeleccionado.usuario || "")
+            setCorreo(usuarioSeleccionado.correo || usuarioSeleccionado.email || "")
             setRol(usuarioSeleccionado.rol || "usuario")
         } else {
             setNombre("")
@@ -39,8 +39,8 @@ function EditarUsuario() {
 
         const correoExiste = usuarios.some(
             usuario =>
-                usuario.correo === correo &&
-                usuario.correo !== correoSeleccionado
+                (usuario.correo || usuario.email) === correo &&
+                (usuario.correo || usuario.email) !== correoSeleccionado
         )
 
         if (correoExiste) {
@@ -49,7 +49,7 @@ function EditarUsuario() {
         }
 
         const usuariosActualizados = usuarios.map(usuario => {
-            if (usuario.correo === correoSeleccionado) {
+            if ((usuario.correo || usuario.email) === correoSeleccionado) {
                 return {
                     ...usuario,
                     nombre: nombre,
@@ -96,10 +96,10 @@ function EditarUsuario() {
 
                             {usuarios.map((usuario, indice) => (
                                 <option
-                                    key={usuario.correo || indice}
-                                    value={usuario.correo}
+                                    key={usuario.correo || usuario.email || indice}
+                                    value={usuario.correo || usuario.email}
                                 >
-                                    {usuario.nombre} ({usuario.correo})
+                                    {usuario.nombre || usuario.usuario} ({usuario.correo || usuario.email})
                                 </option>
                             ))}
                         </select>

@@ -9,6 +9,6 @@ export function filtrarCompras(compras, correo) {
 
     return compras.filter(
         compra =>
-            compra.correo?.toLowerCase() === correo.trim().toLowerCase()
+            compra.correo?.trim().toLowerCase() === correo.trim().toLowerCase()
     )
 }

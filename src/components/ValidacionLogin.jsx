@@ -1,11 +1,8 @@
-
-
-
 function ValidacionLogin(event, navigate) {
     event.preventDefault()
 
-    const identificador = event.target.usuario.value.trim()
-    const password = event.target.password.value.trim()
+    const identificador = event.target.elements.usuario.value.trim()
+    const password = event.target.elements.password.value.trim()
 
     const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || []
 

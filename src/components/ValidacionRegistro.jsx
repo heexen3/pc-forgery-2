@@ -5,10 +5,10 @@
 function ValidacionRegistro(event, navigate) {
     event.preventDefault()
 
-    const usuario = event.target.usuario.value
-    const email = event.target.email.value
-    const password = event.target.password.value
-    const confirmPassword = event.target.confirm_password.value
+    const usuario = event.target.elements.usuario.value
+    const email = event.target.elements.email.value
+    const password = event.target.elements.password.value
+    const confirmPassword = event.target.elements.confirm_password.value
 
     const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.-]).{6,}$/
 

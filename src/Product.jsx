@@ -49,7 +49,7 @@ function Product() {
                 </div>
                 <div className="producto-detalles">
                     <p className="producto-precio">
-                        $Precio
+                        {producto.precio}
                     </p>
                     <button className="producto-agregar-carrito">
                         Agregar al carrito

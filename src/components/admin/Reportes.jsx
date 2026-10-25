@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { generarReporte } from "./Reportes.js"
+import { generarReporte } from "./Reportes"
 
 function Reportes() {
     const [reporte, setReporte] = useState(null)

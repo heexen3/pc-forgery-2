@@ -16,10 +16,12 @@ export function guardarPerfilAdmin(nombre, correo) {
         localStorage.getItem("usuarios")
     ) || []
 
+    const correoActual = usuarioActual.correo || usuarioActual.email
+
     const correoExiste = usuarios.some(
         usuario =>
-            usuario.correo?.toLowerCase() === correo.trim().toLowerCase() &&
-            usuario.correo !== usuarioActual.correo
+            (usuario.correo || usuario.email)?.toLowerCase() === correo.trim().toLowerCase() &&
+            (usuario.correo || usuario.email)?.toLowerCase() !== correoActual?.toLowerCase()
     )
 
     if (correoExiste) {
@@ -36,8 +38,12 @@ export function guardarPerfilAdmin(nombre, correo) {
     }
 
     const usuariosActualizados = usuarios.map(usuario =>
-        usuario.correo === usuarioActual.correo
-            ? { ...usuario, nombre: nombre.trim(), correo: correo.trim() }
+        (usuario.correo || usuario.email) === correoActual
+            ? {
+                ...usuario,
+                nombre: nombre.trim(),
+                correo: correo.trim()
+            }
             : usuario
     )
 
