@@ -4,6 +4,7 @@ import ProductoCard from "./components/ProductoCard"
 import VentanaApp from "./components/VentanaApp"
 import { CATEGORIAS, etiquetaCategoria, obtenerProductos } from "./data/catalogoProductos.js"
 import { ORDENES, filtrarProductos, contarPorCategoria } from "./components/tienda/FiltrosTienda.js"
+import { rutaPublica } from "./utils/rutaPublica.js"
 
 function Shop() {
     // Lógica
@@ -89,7 +90,7 @@ function Shop() {
                             onClick={() => elegirCategoria("")}
                             aria-pressed={categoria === ""}
                         >
-                            <img src="/hardware-icon.svg" alt="" />
+                            <img src={rutaPublica("/hardware-icon.svg")} alt="" />
                             Todas ({productos.length})
                         </button>
                         <div className="carpeta-hijos">
@@ -101,7 +102,7 @@ function Shop() {
                                     onClick={() => elegirCategoria(item.valor)}
                                     aria-pressed={categoria === item.valor}
                                 >
-                                    <img src="/category-icon.svg" alt="" />
+                                    <img src={rutaPublica("/category-icon.svg")} alt="" />
                                     {item.etiqueta} ({conteo[item.valor]})
                                 </button>
                             ))}
@@ -113,7 +114,7 @@ function Shop() {
                                     onClick={() => elegirCategoria(valor)}
                                     aria-pressed={categoria === valor}
                                 >
-                                    <img src="/category-icon.svg" alt="" />
+                                    <img src={rutaPublica("/category-icon.svg")} alt="" />
                                     {etiquetaCategoria(valor)} ({conteo[valor]})
                                 </button>
                             ))}
@@ -123,7 +124,7 @@ function Shop() {
                     {/* Vista de íconos = productos */}
                     <div className="explorador-vista">
                         <div className="explorador-encabezado">
-                            <img src="/shopping-bag.svg" alt="" />
+                            <img src={rutaPublica("/shopping-bag.svg")} alt="" />
                             <div>
                                 <h1>{categoria ? etiquetaCategoria(categoria) : "Bienvenido a la tienda PC Forgery"}</h1>
                                 <p>Selecciona una carpeta para filtrar o busca un producto por su nombre.</p>

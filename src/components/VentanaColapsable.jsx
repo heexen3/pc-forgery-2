@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import { rutaPublica } from "../utils/rutaPublica.js"
 
 function VentanaColapsable({titulo, className, children}) {
     const [colapsada, setColapsada] = useState(false)
@@ -6,7 +7,7 @@ function VentanaColapsable({titulo, className, children}) {
     return (
     <section className={className}>
       <div className="barra-ventana">
-        <img src="/wlogo.svg" alt="" className="wlogo" width="25px" />
+        <img src={rutaPublica("/wlogo.svg")} alt="" className="wlogo" width="25px" />
         <span>{titulo}</span>
         <div className="botones-windows">
           <button

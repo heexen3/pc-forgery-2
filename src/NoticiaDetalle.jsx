@@ -1,6 +1,7 @@
 import { useSearchParams, Link } from "react-router-dom"
 import "./NoticiaDetalle.css"
 import MarcoNavegador from "./components/escritorio/MarcoNavegador.jsx"
+import { rutaPublica } from "./utils/rutaPublica.js"
 // import noticia1 from "./assets/noticia1.webp"
 // import noticia2 from "./assets/noticia2.webp"
 // import monalisa from "./assets/monalisa.jpeg"
@@ -67,14 +68,14 @@ function NoticiaDetalle() {
                 <h1>{noticia.titulo}</h1>
                 <p className="noticia-meta">{noticia.fecha}</p>
 
-                <img src={noticia.imagen} alt={noticia.titulo} className="noticia-imagen-principal" />
+                <img src={rutaPublica(noticia.imagen)} alt={noticia.titulo} className="noticia-imagen-principal" />
 
                 <div className="noticia-cuerpo">
                     {noticia.cuerpo.map(function (parrafo, i) {
                         return <p key={i}>{parrafo}</p>
                     })}
                     {noticia.imagenSecundaria && (
-                        <img src={noticia.imagenSecundaria} alt="" className="noticia-imagen-secundaria" />
+                        <img src={rutaPublica(noticia.imagenSecundaria)} alt="" className="noticia-imagen-secundaria" />
                     )}
                 </div>
             </div>

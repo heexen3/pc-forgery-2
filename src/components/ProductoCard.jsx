@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { agregarAlCarrito, formatearPrecio } from './carrito/Carrito.js'
 import { obtenerInsignias } from './tienda/FiltrosTienda.js'
 import { mostrarAlerta } from "./dialogo/Dialogo.js"
+import { rutaPublica } from "../utils/rutaPublica.js"
 
 function ProductoCard({ producto }) {
     const { id, nombre, imagen, precio } = producto
@@ -23,7 +24,7 @@ function ProductoCard({ producto }) {
         <div className={`producto-card ${agotado ? "producto-agotado" : ""}`}>
             <div className="producto-card-imagen">
                 <Link to={`/producto/${id}`}>
-                    <img src={imagen || "/questionmark.png"} alt={nombre} />
+                    <img src={rutaPublica(imagen || "/questionmark.png")} alt={nombre} />
                 </Link>
                 {insignias.length > 0 && (
                     <div className="insignias">
