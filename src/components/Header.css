@@ -66,3 +66,18 @@ header {
 .barra-titulo .wlogo {
     height: 24px;
 }
+
+/* Responsividad: el título de la ventana no empuja los botones fuera en pantallas angostas */
+.marca {
+    min-width: 0;
+}
+
+.marca span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.botones-windows {
+    flex-shrink: 0;
+}
