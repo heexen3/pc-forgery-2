@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+<rect width="200" height="200" fill="#008080"/>
+<rect x="8" y="8" width="184" height="184" fill="#c0c0c0" stroke="#ffffff" stroke-width="3"/>
+<rect x="11" y="11" width="181" height="181" fill="none" stroke="#808080" stroke-width="2"/>
+<rect x="25" y="55" width="150" height="70" fill="#303030" stroke="#000000" stroke-width="2"/><circle cx="70" cy="90" r="26" fill="#606060" stroke="#000" stroke-width="2"/><circle cx="130" cy="90" r="26" fill="#606060" stroke="#000" stroke-width="2"/><circle cx="70" cy="90" r="6" fill="#000"/><circle cx="130" cy="90" r="6" fill="#000"/><rect x="40" y="125" width="80" height="8" fill="#d4af37"/>
+<rect x="20" y="160" width="160" height="22" fill="#000080"/>
+<text x="100" y="176" font-family="Tahoma, Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="middle">Tarjeta de video</text>
+</svg>

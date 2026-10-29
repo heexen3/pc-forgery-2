@@ -27,6 +27,8 @@ function App() {
                 <Route path="/Home" element={<Home />}/>
                 {/* Conjunto de tienda y detalle de productos */}
                 <Route path="/Shop" element={<Shop />}/>
+                <Route path="/producto/:id" element={<Product />}/>
+                {/* ruta antigua del detalle (?id=), se mantiene por compatibilidad */}
                 <Route path="/Shop/Product" element={<Product />}/>
                 {/* Carrito de compras y boletas */}
                 <Route path="/Carrito" element={<Carrito />} />

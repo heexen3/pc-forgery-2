@@ -15,7 +15,7 @@ function Home() {
         <div className="hero-contenido">
           <p>¡Tu primer PC lo armas aquí!</p>
           <p>Aprende, elige tus componentes y construye tu propio computador.</p>
-          <a href="/tienda">Llévame a la tienda</a>
+          <a href="/Shop">Llévame a la tienda</a>
         </div>
       </section>
 

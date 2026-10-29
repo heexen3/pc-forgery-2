@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { CATEGORIAS, obtenerProductos } from "../../data/catalogoProductos.js"
 
 function NuevoProducto() {
     const [producto, setProducto] = useState({
@@ -40,9 +41,8 @@ function NuevoProducto() {
             return
         }
 
-        const productosGuardados = JSON.parse(
-            localStorage.getItem("productos")
-        ) || []
+        // se parte del catálogo actual (base o guardado) para no perder los productos iniciales
+        const productosGuardados = [...obtenerProductos()]
 
         const nuevoProducto = {
             ...producto,
@@ -50,7 +50,9 @@ function NuevoProducto() {
                 ? Math.max(...productosGuardados.map(producto => producto.id)) + 1
                 : 1,
             precio: Number(producto.precio),
-            stock: Number(producto.stock)
+            stock: Number(producto.stock),
+            // los productos creados por el admin aparecen con la insignia "Nuevo" en la tienda
+            nuevo: true
         }
 
         productosGuardados.push(nuevoProducto)
@@ -59,6 +61,7 @@ function NuevoProducto() {
             "productos",
             JSON.stringify(productosGuardados)
         )
+        localStorage.setItem("productosInicialesCargados", "true")
 
         alert("Producto creado correctamente.")
 
@@ -109,10 +112,9 @@ function NuevoProducto() {
                         required
                     >
                         <option value="">Selecciona una categoría</option>
-                        <option value="Perifericos">Periféricos</option>
-                        <option value="Componentes">Componentes</option>
-                        <option value="Monitores">Monitores</option>
-                        <option value="Almacenamiento">Almacenamiento</option>
+                        {CATEGORIAS.map(categoria => (
+                            <option key={categoria.valor} value={categoria.valor}>{categoria.etiqueta}</option>
+                        ))}
                     </select>
                 </div>
 

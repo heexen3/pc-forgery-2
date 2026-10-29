@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom"
+import { useParams, useSearchParams } from "react-router-dom"
 import "./Product.css"
 import Resena from "./components/Resena.jsx"
 import BotonesWindows from "./components/BotonesWindows.jsx"
@@ -11,8 +11,8 @@ import mouse from './assets/mouse.jpg'
 function Product() {
     // Lógica
     const [searchParams] = useSearchParams()
-    const id = Number(searchParams.get("id"))
-    console.log(id)
+    const { id: idRuta } = useParams()
+    const id = Number(idRuta ?? searchParams.get("id"))
 
 
     const productos = [ { id: 1, nombre: "Corsair K70 RGB Pro", precio: "$129.990", imagen: corsair, descripcion: "Teclado mecánico RGB de alto rendimiento." }, 

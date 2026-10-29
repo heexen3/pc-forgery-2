@@ -1,100 +1,23 @@
 import { useState } from "react"
+import {
+    CATEGORIAS,
+    etiquetaCategoria,
+    inicializarCatalogo,
+    restablecerCatalogo
+} from "../../data/catalogoProductos.js"
 
 function MostrarProductos() {
-    const [productos, setProductos] = useState(() => {
-        
-        const productosGuardados = localStorage.getItem("productos")
-
-        const productosIniciales = [
-            {
-                id: 1,
-                nombre: "Corsair K70 RGB Pro",
-                categoria: "Perifericos",
-                precio: 129990,
-                stock: 15,
-                descripcion: "Teclado mecánico RGB de alto rendimiento.",
-                imagen: "/corsair.jpg"
-            },
-            {
-                id: 2,
-                nombre: "Razer DeathAdder V3",
-                categoria: "Perifericos",
-                precio: 69990,
-                stock: 8,
-                descripcion: "Mouse gamer ergonómico de alta precisión.",
-                imagen: "/mouse.jpg"
-            },
-            {
-                id: 3,
-                nombre: "ASUS TUF Gaming",
-                categoria: "Monitores",
-                precio: 289990,
-                stock: 3,
-                descripcion: "Monitor gaming de alto rendimiento.",
-                imagen: "/monitor.jpg"
-            },
-            {
-                id: 4,
-                nombre: "Samsung 990 EVO 1TB",
-                categoria: "Almacenamiento",
-                precio: 119990,
-                stock: 0,
-                descripcion: "SSD NVMe de 1TB para alto rendimiento.",
-                imagen: "/ssd.jpg"
-            }
-        ]
-
-        try {
-            if (productosGuardados !== null) {
-                const productosParseados = JSON.parse(productosGuardados)
-
-                if (localStorage.getItem("productosInicialesCargados") !== "true") {
-                    const nombresIniciales = new Set(
-                        productosIniciales.map(producto => producto.nombre)
-                    )
-
-                    const productosPersonalizados = productosParseados.filter(
-                        producto => !nombresIniciales.has(producto.nombre)
-                    )
-
-                    const productosActualizados = [
-                        ...productosIniciales,
-                        ...productosPersonalizados
-                    ].map((producto, index) => ({
-                        ...producto,
-                        id: index + 1
-                    }))
-
-                    localStorage.setItem(
-                        "productos",
-                        JSON.stringify(productosActualizados)
-                    )
-
-                    localStorage.setItem("productosInicialesCargados", "true")
-
-                    return productosActualizados
-                }
-
-                return productosParseados
-            }
-        } catch {
-            localStorage.removeItem("productos")
-        }
-
-        localStorage.setItem("productos", JSON.stringify(productosIniciales))
-        localStorage.setItem("productosInicialesCargados", "true")
-
-        return productosIniciales
-    })
+    // El catálogo inicial vive en data/catalogoProductos.js (compartido con la tienda)
+    const [productos, setProductos] = useState(() => inicializarCatalogo())
 
     const [productoEditar, setProductoEditar] = useState(null)
 
     function manejarCambio(event) {
-        const { name, value } = event.target
+        const { name, value, type, checked } = event.target
 
         setProductoEditar({
             ...productoEditar,
-            [name]: value
+            [name]: type === "checkbox" ? checked : value
         })
     }
 
@@ -144,53 +67,7 @@ function MostrarProductos() {
     )
 
     if (productosActualizados.length === 0) {
-        const productosIniciales = [
-            {
-                id: 1,
-                nombre: "Corsair K70 RGB Pro",
-                categoria: "Perifericos",
-                precio: 129990,
-                stock: 15,
-                descripcion: "Teclado mecánico RGB de alto rendimiento.",
-                imagen: "/corsair.jpg"
-            },
-            {
-                id: 2,
-                nombre: "Razer DeathAdder V3",
-                categoria: "Perifericos",
-                precio: 69990,
-                stock: 8,
-                descripcion: "Mouse gamer ergonómico de alta precisión.",
-                imagen: "/mouse.jpg"
-            },
-            {
-                id: 3,
-                nombre: "ASUS TUF Gaming",
-                categoria: "Monitores",
-                precio: 289990,
-                stock: 3,
-                descripcion: "Monitor gaming de alto rendimiento.",
-                imagen: "/monitor.jpg"
-            },
-            {
-                id: 4,
-                nombre: "Samsung 990 EVO 1TB",
-                categoria: "Almacenamiento",
-                precio: 119990,
-                stock: 0,
-                descripcion: "SSD NVMe de 1TB para alto rendimiento.",
-                imagen: "/ssd.jpg"
-            }
-        ]
-
-        setProductos(productosIniciales)
-
-        localStorage.setItem(
-            "productos",
-            JSON.stringify(productosIniciales)
-        )
-
-        localStorage.setItem("productosInicialesCargados", "true")
+        setProductos(restablecerCatalogo())
     } else {
         setProductos(productosActualizados)
 
@@ -238,10 +115,9 @@ function MostrarProductos() {
                             required
                         >
                             <option value="">Selecciona una categoría</option>
-                            <option value="Perifericos">Periféricos</option>
-                            <option value="Componentes">Componentes</option>
-                            <option value="Monitores">Monitores</option>
-                            <option value="Almacenamiento">Almacenamiento</option>
+                            {CATEGORIAS.map(categoria => (
+                                <option key={categoria.valor} value={categoria.valor}>{categoria.etiqueta}</option>
+                            ))}
                         </select>
                     </div>
 
@@ -277,6 +153,20 @@ function MostrarProductos() {
                             onChange={manejarCambio}
                             required
                         />
+                    </div>
+
+                    <div className="mb-3 form-check">
+                        <input
+                            id="nuevo-editar"
+                            name="nuevo"
+                            type="checkbox"
+                            className="form-check-input"
+                            checked={Boolean(productoEditar.nuevo)}
+                            onChange={manejarCambio}
+                        />
+                        <label htmlFor="nuevo-editar" className="form-check-label">
+                            Mostrar insignia "Nuevo" en la tienda
+                        </label>
                     </div>
 
                     <div className="mb-3">
@@ -325,7 +215,7 @@ function MostrarProductos() {
                             <tr key={producto.id}>
                                 <td>{producto.id}</td>
                                 <td>{producto.nombre}</td>
-                                <td>{producto.categoria}</td>
+                                <td>{etiquetaCategoria(producto.categoria)}</td>
                                 <td>
                                     ${Number(producto.precio).toLocaleString("es-CL")}
                                 </td>
