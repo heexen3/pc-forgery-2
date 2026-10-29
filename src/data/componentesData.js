@@ -1,4 +1,6 @@
 // Componentes del asistente "Arma tu PC" (portado de JS/componentesData.js)
+// consumoWatts: consumo aproximado de cada pieza en carga (W), se usa para
+// estimar el consumo total y validar la fuente de poder.
 export const DB_COMPONENTES = {
     procesadores: [
         {
@@ -49,6 +51,7 @@ export const DB_COMPONENTES = {
             ranurasM2: 3,
             nombre: "ASUS TUF Gaming B650-PLUS WIFI",
             precio: 215000,
+            consumoWatts: 45,
             img: "/computer.png"
         },
         {
@@ -60,6 +63,7 @@ export const DB_COMPONENTES = {
             ranurasM2: 1,
             nombre: "MSI PRO A620M-E",
             precio: 105000,
+            consumoWatts: 35,
             img: "/computer.png"
         },
         {
@@ -71,6 +75,7 @@ export const DB_COMPONENTES = {
             ranurasM2: 3,
             nombre: "Gigabyte B760 AORUS ELITE AX DDR5",
             precio: 195000,
+            consumoWatts: 45,
             img: "/computer2.png"
         },
         {
@@ -82,6 +87,7 @@ export const DB_COMPONENTES = {
             ranurasM2: 2,
             nombre: "ASRock B760M-HDV/M.2 D4",
             precio: 115000,
+            consumoWatts: 35,
             img: "/computer2.png"
         }
     ],
@@ -94,6 +100,7 @@ export const DB_COMPONENTES = {
             frecuencia: "6000MHz",
             nombre: "Kingston Fury Beast RGB 32GB DDR5",
             precio: 125000,
+            consumoWatts: 10,
             img: "/computer.png"
         },
         {
@@ -103,6 +110,7 @@ export const DB_COMPONENTES = {
             frecuencia: "5200MHz",
             nombre: "Corsair Vengeance 16GB DDR5",
             precio: 68000,
+            consumoWatts: 8,
             img: "/computer.png"
         },
         {
@@ -112,6 +120,7 @@ export const DB_COMPONENTES = {
             frecuencia: "3200MHz",
             nombre: "Corsair Vengeance LPX 16GB DDR4",
             precio: 45000,
+            consumoWatts: 6,
             img: "/computer2.png"
         },
         {
@@ -121,6 +130,7 @@ export const DB_COMPONENTES = {
             frecuencia: "3200MHz",
             nombre: "Kingston Fury Beast 32GB DDR4",
             precio: 78000,
+            consumoWatts: 8,
             img: "/computer2.png"
         }
     ],
@@ -179,6 +189,7 @@ export const DB_COMPONENTES = {
             capacidad: "1TB",
             nombre: "Kingston NV2 1TB PCIe 4.0 NVMe",
             precio: 62000,
+            consumoWatts: 6,
             img: "/computer.png"
         },
         {
@@ -187,6 +198,7 @@ export const DB_COMPONENTES = {
             capacidad: "2TB",
             nombre: "WD_BLACK SN850X 2TB PCIe 4.0 NVMe",
             precio: 165000,
+            consumoWatts: 8,
             img: "/computer.png"
         },
         {
@@ -195,6 +207,7 @@ export const DB_COMPONENTES = {
             capacidad: "500GB",
             nombre: "Crucial P3 Plus 500GB PCIe 4.0 NVMe",
             precio: 42000,
+            consumoWatts: 5,
             img: "/computer2.png"
         },
         {
@@ -203,6 +216,7 @@ export const DB_COMPONENTES = {
             capacidad: "1TB",
             nombre: "Samsung 870 EVO 1TB SATA III",
             precio: 75000,
+            consumoWatts: 4,
             img: "/computer2.png"
         }
     ],
@@ -229,7 +243,7 @@ export const DB_COMPONENTES = {
         {
             id: "psu-evga-750w",
             potenciaWatts: 750,
-            certificacion: "80 Plus Gold",
+            certificacion: "80 Plus Bronze",
             modular: "Semi Modular",
             nombre: "EVGA 750 BQ 750W 80+ Bronze",
             precio: 85000,
@@ -253,6 +267,7 @@ export const DB_COMPONENTES = {
             maxLargoGpuMm: 370,
             nombre: "DeepCool CC560 V2 Mid Tower",
             precio: 54000,
+            consumoWatts: 12,
             img: "/computer.png"
         },
         {
@@ -261,6 +276,7 @@ export const DB_COMPONENTES = {
             maxLargoGpuMm: 360,
             nombre: "Cooler Master MasterBox Q300L Mini Tower",
             precio: 46000,
+            consumoWatts: 6,
             img: "/computer.png"
         },
         {
@@ -269,6 +285,7 @@ export const DB_COMPONENTES = {
             maxLargoGpuMm: 365,
             nombre: "NZXT H5 Flow Compact Mid Tower",
             precio: 92000,
+            consumoWatts: 10,
             img: "/computer2.png"
         },
         {
@@ -277,6 +294,7 @@ export const DB_COMPONENTES = {
             maxLargoGpuMm: 338,
             nombre: "ASUS Prime AP201 Micro-ATX Case",
             precio: 79000,
+            consumoWatts: 8,
             img: "/computer2.png"
         }
     ]

@@ -60,7 +60,41 @@ export function comprobarCompatibilidad(categoria, item, seleccion, plataforma) 
         return false
     }
 
+    // GPU vs Gabinete (largo máximo de la tarjeta)
+    if (categoria === "gabinetes" && s.gpu && s.gpu.largoMm > item.maxLargoGpuMm) {
+        return false
+    }
+    if (categoria === "gpu" && s.gabinetes && item.largoMm > s.gabinetes.maxLargoGpuMm) {
+        return false
+    }
+
     return true
+}
+
+// Margen de seguridad para la fuente de poder (30% sobre el consumo estimado)
+export const MARGEN_FUENTE = 1.3
+
+// Consumo estimado del equipo en carga (suma de todo menos la fuente)
+export function calcularConsumo(seleccion) {
+    return CATEGORIAS
+        .filter(categoria => categoria !== "fuentes")
+        .reduce((total, categoria) => total + (seleccion[categoria]?.consumoWatts || 0), 0)
+}
+
+// Potencia mínima recomendada para la fuente: consumo + margen, redondeado
+// a múltiplos de 50W, y nunca menos de lo que pide el fabricante de la GPU
+export function potenciaRecomendada(seleccion) {
+    const consumo = calcularConsumo(seleccion)
+    if (consumo === 0) {
+        return 0
+    }
+    const conMargen = Math.ceil((consumo * MARGEN_FUENTE) / 50) * 50
+    return Math.max(conMargen, seleccion.gpu?.fuenteRecomendadaWatts || 0)
+}
+
+// Indica si una fuente alcanza para la selección actual
+export function fuenteSuficiente(fuente, seleccion) {
+    return fuente.potenciaWatts >= potenciaRecomendada(seleccion)
 }
 
 // Devuelve el texto del conflicto encontrado o null si todo es compatible
@@ -75,6 +109,12 @@ export function detectarConflicto(seleccion) {
     }
     if (s.placas && s.gabinetes && !s.gabinetes.formatosSoportados.includes(s.placas.formato)) {
         return "El gabinete no admite el tamaño de la placa madre."
+    }
+    if (s.gpu && s.gabinetes && s.gpu.largoMm > s.gabinetes.maxLargoGpuMm) {
+        return "La tarjeta de video no cabe en el gabinete."
+    }
+    if (s.fuentes && !fuenteSuficiente(s.fuentes, s)) {
+        return `La fuente de ${s.fuentes.potenciaWatts}W no alcanza: se recomiendan al menos ${potenciaRecomendada(s)}W.`
     }
     return null
 }
@@ -102,6 +142,11 @@ export function seleccionarComponente(seleccion, categoria, item) {
             removidos.push(nuevaSeleccion.gabinetes.nombre)
             nuevaSeleccion.gabinetes = null
         }
+    }
+
+    if (categoria === "gpu" && nuevaSeleccion.gabinetes && item.largoMm > nuevaSeleccion.gabinetes.maxLargoGpuMm) {
+        removidos.push(nuevaSeleccion.gabinetes.nombre)
+        nuevaSeleccion.gabinetes = null
     }
 
     return { seleccion: nuevaSeleccion, removidos }
