@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+<rect width="200" height="200" fill="#008080"/>
+<rect x="8" y="8" width="184" height="184" fill="#c0c0c0" stroke="#ffffff" stroke-width="3"/>
+<rect x="11" y="11" width="181" height="181" fill="none" stroke="#808080" stroke-width="2"/>
+<path d="M60 120 Q60 50 100 50 Q140 50 140 120" fill="none" stroke="#202020" stroke-width="10"/><rect x="45" y="105" width="28" height="42" rx="8" fill="#303030"/><rect x="127" y="105" width="28" height="42" rx="8" fill="#303030"/>
+<rect x="20" y="160" width="160" height="22" fill="#000080"/>
+<text x="100" y="176" font-family="Tahoma, Arial, sans-serif" font-size="13" fill="#ffffff" text-anchor="middle">Periférico</text>
+</svg>

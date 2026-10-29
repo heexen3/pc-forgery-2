@@ -87,26 +87,44 @@
     border: 2px inset #ffffff;
 }
 
-/* Barra superior de pestañas de navegación con scroll horizontal táctil */
-#wizard-steps.wizard-steps {
+/* Panel lateral del instalador (estilo "Asistente de instalación" de Windows 98).
+   En móvil es una franja horizontal con scroll, en escritorio una columna. */
+.wizard-cuerpo {
     display: flex;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    align-items: flex-end !important;
+    flex-direction: column;
+}
+
+.wizard-banner {
+    background: linear-gradient(180deg, #000080 0%, #1084d0 100%);
+    color: #ffffff;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-sizing: border-box;
+}
+
+.wizard-banner-img {
+    display: none;
+}
+
+.wizard-banner-titulo {
+    font-weight: bold;
+    font-size: 14px;
+    font-style: italic;
+    text-shadow: 2px 2px 0 #000040;
+}
+
+.wizard-steps {
+    display: flex;
+    flex-direction: row;
     gap: 4px;
-    padding: 6px 6px 0 6px;
-    background-color: #c0c0c0;
-    border-top: none;
-    border-bottom: 2px solid #808080;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
+    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: thin;
-    box-sizing: border-box;
     width: 100%;
 }
 
-/* Ocultar barra de scroll tosca en webkit manteniendo funcionalidad de deslizamiento */
 .wizard-steps::-webkit-scrollbar {
     height: 4px;
 }
@@ -116,32 +134,100 @@
 
 .step-tab {
     flex-shrink: 0;
-    min-height: 38px;
-    background-color: #c0c0c0;
-    border: 2px outset #ffffff;
-    border-bottom: none;
-    padding: 8px 12px;
+    min-height: 32px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 4px 8px;
     font-size: 12px;
     font-family: inherit;
-    color: #000000;
+    color: #ffffff;
     cursor: pointer;
     white-space: nowrap;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 6px;
+    text-align: left;
     touch-action: manipulation;
     user-select: none;
 }
 
+.step-tab:hover {
+    border: 1px dotted #ffffff;
+}
+
 .step-tab:active {
-    border: 2px inset #ffffff;
+    border: 1px solid transparent;
 }
 
 .step-tab.active {
-    background-color: #000080;
-    color: #ffffff;
+    background-color: #c0c0c0;
+    color: #000000;
     font-weight: bold;
-    border-bottom: none;
+    border: 2px outset #ffffff;
+}
+
+.step-tab.completo .step-check {
+    color: #7cfc00;
+}
+
+.step-tab.active .step-check {
+    color: #000080;
+}
+
+.step-check {
+    width: 14px;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Encabezado del paso y barra de progreso por bloques */
+.wizard-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border-bottom: 2px groove #ffffff;
+    padding: 6px 10px;
+    margin: -10px -10px 0;
+}
+
+.wizard-encabezado h2 {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.wizard-encabezado p {
+    font-size: 12px;
+    margin: 0;
+    padding-left: 12px;
+}
+
+.wizard-encabezado img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.wizard-progreso {
+    height: 20px;
+    border: 2px inset #ffffff;
+    background-color: #ffffff;
+    padding: 2px;
+    box-sizing: border-box;
+}
+
+.wizard-progreso-relleno {
+    height: 100%;
+    /* bloques azules como la barra de progreso de Windows 98 */
+    background: repeating-linear-gradient(
+        to right,
+        #000080 0,
+        #000080 10px,
+        transparent 10px,
+        transparent 12px
+    );
+    transition: width 0.35s steps(6);
 }
 
 /* Área central de contenido */
@@ -500,11 +586,40 @@
         min-width: 0;
     }
 
-    .summary-window {
+    .wizard-lateral {
         width: 280px;
         flex-shrink: 0;
-        position: sticky;
-        top: 15px;
+    }
+
+    .wizard-cuerpo {
+        flex-direction: row;
+    }
+
+    .wizard-banner {
+        width: 170px;
+        flex-shrink: 0;
+        padding: 12px 8px;
+    }
+
+    .wizard-banner-img {
+        display: block;
+        width: 64px;
+        margin: 0 auto;
+    }
+
+    .wizard-banner-titulo {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .wizard-steps {
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .wizard-content {
+        flex: 1;
+        min-width: 0;
     }
 
     .window-title {
@@ -542,7 +657,7 @@
 ======================================================= */
 
 @media (min-width: 1024px) {
-    .summary-window {
+    .wizard-lateral {
         width: 320px;
     }
 
@@ -551,6 +666,116 @@
         max-height: 520px;
     }
 }
+/* Tarjeta de fuente que no alcanza */
+.item-insuficiente {
+    background-color: #e8d0d0;
+}
+
+.item-alerta {
+    font-size: 11px;
+    font-weight: bold;
+    color: #800000;
+    margin: 0;
+}
+
+/* Columna lateral: resumen + armados guardados */
+.wizard-lateral {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.summary-energia {
+    border: 2px inset #ffffff;
+    background-color: #ffffff;
+    padding: 6px 8px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.summary-energia > div:not(.medidor-energia) {
+    display: flex;
+    justify-content: space-between;
+}
+
+.medidor-energia {
+    height: 14px;
+    border: 2px inset #ffffff;
+    background-color: #c0c0c0;
+}
+
+.medidor-energia div {
+    height: 100%;
+    background-color: #008000;
+    transition: width 0.3s;
+}
+
+.medidor-excedido div {
+    background-color: #c00000;
+}
+
+.armados-form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+}
+
+.armados-form div {
+    display: flex;
+    gap: 6px;
+}
+
+.armados-form input {
+    flex: 1;
+    min-width: 0;
+    border: 2px inset #ffffff;
+    padding: 4px;
+    font-size: 13px;
+}
+
+.armados-info {
+    font-size: 12px;
+}
+
+.armados-lista {
+    list-style: none;
+    margin: 0;
+    padding: 4px;
+    background-color: #ffffff;
+    border: 2px inset #ffffff;
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 12px;
+}
+
+.armados-lista li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+    border-bottom: 1px dotted #cccccc;
+}
+
+.armados-lista li > div:first-child {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.armados-lista li > div:last-child {
+    display: flex;
+    gap: 4px;
+}
+
+.armados-lista .btn-retro {
+    min-height: 28px;
+    padding: 2px 8px;
+}
+
 .aviso-compatibilidad {
     font-size: 13px;
     color: #800000;

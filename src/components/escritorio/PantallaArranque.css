@@ -1,0 +1,105 @@
+.pantalla-arranque {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background: radial-gradient(circle at center, #1a1a6e 0%, #000033 60%, #000000 100%);
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    cursor: pointer;
+    animation: arranque-salida 0.3s ease-in 1.9s forwards;
+}
+
+.arranque-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: arranque-entrada 0.6s ease-out;
+}
+
+.arranque-logo img {
+    width: 72px;
+    height: 72px;
+}
+
+.arranque-titulo {
+    font-size: 34px;
+    font-weight: bold;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+.arranque-titulo span {
+    color: #ff6060;
+}
+
+.arranque-subtitulo {
+    font-size: 14px;
+    color: #c0c0c0;
+}
+
+.arranque-progreso {
+    width: 220px;
+    height: 14px;
+    border: 1px solid #808080;
+    overflow: hidden;
+    position: relative;
+    background-color: #000000;
+}
+
+/* Bloques que avanzan como la barra de carga de Windows */
+.arranque-progreso-barra {
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    width: 60px;
+    background: repeating-linear-gradient(
+        to right,
+        #1084d0 0 10px,
+        transparent 10px 13px
+    );
+    animation: arranque-carga 1s linear infinite;
+}
+
+.arranque-omitir {
+    font-size: 12px;
+    color: #808080;
+}
+
+@keyframes arranque-carga {
+    from {
+        left: -60px;
+    }
+    to {
+        left: 220px;
+    }
+}
+
+@keyframes arranque-entrada {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes arranque-salida {
+    to {
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pantalla-arranque,
+    .arranque-logo,
+    .arranque-progreso-barra {
+        animation: none;
+    }
+}

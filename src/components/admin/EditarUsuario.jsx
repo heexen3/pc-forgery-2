@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { mostrarAlerta } from "../dialogo/Dialogo.js"
 
 function EditarUsuario() {
     const [usuarios, setUsuarios] = useState([])
@@ -44,7 +45,7 @@ function EditarUsuario() {
         )
 
         if (correoExiste) {
-            alert("Ya existe otro usuario con ese correo.")
+            mostrarAlerta("Ya existe otro usuario con ese correo.", { icono: "advertencia" })
             return
         }
 
@@ -69,7 +70,7 @@ function EditarUsuario() {
         setUsuarios(usuariosActualizados)
         setCorreoSeleccionado(correo)
 
-        alert("Usuario actualizado correctamente.")
+        mostrarAlerta("Usuario actualizado correctamente.")
     }
 
     return (

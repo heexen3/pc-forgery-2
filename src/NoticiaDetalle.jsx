@@ -1,5 +1,6 @@
 import { useSearchParams, Link } from "react-router-dom"
 import "./NoticiaDetalle.css"
+import MarcoNavegador from "./components/escritorio/MarcoNavegador.jsx"
 // import noticia1 from "./assets/noticia1.webp"
 // import noticia2 from "./assets/noticia2.webp"
 // import monalisa from "./assets/monalisa.jpeg"
@@ -48,16 +49,19 @@ function NoticiaDetalle() {
     if (!noticia) {
         return (
             <main className="detalle-main">
-                <article className="contenedor-noticia-detalle">
-                    <h1>Noticia no encontrada</h1>
-                    <Link to="/noticias" className="boton-volver">← Volver a Noticias</Link>
-                </article>
+                <MarcoNavegador titulo="No se puede mostrar la página" direccion={`http://www.pcforgery.cl/noticias/detalle?id=${id}`}>
+                    <div className="contenedor-noticia-detalle">
+                        <h1>Noticia no encontrada</h1>
+                        <Link to="/noticias" className="boton-volver">← Volver a Noticias</Link>
+                    </div>
+                </MarcoNavegador>
             </main>
         )
     }
     return (
         <main className="detalle-main">
-            <article className="contenedor-noticia-detalle">
+            <MarcoNavegador titulo={noticia.titulo} direccion={`http://www.pcforgery.cl/noticias/detalle?id=${noticia.id}`}>
+            <div className="contenedor-noticia-detalle">
                 <Link to="/noticias" className="boton-volver">← Volver a Noticias</Link>
 
                 <h1>{noticia.titulo}</h1>
@@ -73,7 +77,8 @@ function NoticiaDetalle() {
                         <img src={noticia.imagenSecundaria} alt="" className="noticia-imagen-secundaria" />
                     )}
                 </div>
-            </article>
+            </div>
+            </MarcoNavegador>
         </main>
     )
 }

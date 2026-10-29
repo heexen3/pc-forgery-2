@@ -2,14 +2,16 @@ import { Link } from 'react-router-dom'
 import "./comunidad.css"
 import HiloCard from "./components/HiloCard"
 import MensajeForo from "./components/MensajeForo"
+import MarcoCorreo from "./components/escritorio/MarcoCorreo.jsx"
 
 function Comunidad() {
     return (
         <main className="comunidad-main">
-            <section className="contenedor-foro">
+            <MarcoCorreo estado="3 hilo(s), 0 sin leer">
+            <div className="contenedor-foro">
                 <div className="cabecera-foro">
                     <div className="cabecera-titulo">
-                        <img src="/img/computer.png" alt="" />
+                        <img src="/computer.png" alt="" />
                         <h1>Comunidad</h1>
                     </div>
                     <Link to="/comunidad/nuevo-hilo" className="boton-nuevo-hilo">+ Nuevo hilo</Link>
@@ -33,7 +35,8 @@ function Comunidad() {
                         <button disabled>Responder</button>
                     </div>
                 </article>
-            </section>
+            </div>
+            </MarcoCorreo>
         </main>
     )
 }
