@@ -8,7 +8,11 @@ import Product from './Product.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
 import Admin from './Admin.jsx'
-
+import Noticia from './Noticias.jsx'
+import NoticiaDetalle from './NoticiaDetalle.jsx'
+import Comunidad from './Comunidad.jsx'
+import Contacto from './Contacto.jsx'
+import NuevoHilo from './NuevoHilo.jsx'
 function App() {
     return (
       <>
@@ -25,6 +29,14 @@ function App() {
                 <Route path="/Register" element={<Register />} />
                 {/* Rutas de usuario y admin */}
                 <Route path="/Admin" element={<Admin />} />
+                {/* Noticias */}
+                <Route path="/Noticias" element={<Noticia />} />
+                <Route path="/noticias/detalle" element={<NoticiaDetalle />} />
+                {/* Comunidad */}
+                <Route path="/comunidad" element={<Comunidad />} />
+                <Route path="/comunidad/nuevo-hilo" element={<NuevoHilo />} />
+                {/* Contacto */}
+                <Route path="/contacto" element={<Contacto />} />
                 {/* si el usuario pone cualquier otra ruta va a ir al Home*/}
                 <Route path="*" element={<Home />} />
             </Routes>

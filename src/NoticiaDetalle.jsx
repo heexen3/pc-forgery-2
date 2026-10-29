@@ -1,10 +1,10 @@
 import { useSearchParams, Link } from "react-router-dom"
 import "./NoticiaDetalle.css"
-/*import noticia1 from "./assets/noticia1.webp"
-import noticia2 from "./assets/noticia2.webp"
-import monalisa from "./assets/monalisa.jpeg"
-import computer from "./assets/computer.png"
-*/
+// import noticia1 from "./assets/noticia1.webp"
+// import noticia2 from "./assets/noticia2.webp"
+// import monalisa from "./assets/monalisa.jpeg"
+// import computer from "./assets/computer.png"
+
 function NoticiaDetalle() {
     const [searchParams] = useSearchParams()
     const id = Number(searchParams.get("id"))
@@ -14,18 +14,18 @@ function NoticiaDetalle() {
             id: 1,
             titulo: "DETALLE DE NOTICIA IMPORTANTE",
             fecha: "Publicado el 03 de septiembre, 2026",
-            imagen: "/img/noticia1.webp",
+            imagen: "/noticia1.webp",
             cuerpo: [
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore. Excepturi reprehenderit, quae quia maiores nesciunt saepe soluta iure natus exercitationem amet.",
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore."
             ],
-            imagenSecundaria: "/img/monalisa.jpeg"
+            imagenSecundaria: "/monalisa.jpeg"
         },
         {
             id: 2,
             titulo: "PC Forgery suma la sección Comunidad",
             fecha: "Publicado el 06 de septiembre, 2026",
-            imagen: "/img/noticia2.webp",
+            imagen: "/noticia2.webp",
             cuerpo: [
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore. Excepturi reprehenderit, quae quia maiores nesciunt saepe soluta iure natus exercitationem amet.",
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore."
@@ -36,7 +36,7 @@ function NoticiaDetalle() {
             id: 3,
             titulo: "Guía rápida: cómo elegir tu primera fuente de poder",
             fecha: "Publicado el 01 de septiembre, 2026",
-            imagen: "/img/computer.png",
+            imagen: "/computer.png",
             cuerpo: [
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore. Excepturi reprehenderit, quae quia maiores nesciunt saepe soluta iure natus exercitationem amet.",
                 "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore."
