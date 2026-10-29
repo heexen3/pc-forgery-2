@@ -174,3 +174,53 @@
         border-left: 1px dotted #808080;
     }
 }
+
+/* Responsividad (celular): las carpetas se convierten en una barra horizontal desplazable
+   y la barra de herramientas apila Dirección, Buscar y Ordenar */
+@media (max-width: 767px) {
+    .explorador .ventana-app-herramientas label {
+        flex: 1 1 100%;
+    }
+
+    .explorador .ventana-app-herramientas label input,
+    .explorador .ventana-app-herramientas label select {
+        flex: 1;
+        width: 100%;
+    }
+
+    .explorador-arbol {
+        flex-wrap: nowrap;
+        align-items: center;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        gap: 4px;
+    }
+
+    .explorador-arbol-titulo {
+        width: auto;
+        flex-shrink: 0;
+        margin: 0;
+    }
+
+    .explorador-arbol .carpeta {
+        flex-shrink: 0;
+        white-space: nowrap;
+        border: 1px solid #808080;
+    }
+
+    .explorador-vista {
+        padding: 6px;
+    }
+
+    .explorador-encabezado h1 {
+        font-size: 16px;
+    }
+}
+
+/* Tablet: la barra lateral de carpetas es algo más angosta para dejar espacio a la grilla */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .explorador-arbol {
+        width: 180px;
+    }
+}
