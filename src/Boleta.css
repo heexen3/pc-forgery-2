@@ -209,3 +209,63 @@
         print-color-adjust: exact;
     }
 }
+
+/* Responsividad (solo pantalla, la impresión no cambia): en celular cada línea de detalle
+   se apila mostrando el nombre de la columna */
+@media screen and (max-width: 599px) {
+    .boleta-documento {
+        padding: 10px;
+    }
+
+    .boleta-tabla thead {
+        display: none;
+    }
+
+    .boleta-tabla,
+    .boleta-tabla tbody,
+    .boleta-tabla tr,
+    .boleta-tabla td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .boleta-tabla tr {
+        border-bottom: 1px dashed #000000;
+        padding: 4px 0;
+    }
+
+    .boleta-tabla td,
+    .boleta-tabla .numero {
+        border: none;
+        padding: 1px 0;
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        text-align: right;
+    }
+
+    .boleta-tabla td[data-label]::before {
+        content: attr(data-label);
+        font-weight: bold;
+        text-align: left;
+        flex-shrink: 0;
+    }
+
+    .boleta-tabla .celda-descripcion {
+        display: block;
+        text-align: left;
+    }
+
+    .boleta-tabla .celda-descripcion::before {
+        display: block;
+    }
+
+    .boleta-totales {
+        min-width: 0;
+    }
+
+    .timbre-svg {
+        max-width: 100%;
+    }
+}

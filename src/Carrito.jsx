@@ -74,7 +74,7 @@ function Carrito() {
                     ) : (
                         <>
                             <div className="carrito-tabla-contenedor">
-                                <table className="carrito-tabla">
+                                <table className="carrito-tabla tabla-apilable">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -88,10 +88,10 @@ function Carrito() {
                                     <tbody>
                                         {carrito.map(item => (
                                             <tr key={item.id}>
-                                                <td>
+                                                <td className="celda-imagen">
                                                     {item.imagen && <img src={rutaPublica(item.imagen)} alt={item.nombre} />}
                                                 </td>
-                                                <td>
+                                                <td className="celda-nombre" data-label="Producto">
                                                     {item.nombre}
                                                     {item.componentes && (
                                                         <ul className="carrito-componentes">
@@ -103,8 +103,8 @@ function Carrito() {
                                                         </ul>
                                                     )}
                                                 </td>
-                                                <td>{formatearPrecio(item.precio)}</td>
-                                                <td>
+                                                <td data-label="Precio">{formatearPrecio(item.precio)}</td>
+                                                <td data-label="Cantidad">
                                                     <div className="carrito-cantidad">
                                                         <button
                                                             aria-label={`Disminuir cantidad de ${item.nombre}`}
@@ -132,8 +132,8 @@ function Carrito() {
                                                         </button>
                                                     </div>
                                                 </td>
-                                                <td>{formatearPrecio(item.precio * item.cantidad)}</td>
-                                                <td>
+                                                <td data-label="Total">{formatearPrecio(item.precio * item.cantidad)}</td>
+                                                <td className="celda-acciones">
                                                     <button
                                                         aria-label={`Eliminar ${item.nombre}`}
                                                         onClick={() => eliminarDelCarrito(item.id)}

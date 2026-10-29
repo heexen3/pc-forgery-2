@@ -95,8 +95,8 @@ function Boleta() {
                                 <tbody>
                                     {boleta.items.map(item => (
                                         <tr key={item.id}>
-                                            <td>{item.codigo}</td>
-                                            <td>
+                                            <td data-label="Código">{item.codigo}</td>
+                                            <td className="celda-descripcion" data-label="Descripción">
                                                 {item.nombre}
                                                 {item.componentes && (
                                                     <ul className="carrito-componentes">
@@ -108,9 +108,9 @@ function Boleta() {
                                                     </ul>
                                                 )}
                                             </td>
-                                            <td className="numero">{item.cantidad}</td>
-                                            <td className="numero">{formatearPrecio(item.precio)}</td>
-                                            <td className="numero">{formatearPrecio(item.totalLinea)}</td>
+                                            <td className="numero" data-label="Cant.">{item.cantidad}</td>
+                                            <td className="numero" data-label="Precio unit.">{formatearPrecio(item.precio)}</td>
+                                            <td className="numero" data-label="Total">{formatearPrecio(item.totalLinea)}</td>
                                         </tr>
                                     ))}
                                 </tbody>
