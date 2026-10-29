@@ -1,3 +1,4 @@
+import { mostrarAlerta } from "./components/dialogo/Dialogo.js"
 import { useState } from "react"
 import { Link, useParams, useSearchParams } from "react-router-dom"
 import "./Product.css"
@@ -80,7 +81,7 @@ function DetalleProducto({ id }) {
             imagen: producto.imagen,
             precio: producto.precio
         })
-        alert(resultado.mensaje)
+        mostrarAlerta(resultado.mensaje, { icono: resultado.ok ? "info" : "error" })
     }
 
     function publicarResena(event) {

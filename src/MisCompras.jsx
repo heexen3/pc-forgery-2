@@ -23,7 +23,7 @@ function MisCompras() {
     // Renderizado
     return (
         <main className="carrito-contenedor">
-            <section className="carrito-ventana">
+            <section className="carrito-ventana ventana-animada">
                 <div className="carrito-titulo">
                     <h1>Mis compras</h1>
                     <BotonesWindows />

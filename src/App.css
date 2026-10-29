@@ -23,9 +23,45 @@ button {
     cursor: pointer;
 }
 
-button:active {
-    /* Borde */
+/* Efecto 3D (bisel) de los botones Windows 98 */
+button:hover:not(:disabled) {
+    background-color: #d0d0d0;
+}
+
+button:active:not(:disabled) {
+    /* Borde hundido y texto desplazado como al presionar un botón real */
     border: 2px inset #ffffff;
+    background-color: #b8b8b8;
+    box-shadow: inset 1px 1px 0 #000000;
+}
+
+button:active:not(:disabled) > * {
+    transform: translate(1px, 1px);
+}
+
+button:focus-visible {
+    outline: 1px dotted #000000;
+    outline-offset: -4px;
+}
+
+button:disabled {
+    color: #808080;
+    text-shadow: 1px 1px 0 #ffffff;
+    cursor: default;
+}
+
+/* Enlaces con aspecto de botón */
+.boton-enlace:hover,
+.boton-nuevo-hilo:hover,
+.boton-volver:hover {
+    background-color: #d0d0d0;
+}
+
+.boton-enlace:active,
+.boton-nuevo-hilo:active,
+.boton-volver:active {
+    border-style: inset;
+    box-shadow: inset 1px 1px 0 #000000;
 }
 
 h1 {

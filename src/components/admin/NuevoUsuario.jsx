@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { mostrarAlerta } from "../dialogo/Dialogo.js"
 
 function NuevoUsuario() {
     const [nombre, setNombre] = useState("")
@@ -19,7 +20,7 @@ function NuevoUsuario() {
         )
 
         if (correoExiste) {
-            alert("Ya existe un usuario registrado con ese correo.")
+            mostrarAlerta("Ya existe un usuario registrado con ese correo.", { icono: "advertencia" })
             return
         }
 
@@ -37,7 +38,7 @@ function NuevoUsuario() {
             JSON.stringify(usuariosGuardados)
         )
 
-        alert("Usuario registrado correctamente.")
+        mostrarAlerta("Usuario registrado correctamente.")
 
         setNombre("")
         setCorreo("")

@@ -9,7 +9,7 @@ function Register() {
     // Renderizado
     return(
     <main>
-        <section className="formulario-registro">
+        <section className="formulario-registro ventana-animada">
             <h1>Registrarse</h1>
             <form onSubmit={(event) => ValidacionRegistro(event,navigate)}>
                 {/* <!-- Nombre de usuario --> */}

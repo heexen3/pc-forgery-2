@@ -12,6 +12,7 @@ import {
 } from "./components/carrito/Carrito.js"
 import { generarBoleta, METODOS_PAGO } from "./components/carrito/Boletas.js"
 import { formatearRut, validarRut } from "./components/carrito/Rut.js"
+import { mostrarAlerta, confirmar as confirmarDialogo } from "./components/dialogo/Dialogo.js"
 
 function Carrito() {
     // Lógica
@@ -25,12 +26,12 @@ function Carrito() {
     function actualizarCantidad(id, cantidad) {
         const resultado = cambiarCantidad(id, cantidad)
         if (!resultado.ok) {
-            alert(resultado.mensaje)
+            mostrarAlerta(resultado.mensaje, { icono: resultado.ok ? "info" : "error" })
         }
     }
 
-    function confirmarVaciado() {
-        if (window.confirm("¿Estás seguro de que deseas vaciar el carrito?")) {
+    async function confirmarVaciado() {
+        if (await confirmarDialogo("¿Estás seguro de que deseas vaciar el carrito?")) {
             vaciarCarrito()
         }
     }
@@ -39,7 +40,7 @@ function Carrito() {
         const usuario = JSON.parse(localStorage.getItem("usuarioActual"))
         const resultado = generarBoleta(usuario, new Date(), { metodoPago, rut })
 
-        alert(resultado.mensaje)
+        mostrarAlerta(resultado.mensaje, { icono: resultado.ok ? "info" : "error" })
 
         if (!usuario) {
             navigate("/Login")
@@ -54,7 +55,7 @@ function Carrito() {
     // Renderizado
     return (
         <main className="carrito-contenedor">
-            <section className="carrito-ventana">
+            <section className="carrito-ventana ventana-animada">
                 <div className="carrito-titulo">
                     <h1>Carrito de compras</h1>
                     <BotonesWindows />

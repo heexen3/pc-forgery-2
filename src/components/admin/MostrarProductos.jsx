@@ -1,3 +1,4 @@
+import { mostrarAlerta, confirmar as confirmarDialogo } from "../dialogo/Dialogo.js"
 import { useState } from "react"
 import {
     CATEGORIAS,
@@ -30,7 +31,7 @@ function MostrarProductos() {
             Number(productoEditar.precio) <= 0 ||
             Number(productoEditar.stock) < 0
         ) {
-            alert("Verifica los datos del producto.")
+            mostrarAlerta("Verifica los datos del producto.", { icono: "advertencia" })
             return
         }
 
@@ -52,11 +53,11 @@ function MostrarProductos() {
         )
 
         setProductoEditar(null)
-        alert("Producto actualizado correctamente.")
+        mostrarAlerta("Producto actualizado correctamente.")
     }
 
-    function eliminarProducto(id) {
-    const confirmar = window.confirm(
+    async function eliminarProducto(id) {
+    const confirmar = await confirmarDialogo(
         "¿Estás seguro de que deseas eliminar este producto?"
     )
 

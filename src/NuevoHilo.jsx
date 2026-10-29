@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
 import "./NuevoHilo.css"
+import MarcoCorreo from "./components/escritorio/MarcoCorreo.jsx"
 
 function NuevoHilo() {
     return (
         <main className="nuevo-hilo-main">
-            <section className="contenedor-foro">
+            <MarcoCorreo titulo="Nuevo hilo" carpetaActiva="Borradores" estado="Redactando mensaje">
+            <div className="contenedor-foro">
                 <div className="cabecera-foro">
                     <h1>Nuevo hilo</h1>
                     <Link to="/comunidad" className="boton-volver">← Volver a Comunidad</Link>
@@ -26,7 +28,8 @@ function NuevoHilo() {
                         <span className="aviso-formulario">Publicar hilos estará disponible próximamente.</span>
                     </div>
                 </form>
-            </section>
+            </div>
+            </MarcoCorreo>
         </main>
     )
 }

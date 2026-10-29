@@ -1,10 +1,12 @@
 import "./Noticias.css"
 import NoticiaCard from "./components/NoticiaCard"
+import MarcoNavegador from "./components/escritorio/MarcoNavegador.jsx"
 
 function Noticias() {
     return (
         <main className="noticias-main">
-            <section className="contenedor-noticias">
+            <MarcoNavegador titulo="Noticias PC Forgery" direccion="http://www.pcforgery.cl/noticias">
+            <div className="contenedor-noticias">
                 <div className="titulo-noticias">
                     <img src="/computer.png" alt="" />
                     <h1>Noticias</h1>
@@ -30,7 +32,8 @@ function Noticias() {
                         resumen="Te explicamos qué significa el wattage, la certificación 80 Plus y qué debes considerar antes de comprar."
                     />
                 </ul>
-            </section>
+            </div>
+            </MarcoNavegador>
         </main>
     )
 }

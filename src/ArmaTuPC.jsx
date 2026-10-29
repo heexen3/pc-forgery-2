@@ -25,6 +25,7 @@ import {
     cargarSeleccion
 } from "./components/armado/ArmadosGuardados.js"
 import { agregarAlCarrito, formatearPrecio } from "./components/carrito/Carrito.js"
+import { mostrarAlerta } from "./components/dialogo/Dialogo.js"
 
 // Textos de ayuda del asistente para cada paso
 const AYUDA_PASOS = {
@@ -107,16 +108,16 @@ function ArmaTuPC() {
     function agregarArmadoAlCarrito() {
         const faltantes = componentesFaltantes(seleccion)
         if (faltantes.length > 0) {
-            alert(`Faltan componentes por elegir: ${faltantes.join(", ")}.`)
+            mostrarAlerta(`Faltan componentes por elegir: ${faltantes.join(", ")}.`, { icono: "advertencia" })
             return
         }
         if (conflicto) {
-            alert(`No se puede agregar un PC incompatible: ${conflicto}`)
+            mostrarAlerta(`No se puede agregar un PC incompatible: ${conflicto}`, { icono: "advertencia" })
             return
         }
 
         const resultado = agregarAlCarrito(crearItemArmado(seleccion, plataforma))
-        alert(resultado.mensaje)
+        mostrarAlerta(resultado.mensaje, { icono: resultado.ok ? "info" : "error" })
         if (resultado.ok) {
             navigate("/Carrito")
         }

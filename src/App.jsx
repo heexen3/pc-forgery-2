@@ -17,6 +17,9 @@ import Carrito from './Carrito.jsx'
 import Boleta from './Boleta.jsx'
 import MisCompras from './MisCompras.jsx'
 import ArmaTuPC from './ArmaTuPC.jsx'
+import BarraTareas from './components/escritorio/BarraTareas.jsx'
+import PantallaArranque from './components/escritorio/PantallaArranque.jsx'
+import DialogoWindows from './components/dialogo/DialogoWindows.jsx'
 function App() {
     return (
       <>
@@ -52,8 +55,12 @@ function App() {
                 {/* si el usuario pone cualquier otra ruta va a ir al Home*/}
                 <Route path="*" element={<Home />} />
             </Routes>
+            <Footer/>
+            {/* Elementos del "escritorio": barra de tareas, diálogos y arranque */}
+            <BarraTareas />
+            <DialogoWindows />
+            <PantallaArranque />
         </BrowserRouter>
-        <Footer/>
       </>
     )
 }

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { CATEGORIAS, obtenerProductos } from "../../data/catalogoProductos.js"
+import { mostrarAlerta } from "../dialogo/Dialogo.js"
 
 function NuevoProducto() {
     const [producto, setProducto] = useState({
@@ -29,7 +30,7 @@ function NuevoProducto() {
             producto.precio === "" ||
             producto.stock === ""
         ) {
-            alert("Completa todos los campos obligatorios.")
+            mostrarAlerta("Completa todos los campos obligatorios.", { icono: "advertencia" })
             return
         }
 
@@ -37,7 +38,7 @@ function NuevoProducto() {
             Number(producto.precio) <= 0 ||
             Number(producto.stock) < 0
         ) {
-            alert("El precio debe ser mayor que cero y el stock no puede ser negativo.")
+            mostrarAlerta("El precio debe ser mayor que cero y el stock no puede ser negativo.", { icono: "advertencia" })
             return
         }
 
@@ -63,7 +64,7 @@ function NuevoProducto() {
         )
         localStorage.setItem("productosInicialesCargados", "true")
 
-        alert("Producto creado correctamente.")
+        mostrarAlerta("Producto creado correctamente.")
 
         setProducto({
             nombre: "",
