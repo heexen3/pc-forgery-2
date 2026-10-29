@@ -4,6 +4,7 @@ import adminCSS from "./Admin.css?url"
 import Usuarios from "./components/admin/Usuarios.jsx"
 import Reportes from "./components/admin/Reportes.jsx"
 import PerfilAdmin from "./components/admin/PerfilAdmin.jsx"
+import Productos from "./components/admin/Productos.jsx"
 
 function Admin() {
     // Lógica
@@ -61,6 +62,10 @@ return (
                         <button onClick={() => setVista("perfil")}>
                             Ver Perfil Admin
                         </button>
+
+                        <button onClick={() => setVista("productos")}>
+                            Gestionar Productos
+                        </button>
                     </div>
                 </section>
             </div>
@@ -114,6 +119,8 @@ return (
                 {vista === "reportes" && <Reportes />}
 
                 {vista === "perfil" && <PerfilAdmin />}
+
+                {vista === "productos" && <Productos />}
 
             </div>
         </div>
