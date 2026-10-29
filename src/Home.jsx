@@ -1,5 +1,4 @@
 import VentanaColapsable from "./components/VentanaColapsable"
-import Nav from "./components/Nav"
 import './Home.css'
 import './App.css'
 
