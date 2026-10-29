@@ -9,7 +9,7 @@ function Comunidad() {
             <section className="contenedor-foro">
                 <div className="cabecera-foro">
                     <div className="cabecera-titulo">
-                        <img src="/img/computer.png" alt="" />
+                        <img src="/computer.png" alt="" />
                         <h1>Comunidad</h1>
                     </div>
                     <Link to="/comunidad/nuevo-hilo" className="boton-nuevo-hilo">+ Nuevo hilo</Link>

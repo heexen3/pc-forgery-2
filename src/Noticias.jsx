@@ -1,4 +1,4 @@
-import "./noticias.css"
+import "./Noticias.css"
 import NoticiaCard from "./components/NoticiaCard"
 
 function Noticias() {
@@ -6,7 +6,7 @@ function Noticias() {
         <main className="noticias-main">
             <section className="contenedor-noticias">
                 <div className="titulo-noticias">
-                    <img src="/img/computer.png" alt="" />
+                    <img src="/computer.png" alt="" />
                     <h1>Noticias</h1>
                 </div>
 

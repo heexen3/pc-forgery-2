@@ -8,7 +8,7 @@ export const productosBase = [
         precio: 129990,
         stock: 15,
         descripcion: "Teclado mecánico RGB de alto rendimiento.",
-        imagen: "/img/corsair.jpg"
+        imagen: "/corsair.jpg"
     },
     {
         id: 2,
@@ -17,7 +17,7 @@ export const productosBase = [
         precio: 69990,
         stock: 8,
         descripcion: "Mouse gamer ergonómico de alta precisión.",
-        imagen: "/img/mouse.jpg"
+        imagen: "/mouse.jpg"
     },
     {
         id: 3,
@@ -26,7 +26,7 @@ export const productosBase = [
         precio: 289990,
         stock: 3,
         descripcion: "Monitor gaming de alto rendimiento.",
-        imagen: "/img/monitor.jpg"
+        imagen: "/monitor.jpg"
     },
     {
         id: 4,
@@ -35,7 +35,7 @@ export const productosBase = [
         precio: 119990,
         stock: 0,
         descripcion: "SSD NVMe de 1TB para alto rendimiento.",
-        imagen: "/img/ssd.jpg"
+        imagen: "/ssd.jpg"
     }
 ]
 

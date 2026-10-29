@@ -177,7 +177,7 @@ function NuevoProducto() {
                         id="imagen"
                         name="imagen"
                         className="form-control"
-                        placeholder="/img/producto.jpg"
+                        placeholder="/producto.jpg"
                         value={producto.imagen}
                         onChange={manejarCambio}
                     />

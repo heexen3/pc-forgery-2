@@ -9,7 +9,7 @@ function Home() {
     <main>
       <section className="hero">
         <div className="hero-titulo">
-          <img src="/img/computer.png" alt="" />
+          <img src="/computer.png" alt="" />
           <h1>¡Bienvenido a PC Forgery!</h1>
         </div>
         <div className="hero-contenido">
@@ -22,15 +22,15 @@ function Home() {
       <VentanaColapsable titulo="¿Por dónde empiezo?" className="what-to-do">
         <div className="wtd-contenido">
           <div className="wtd-nosotros">
-            <img src="/img/tools.png" alt="" />
+            <img src="/tools.png" alt="" />
             <h3>¿Qué es PC Forgery?</h3>
           </div>
           <div className="wtd-armado">
-            <img src="/img/computer2.png" alt="" />
+            <img src="/computer2.png" alt="" />
             <h3>¡Quiero armar mi nuevo PC!</h3>
           </div>
           <div className="wtd-diy">
-            <img src="/img/help.png" alt="" />
+            <img src="/help.png" alt="" />
             <h3>Aprende más sobre tu PC</h3>
           </div>
         </div>
@@ -39,12 +39,12 @@ function Home() {
       <VentanaColapsable titulo="¿Cómo armo un PC?" className="primer-pc">
         <div className="guia-contenido">
           <div className="guia-titulo">
-            <img src="/img/frodo4.png" alt="" height="95px" />
+            <img src="/frodo4.png" alt="" height="95px" />
             <h2>"Pero Gandalf, es mi primera vez..."</h2>
           </div>
           <div className="guia-respuesta">
             <h2>"¡No te preocupes mi querido Frodo, tenemos la guía perfecta para tí!"</h2>
-            <img src="/img/gandalf4.png" alt="" height="108px" />
+            <img src="/gandalf4.png" alt="" height="108px" />
           </div>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta nulla at laboriosam unde laborum. Placeat nesciunt, illum quis ratione et sint? Numquam, deserunt alias nobis exercitationem accusamus sapiente. Earum, cupiditate.</p>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta nulla at laboriosam unde laborum. Placeat nesciunt, illum quis ratione et sint? Numquam, deserunt alias nobis exercitationem accusamus sapiente. Earum, cupiditate.</p>
