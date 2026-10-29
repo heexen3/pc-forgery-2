@@ -1,109 +1,346 @@
 @import url(./App.css);
 @import url(./components/Header.css);
 @import url(./components/Footer.css);
-/* Mobile */
+
+/* Detalle de producto como ventana de "Propiedades" de Windows 98 */
+
 .producto-contenedor {
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
+    width: 94%;
+    max-width: 1000px;
+    margin: 15px auto;
+    font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
 }
-.producto, .producto-reseña {
+
+.producto,
+.producto-relacionados {
     width: 100%;
     background-color: #c0c0c0;
     border: 2px outset #ffffff;
+    box-shadow: 1px 1px 0 #000000;
     display: flex;
     flex-direction: column;
-    
+    box-sizing: border-box;
 }
 
-.producto-reseña {
-    margin-top: 20px;
+.producto-relacionados {
+    margin-top: 15px;
 }
 
-.titulo-producto, .titulo-reseña {
-    height: 33px;
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    
-    padding: 0 5px;
-    background: linear-gradient(
-        to right,
-        #000080,
-        #537d99
-    );
-    margin-bottom: 4px;
+.producto-relacionados .productos-grid {
+    padding: 10px;
 }
 
-.titulo-producto h1, .titulo-reseña h2 {
+.titulo-producto {
+    min-height: 26px;
     display: flex;
     align-items: center;
-    font-size: 24px;
+    gap: 6px;
+    padding: 2px 4px;
+    background: linear-gradient(to right, #000080, #1084d0);
     color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.titulo-producto > span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.titulo-producto h1,
+.titulo-producto h2 {
+    font-size: 14px;
+    color: #ffffff;
+    margin: 0;
+}
+
+.botones-titulo {
+    display: flex;
+    gap: 2px;
+}
+
+.botones-titulo span {
+    width: 18px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c0c0c0;
+    color: #000000;
+    border: 2px outset #ffffff;
+    font-size: 11px;
+}
+
+/* Pestañas */
+.pestanas {
+    display: flex;
+    gap: 0;
+    padding: 8px 8px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.pestanas .pestana {
+    font-family: inherit;
+    font-size: 13px;
+    padding: 4px 12px;
+    border: 2px outset #ffffff;
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    background-color: #c0c0c0;
+    margin-top: 3px;
+    cursor: pointer;
+}
+
+.pestanas .pestana:active {
+    border-style: outset;
+}
+
+.pestanas .pestana-activa {
+    margin-top: 0;
+    padding-bottom: 7px;
+    margin-bottom: -2px;
+    font-weight: bold;
+}
+
+.panel-pestana {
+    margin: 0 8px;
+    padding: 12px;
+    border: 2px outset #ffffff;
+    min-height: 260px;
+    font-size: 13px;
+}
+
+.producto-general {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.producto-imagen img {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 2px inset #ffffff;
+    background-color: #ffffff;
+    display: block;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.producto-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.producto-info .producto-nombre {
+    font-size: 20px;
+    color: #000080;
+    margin: 0;
+}
+
+.producto-insignias {
+    display: flex;
+    gap: 4px;
+}
+
+.producto-descripcion {
+    margin: 0;
+}
+
+.tabla-propiedades {
+    border-collapse: collapse;
+    border-top: 2px groove #ffffff;
+    padding-top: 6px;
+}
+
+.tabla-propiedades th {
+    text-align: left;
+    font-weight: normal;
+    padding: 3px 10px 3px 0;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.tabla-propiedades td {
+    padding: 3px 0;
+}
+
+.producto-precio {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 6px 0 0;
+}
+
+.producto-iva {
+    font-size: 11px;
+    margin: 0;
+}
+
+.producto-agregar-carrito {
+    align-self: flex-start;
+    padding: 6px 16px;
+    font-weight: bold;
+}
+
+.tabla-especificaciones {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: 2px inset #ffffff;
+}
+
+.tabla-especificaciones th {
+    background-color: #c0c0c0;
+    border: 1px outset #ffffff;
+    text-align: left;
+    padding: 3px 6px;
     font-weight: normal;
 }
-.titulo-reseña h2 {
+
+.tabla-especificaciones td {
+    padding: 4px 6px;
+    border-bottom: 1px dotted #c0c0c0;
+}
+
+/* Reseñas */
+.resumen-resenas {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.resumen-estrellas,
+.reseña-estrellas {
+    color: #c08000;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.reseña-estrellas {
+    color: #ffd700;
+    font-size: 14px;
+}
+
+.form-resena fieldset {
+    border: 2px groove #ffffff;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0 0 10px;
+}
+
+.form-resena textarea {
+    font-family: inherit;
+    border: 2px inset #ffffff;
+    padding: 4px;
+    resize: vertical;
+}
+
+.form-resena button[type="submit"] {
+    align-self: flex-start;
+    padding: 4px 12px;
+}
+
+.selector-estrellas {
+    display: flex;
+    gap: 2px;
+}
+
+.selector-estrellas button {
     font-size: 20px;
-    font-family: "MS Shell Dlg";
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    color: #808080;
 }
-.producto-imagen {
-    width: 100%;
+
+.selector-estrellas .estrella-activa {
+    color: #c08000;
+}
+
+.aviso-login,
+.mensaje-resena {
+    padding: 6px;
+    background-color: #ffffe1;
+    border: 1px solid #000000;
+}
+
+.reseñas {
     display: flex;
-    padding: 10px;
-    border: 2px inset #ffffff;
     flex-direction: column;
-    align-items: center;
+    gap: 8px;
 }
-.producto-detalles{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 10px;
-}
-.producto-imagen img {
-    width: 300px;
-    height: 300px;
-    border: 2px inset #ffffff;
-}
+
 .reseña {
     border: 2px inset #ffffff;
+    background-color: #ffffff;
     display: flex;
     flex-direction: column;
 }
+
 .reseña-usuario {
-    height: 33px;
+    min-height: 24px;
     display: flex;
-    width: 100%;
     align-items: center;
     justify-content: space-between;
     color: #ffffff;
-    padding: 0 5px;
-    background: linear-gradient(
-        to right,
-        #000080,
-        #537d99
-    );
-    margin-bottom: 4px;
+    padding: 0 6px;
+    background: linear-gradient(to right, #000080, #537d99);
 }
-.producto-reseña p {
-    padding: 10px;
+
+.reseña-texto {
+    padding: 8px;
+    margin: 0;
 }
-.producto-imagen p {
-    padding: 10px;
-    text-align: center;
+
+.reseña-fecha {
+    padding: 0 8px 6px;
+    margin: 0;
+    font-size: 11px;
+    color: #404040;
+}
+
+.producto-acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 8px;
+}
+
+.producto-acciones > * {
+    min-width: 120px;
+    padding: 4px 10px;
+    font-size: 13px;
+}
+
+.producto-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.producto-error img {
+    width: 48px;
 }
 
 @media (min-width: 768px) {
-    .producto-imagen {
+    .producto-general {
         flex-direction: row;
-        justify-content: space-between;
+        align-items: flex-start;
     }
 
-    .producto-imagen img {
-        width: 400px;
-        height: 400px;
-        border: 2px inset #ffffff;
+    .producto-imagen {
+        width: 45%;
     }
 }

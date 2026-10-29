@@ -1,3 +1,4 @@
+import './ProductoCard.css'
 import { Link } from 'react-router-dom'
 import { agregarAlCarrito, formatearPrecio } from './carrito/Carrito.js'
 import { obtenerInsignias } from './tienda/FiltrosTienda.js'
