@@ -1,0 +1,210 @@
+/* Boleta electrónica con formato chileno (simulada) */
+
+.boleta-documento {
+    background-color: #ffffff;
+    color: #000000;
+    border: 2px inset #ffffff;
+    padding: 16px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 820px;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.boleta-documento p {
+    margin: 0;
+}
+
+.boleta-encabezado {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.boleta-emisor h2 {
+    font-size: 20px;
+    margin: 0 0 4px;
+    font-family: Tahoma, Arial, sans-serif;
+}
+
+/* Recuadro rojo característico de los documentos tributarios */
+.boleta-recuadro {
+    border: 3px solid #cc0000;
+    color: #cc0000;
+    text-align: center;
+    padding: 8px 12px;
+    font-weight: bold;
+    align-self: center;
+    min-width: 220px;
+}
+
+.boleta-recuadro p {
+    margin: 2px 0;
+}
+
+.boleta-recuadro-tipo {
+    font-size: 15px;
+}
+
+.boleta-sii {
+    font-size: 11px;
+}
+
+.boleta-cliente {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px 16px;
+    border-top: 1px dashed #000000;
+    border-bottom: 1px dashed #000000;
+    padding: 8px 0;
+}
+
+.boleta-tabla-contenedor {
+    overflow-x: auto;
+}
+
+.boleta-tabla {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.boleta-tabla th {
+    border-bottom: 2px solid #000000;
+    text-align: left;
+    padding: 4px;
+}
+
+.boleta-tabla td {
+    border-bottom: 1px dotted #808080;
+    padding: 4px;
+    vertical-align: top;
+}
+
+.boleta-tabla .numero {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.boleta-pie {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 12px;
+}
+
+.boleta-timbre {
+    text-align: center;
+    font-size: 11px;
+}
+
+.timbre-svg {
+    width: 220px;
+    height: 70px;
+    fill: #000000;
+    display: block;
+    margin: 0 auto 4px;
+}
+
+.boleta-totales {
+    min-width: 240px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.boleta-totales div {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.boleta-total {
+    border-top: 2px solid #000000;
+    padding-top: 4px;
+    margin-top: 2px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.boleta-iva-incluido {
+    font-size: 11px;
+    margin-top: 6px !important;
+}
+
+.boleta-nota {
+    text-align: center;
+    font-weight: bold;
+    border: 1px dashed #cc0000;
+    color: #cc0000;
+    padding: 4px;
+}
+
+@media (min-width: 768px) {
+    .boleta-encabezado {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .boleta-cliente {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .boleta-pie {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+}
+
+/* Impresión: solo se imprime la hoja de la boleta */
+@media print {
+    body {
+        background: #ffffff !important;
+    }
+
+    header,
+    footer,
+    .barra-tareas,
+    .no-imprimir {
+        display: none !important;
+    }
+
+    .boleta-contenedor,
+    .boleta-contenedor .carrito-ventana,
+    .boleta-contenedor .carrito-cuerpo {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        background: #ffffff !important;
+        box-shadow: none !important;
+        animation: none !important;
+    }
+
+    .boleta-documento {
+        border: none;
+        max-width: none;
+    }
+
+    .boleta-encabezado {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .boleta-pie {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .boleta-recuadro,
+    .boleta-nota {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

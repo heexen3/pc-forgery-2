@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "./Carrito.css"
 import BotonesWindows from "./components/BotonesWindows.jsx"
@@ -9,13 +10,17 @@ import {
     calcularTotales,
     formatearPrecio
 } from "./components/carrito/Carrito.js"
-import { generarBoleta } from "./components/carrito/Boletas.js"
+import { generarBoleta, METODOS_PAGO } from "./components/carrito/Boletas.js"
+import { formatearRut, validarRut } from "./components/carrito/Rut.js"
 
 function Carrito() {
     // Lógica
     const navigate = useNavigate()
     const carrito = useCarrito()
     const { subtotal, iva, total } = calcularTotales(carrito)
+    const [rut, setRut] = useState("")
+    const [metodoPago, setMetodoPago] = useState(METODOS_PAGO[0])
+    const rutInvalido = rut.trim() !== "" && !validarRut(rut)
 
     function actualizarCantidad(id, cantidad) {
         const resultado = cambiarCantidad(id, cantidad)
@@ -32,7 +37,7 @@ function Carrito() {
 
     function finalizarCompra() {
         const usuario = JSON.parse(localStorage.getItem("usuarioActual"))
-        const resultado = generarBoleta(usuario)
+        const resultado = generarBoleta(usuario, new Date(), { metodoPago, rut })
 
         alert(resultado.mensaje)
 
@@ -154,6 +159,42 @@ function Carrito() {
                                     <span data-testid="carrito-total">{formatearPrecio(total)}</span>
                                 </div>
                             </div>
+
+                            {/* Datos de pago para la boleta electrónica */}
+                            <fieldset className="carrito-pago">
+                                <legend>Datos para la boleta</legend>
+                                <div className="carrito-pago-campo">
+                                    <label htmlFor="rut-cliente">RUT (opcional):</label>
+                                    <input
+                                        id="rut-cliente"
+                                        type="text"
+                                        placeholder="12.345.678-5"
+                                        maxLength={12}
+                                        value={rut}
+                                        aria-invalid={rutInvalido}
+                                        onChange={event => setRut(event.target.value)}
+                                        onBlur={() => !rutInvalido && rut && setRut(formatearRut(rut))}
+                                    />
+                                    {rutInvalido && (
+                                        <small className="carrito-error">RUT inválido: revisa el dígito verificador.</small>
+                                    )}
+                                </div>
+                                <div className="carrito-pago-campo" role="radiogroup" aria-label="Método de pago">
+                                    <span>Método de pago:</span>
+                                    {METODOS_PAGO.map(metodo => (
+                                        <label key={metodo} className="carrito-radio">
+                                            <input
+                                                type="radio"
+                                                name="metodo-pago"
+                                                value={metodo}
+                                                checked={metodoPago === metodo}
+                                                onChange={() => setMetodoPago(metodo)}
+                                            />
+                                            {metodo}
+                                        </label>
+                                    ))}
+                                </div>
+                            </fieldset>
 
                             <div className="carrito-acciones">
                                 <button onClick={confirmarVaciado}>Vaciar carrito</button>
