@@ -57,7 +57,7 @@ function Boleta() {
                 <div className="carrito-cuerpo">
                     {/* Hoja de la boleta */}
                     <div className="boleta-documento" data-testid="boleta-documento">
-                        <header className="boleta-encabezado">
+                        <div className="boleta-encabezado">
                             <div className="boleta-emisor">
                                 <h2>{emisor.razonSocial}</h2>
                                 <p>{emisor.giro}</p>
@@ -70,7 +70,7 @@ function Boleta() {
                                 <p>N° {boleta.numero}</p>
                                 <p className="boleta-sii">S.I.I. - SANTIAGO ORIENTE</p>
                             </div>
-                        </header>
+                        </div>
 
                         <div className="boleta-cliente">
                             <p><strong>Fecha emisión:</strong> {formatearSoloFecha(boleta.fecha)}</p>
@@ -87,9 +87,9 @@ function Boleta() {
                                     <tr>
                                         <th>Código</th>
                                         <th>Descripción</th>
-                                        <th>Cant.</th>
-                                        <th>Precio unit.</th>
-                                        <th>Total</th>
+                                        <th className="numero">Cant.</th>
+                                        <th className="numero">Precio unit.</th>
+                                        <th className="numero">Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>

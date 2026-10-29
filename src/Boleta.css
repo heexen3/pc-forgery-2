@@ -85,7 +85,8 @@
     vertical-align: top;
 }
 
-.boleta-tabla .numero {
+.boleta-tabla .numero,
+.boleta-tabla th.numero {
     text-align: right;
     white-space: nowrap;
 }
