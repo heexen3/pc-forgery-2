@@ -54,10 +54,6 @@ function Nav() {
                 <Link to="/Admin">
                     Admin
                 </Link>
-
-                <Link to="/Historial">
-                    Ver Historial
-                </Link>
             </>
         )}
 

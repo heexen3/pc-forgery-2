@@ -2,39 +2,33 @@ import { useSearchParams } from "react-router-dom"
 import "./product.css"
 import Resena from "./components/Resena.jsx"
 import BotonesWindows from "./components/BotonesWindows.jsx"
-
-
-//import corsair from './assets/corsair.jpg'
-//import ssd from './assets/ssd.jpg'
-//import monitor from './assets/monitor.jpg'
-//import mouse from './assets/mouse.jpg'
+import corsair from './assets/corsair.jpg'
+import ssd from './assets/ssd.jpg'
+import monitor from './assets/monitor.jpg'
+import mouse from './assets/mouse.jpg'
 
 function Product() {
-    // logica
+    // Lógica
     const [searchParams] = useSearchParams()
     const id = Number(searchParams.get("id"))
+    console.log(id)
 
-    const productos = [
-        { id: 1, nombre: "Corsair K70 RGB Pro", precio: "$129.990", imagen: "/img/corsair.jpg", descripcion: "Teclado mecánico RGB de alto rendimiento." },
-        { id: 2, nombre: "Razer DeathAdder V3", precio: "$69.990", imagen: "/img/mouse.jpg", descripcion: "Mouse gamer ergonómico de alta precisión." },
-        { id: 3, nombre: "ASUS TUF Gaming", precio: "$289.990", imagen: "/img/monitor.jpg", descripcion: "Monitor gaming de alto rendimiento." },
-        { id: 4, nombre: "Samsung 990 EVO 1TB", precio: "$119.990", imagen: "/img/ssd.jpg", descripcion: "SSD NVMe de 1TB para alto rendimiento." }
-    ]
 
-    const producto = productos.find(function (producto) { return producto.id === id })
+    const productos = [ { id: 1, nombre: "Corsair K70 RGB Pro", precio: "$129.990", imagen: corsair, descripcion: "Teclado mecánico RGB de alto rendimiento." }, 
+        { id: 2, nombre: "Razer DeathAdder V3", precio: "$69.990", imagen: mouse, descripcion: "Mouse gamer ergonómico de alta precisión." }, 
+        { id: 3, nombre: "ASUS TUF Gaming", precio: "$289.990", imagen: monitor, descripcion: "Monitor gaming de alto rendimiento." }, 
+        { id: 4, nombre: "Samsung 990 EVO 1TB", precio: "$119.990", imagen: ssd, descripcion: "SSD NVMe de 1TB para alto rendimiento." } ]
+    
+    const producto = productos.find(function(producto) { return producto.id === id })
 
-    if (!producto) {
-        return (
-            <main className="producto-contenedor">
-                <section className="producto">
-                    <h1>Producto no encontrado</h1>
-                    <p>El producto que buscas no existe.</p>
-                </section>
-            </main>
-        )
-    }
-
-    // renderizado
+    if (!producto) 
+    { return (  <main className="producto-contenedor"> 
+                    <section className="producto"> 
+                        <h1>Producto no encontrado</h1> 
+                            <p>El producto que buscas no existe.</p> 
+                    </section> 
+                </main> ) }
+    // Renderizado
     return (
         <main className="producto-contenedor">
             <section className="producto">
@@ -55,7 +49,7 @@ function Product() {
                 </div>
                 <div className="producto-detalles">
                     <p className="producto-precio">
-                        $Precio
+                        {producto.precio}
                     </p>
                     <button className="producto-agregar-carrito">
                         Agregar al carrito
