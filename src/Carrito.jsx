@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import "./Carrito.css"
 import BotonesWindows from "./components/BotonesWindows.jsx"
 import useCarrito from "./components/carrito/useCarrito.js"
+import { rutaPublica } from "./utils/rutaPublica.js"
 import {
     cambiarCantidad,
     eliminarDelCarrito,
@@ -88,7 +89,7 @@ function Carrito() {
                                         {carrito.map(item => (
                                             <tr key={item.id}>
                                                 <td>
-                                                    {item.imagen && <img src={item.imagen} alt={item.nombre} />}
+                                                    {item.imagen && <img src={rutaPublica(item.imagen)} alt={item.nombre} />}
                                                 </td>
                                                 <td>
                                                     {item.nombre}

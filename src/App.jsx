@@ -20,10 +20,14 @@ import ArmaTuPC from './ArmaTuPC.jsx'
 import BarraTareas from './components/escritorio/BarraTareas.jsx'
 import PantallaArranque from './components/escritorio/PantallaArranque.jsx'
 import DialogoWindows from './components/dialogo/DialogoWindows.jsx'
+// Base del sitio definida en vite.config.js ("/pc-forgery-2/" para GitHub Pages; "/" si no se configura).
+// React Router espera el basename sin la barra final.
+const BASENAME = import.meta.env.BASE_URL.replace(/\/+$/, "") || "/"
+
 function App() {
     return (
       <>
-        <BrowserRouter>
+        <BrowserRouter basename={BASENAME}>
             <Nav />
             <Routes>
                 <Route path="/" element={<Home />} />

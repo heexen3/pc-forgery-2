@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
 import "./BarraTareas.css"
 import { PROGRAMAS, ventanaActiva } from "./Escritorio.js"
+import { rutaPublica } from "../../utils/rutaPublica.js"
 
 function formatearHora(fecha) {
     return fecha.toLocaleTimeString("es-CL", { hour: "2-digit", minute: "2-digit" })
@@ -47,7 +48,7 @@ function BarraTareas() {
                 aria-expanded={menuAbierto}
                 onClick={() => setMenuAbierto(!menuAbierto)}
             >
-                <img src="/wlogo.svg" alt="" />
+                <img src={rutaPublica("/wlogo.svg")} alt="" />
                 <span>Inicio</span>
             </button>
 
@@ -64,7 +65,7 @@ function BarraTareas() {
                                     role="menuitem"
                                     onClick={() => setMenuAbierto(false)}
                                 >
-                                    <img src={programa.icono} alt="" />
+                                    <img src={rutaPublica(programa.icono)} alt="" />
                                     {programa.etiqueta}
                                 </Link>
                             </li>

@@ -1,6 +1,7 @@
 import "./Noticias.css"
 import NoticiaCard from "./components/NoticiaCard"
 import MarcoNavegador from "./components/escritorio/MarcoNavegador.jsx"
+import { rutaPublica } from "./utils/rutaPublica.js"
 
 function Noticias() {
     return (
@@ -8,7 +9,7 @@ function Noticias() {
             <MarcoNavegador titulo="Noticias PC Forgery" direccion="http://www.pcforgery.cl/noticias">
             <div className="contenedor-noticias">
                 <div className="titulo-noticias">
-                    <img src="/computer.png" alt="" />
+                    <img src={rutaPublica("/computer.png")} alt="" />
                     <h1>Noticias</h1>
                 </div>
 

@@ -7,6 +7,7 @@ import ProductoCard from "./components/ProductoCard.jsx"
 import { agregarAlCarrito, formatearPrecio } from "./components/carrito/Carrito.js"
 import { etiquetaCategoria, obtenerProducto, obtenerProductos } from "./data/catalogoProductos.js"
 import { obtenerInsignias } from "./components/tienda/FiltrosTienda.js"
+import { rutaPublica } from "./utils/rutaPublica.js"
 import {
     agregarResena,
     obtenerResenas,
@@ -57,7 +58,7 @@ function DetalleProducto({ id }) {
                         <h1 className="producto-nombre">Producto no encontrado</h1>
                     </div>
                     <div className="producto-error">
-                        <img src="/questionmark.png" alt="" />
+                        <img src={rutaPublica("/questionmark.png")} alt="" />
                         <p>El producto que buscas no existe.</p>
                         <Link to="/Shop" className="boton-enlace">Volver a la tienda</Link>
                     </div>
@@ -101,7 +102,7 @@ function DetalleProducto({ id }) {
             {/* Ventana de "Propiedades" estilo Windows 98 */}
             <div className="producto ventana-animada">
                 <div className="titulo-producto">
-                    <img src="/wlogo.svg" alt="" className="wlogo" width="20" />
+                    <img src={rutaPublica("/wlogo.svg")} alt="" className="wlogo" width="20" />
                     <span>Propiedades de {producto.nombre}</span>
                     <div className="botones-titulo" aria-hidden="true">
                         <span>?</span>
@@ -135,7 +136,7 @@ function DetalleProducto({ id }) {
                     {pestana === "general" && (
                         <div className="producto-general">
                             <div className="producto-imagen">
-                                <img src={producto.imagen || "/questionmark.png"} alt={producto.nombre} />
+                                <img src={rutaPublica(producto.imagen || "/questionmark.png")} alt={producto.nombre} />
                             </div>
                             <div className="producto-info">
                                 <h1 className="producto-nombre">{producto.nombre}</h1>
@@ -262,7 +263,7 @@ function DetalleProducto({ id }) {
             {relacionados.length > 0 && (
                 <div className="producto-relacionados ventana-animada">
                     <div className="titulo-producto">
-                        <img src="/wlogo.svg" alt="" className="wlogo" width="20" />
+                        <img src={rutaPublica("/wlogo.svg")} alt="" className="wlogo" width="20" />
                         <h2>Productos relacionados</h2>
                     </div>
                     <div className="productos-grid">

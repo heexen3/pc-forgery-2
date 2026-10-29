@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import "./PantallaArranque.css"
 import { CLAVE_ARRANQUE, DURACION_ARRANQUE_MS, debeMostrarArranque } from "./Escritorio.js"
+import { rutaPublica } from "../../utils/rutaPublica.js"
 
 
 function PantallaArranque() {
@@ -30,7 +31,7 @@ function PantallaArranque() {
     return (
         <div className="pantalla-arranque" onClick={omitir} role="presentation">
             <div className="arranque-logo">
-                <img src="/wlogo.svg" alt="" />
+                <img src={rutaPublica("/wlogo.svg")} alt="" />
                 <p className="arranque-titulo">
                     PC Forgery <span>98</span>
                 </p>

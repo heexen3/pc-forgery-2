@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import "./ArmaTuPC.css"
 import VentanaColapsable from "./components/VentanaColapsable.jsx"
 import { DB_COMPONENTES } from "./data/componentesData.js"
+import { rutaPublica } from "./utils/rutaPublica.js"
 import {
     PASOS,
     nombrePaso,
@@ -159,7 +160,7 @@ function ArmaTuPC() {
                 <div className="wizard-cuerpo">
                     {/* Panel lateral del instalador con la lista de pasos */}
                     <aside className="wizard-banner">
-                        <img src="/computer.png" alt="" className="wizard-banner-img" />
+                        <img src={rutaPublica("/computer.png")} alt="" className="wizard-banner-img" />
                         <p className="wizard-banner-titulo">Arma tu PC</p>
                         <nav className="wizard-steps" id="wizard-steps" aria-label="Pasos del asistente">
                             {PASOS.map((pasoNav, index) => (
@@ -183,7 +184,7 @@ function ArmaTuPC() {
                                 <h2>{nombrePaso(paso)}</h2>
                                 <p>Paso {pasoActual + 1} de {PASOS.length}</p>
                             </div>
-                            <img src="/tools.png" alt="" />
+                            <img src={rutaPublica("/tools.png")} alt="" />
                         </div>
 
                         <div
@@ -198,7 +199,7 @@ function ArmaTuPC() {
                         </div>
 
                         <div className="clippy-helper">
-                            <img src="/help.png" alt="Clippy" className="clippy-img" />
+                            <img src={rutaPublica("/help.png")} alt="Clippy" className="clippy-img" />
                             <div className="clippy-dialog">{AYUDA_PASOS[paso.key]}</div>
                         </div>
 
@@ -207,7 +208,7 @@ function ArmaTuPC() {
                                 const seleccionada = plataforma === marca
                                 return (
                                     <div key={marca} className={`item-card ${seleccionada ? "selected" : ""}`}>
-                                        <img src="/computer.png" className="item-img" alt={marca} />
+                                        <img src={rutaPublica("/computer.png")} className="item-img" alt={marca} />
                                         <h4>Plataforma {marca}</h4>
                                         <p>Configura procesadores y placas compatibles con {marca}.</p>
                                         <button
@@ -235,7 +236,7 @@ function ArmaTuPC() {
                                         key={producto.id}
                                         className={`item-card ${estaSeleccionado ? "selected" : ""} ${fuenteCorta ? "item-insuficiente" : ""}`}
                                     >
-                                        <img src={producto.img} className="item-img" alt={producto.nombre} />
+                                        <img src={rutaPublica(producto.img)} className="item-img" alt={producto.nombre} />
                                         <h4 className="item-title">{producto.nombre}</h4>
                                         <div className="item-specs">
                                             {producto.socket && <span>Socket: {producto.socket}</span>}

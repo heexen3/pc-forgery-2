@@ -3,6 +3,7 @@ import "./comunidad.css"
 import HiloCard from "./components/HiloCard"
 import MensajeForo from "./components/MensajeForo"
 import MarcoCorreo from "./components/escritorio/MarcoCorreo.jsx"
+import { rutaPublica } from "./utils/rutaPublica.js"
 
 function Comunidad() {
     return (
@@ -11,7 +12,7 @@ function Comunidad() {
             <div className="contenedor-foro">
                 <div className="cabecera-foro">
                     <div className="cabecera-titulo">
-                        <img src="/computer.png" alt="" />
+                        <img src={rutaPublica("/computer.png")} alt="" />
                         <h1>Comunidad</h1>
                     </div>
                     <Link to="/comunidad/nuevo-hilo" className="boton-nuevo-hilo">+ Nuevo hilo</Link>
