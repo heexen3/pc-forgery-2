@@ -1,3 +1,7 @@
+@import url(./App.css);
+@import url(./components/Header.css);
+@import url(./components/Footer.css);
+
 /* =======================================================
    MOBILE FIRST / ESTRUCTURA BASE (< 768px)
    Estética Retro Windows 95 optimizada para dispositivos móviles
@@ -85,7 +89,7 @@
 
 /* Barra superior de pestañas de navegación con scroll horizontal táctil */
 #wizard-steps.wizard-steps {
-    display: flex !important;
+    display: flex;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: flex-end !important;
@@ -546,4 +550,11 @@
         grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
         max-height: 520px;
     }
+}
+.aviso-compatibilidad {
+    font-size: 13px;
+    color: #800000;
+    padding: 4px;
+    border: 1px dashed #800000;
+    background-color: #ffffe1;
 }

@@ -1,0 +1,158 @@
+@import url(./App.css);
+@import url(./components/Header.css);
+@import url(./components/Footer.css);
+
+/* Mobile */
+.carrito-contenedor {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.carrito-ventana {
+    width: 100%;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.carrito-titulo {
+    height: 33px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    background: linear-gradient(
+        to right,
+        #000080,
+        #537d99
+    );
+    margin-bottom: 4px;
+}
+
+.carrito-titulo h1, .carrito-titulo h2 {
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: normal;
+    margin: 0;
+}
+
+.carrito-cuerpo {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.carrito-tabla-contenedor {
+    overflow-x: auto;
+    border: 2px inset #ffffff;
+    background-color: #ffffff;
+}
+
+.carrito-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.carrito-tabla th {
+    background-color: #c0c0c0;
+    border: 1px solid #808080;
+    padding: 4px 6px;
+    text-align: left;
+    font-weight: bold;
+}
+
+.carrito-tabla td {
+    border: 1px solid #c0c0c0;
+    padding: 4px 6px;
+    vertical-align: middle;
+}
+
+.carrito-tabla img {
+    width: 48px;
+    height: 48px;
+    border: 2px inset #ffffff;
+    object-fit: cover;
+}
+
+.carrito-componentes {
+    margin: 4px 0 0 16px;
+    font-size: 12px;
+    color: #333333;
+}
+
+.carrito-cantidad {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.carrito-cantidad input {
+    width: 50px;
+    padding: 2px;
+    border: 2px inset #ffffff;
+    font-size: 13px;
+    text-align: center;
+}
+
+.carrito-cantidad button {
+    padding: 0 8px;
+}
+
+.carrito-resumen {
+    align-self: flex-end;
+    min-width: 260px;
+    border: 2px inset #ffffff;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.carrito-resumen div {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 2px 0;
+}
+
+.carrito-resumen .carrito-total {
+    border-top: 2px solid #808080;
+    margin-top: 4px;
+    padding-top: 4px;
+    font-weight: bold;
+}
+
+.carrito-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.carrito-vacio {
+    text-align: center;
+    padding: 20px;
+}
+
+.carrito-vacio a, .carrito-enlace {
+    text-decoration: underline;
+    color: #000080;
+}
+
+.boleta-datos p {
+    font-size: 14px;
+    margin: 2px 0;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .carrito-titulo h1, .carrito-titulo h2 {
+        font-size: 20px;
+    }
+}

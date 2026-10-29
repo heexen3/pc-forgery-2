@@ -1,13 +1,15 @@
-import VentanaColapsable from './components/VentanaColapsable'
+import VentanaColapsable from "./components/VentanaColapsable"
+import Nav from "./components/Nav"
 import './Home.css'
 import './App.css'
 
 function Home() {
   return (
+    <>
     <main>
       <section className="hero">
         <div className="hero-titulo">
-          <img src="/computer.png" alt="" />
+          <img src="/img/computer.png" alt="" />
           <h1>¡Bienvenido a PC Forgery!</h1>
         </div>
         <div className="hero-contenido">
@@ -78,7 +80,9 @@ function Home() {
         </div>
       </VentanaColapsable>
     </main>
+    </>
   )
 }
 
 export default Home
+

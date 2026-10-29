@@ -1,0 +1,98 @@
+.comunidad-main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 15px auto;
+}
+
+.contenedor-foro {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 0 20px 0;
+    box-sizing: border-box;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cabecera-foro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.cabecera-titulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 5px;
+}
+
+.cabecera-titulo h1 {
+    font-size: 36px;
+}
+
+.boton-nuevo-hilo {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.boton-nuevo-hilo:active {
+    border: 2px inset #ffffff;
+}
+
+.lista-hilos {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 10px 10px;
+}
+
+.hilo-detalle {
+    margin: 0 10px 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 2px inset #ffffff;
+    box-sizing: border-box;
+}
+
+.hilo-detalle .hilo-meta {
+    font-size: 12px;
+    color: #333333;
+}
+
+.caja-respuesta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.caja-respuesta textarea {
+    resize: vertical;
+    min-height: 60px;
+    padding: 6px;
+    font-family: inherit;
+    border: 2px inset #ffffff;
+}
+
+.caja-respuesta button {
+    margin-top: 10px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .cabecera-foro {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

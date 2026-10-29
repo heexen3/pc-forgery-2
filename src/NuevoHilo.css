@@ -1,0 +1,90 @@
+.nuevo-hilo-main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 15px auto;
+}
+
+.contenedor-foro {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 0 20px 0;
+    box-sizing: border-box;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cabecera-foro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.cabecera-foro .boton-volver {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.cabecera-foro .boton-volver:active {
+    border: 2px inset #ffffff;
+}
+
+.formulario-hilo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin: 0 10px 10px;
+    padding: 15px;
+    background-color: #ffffff;
+    border: 2px inset #ffffff;
+    box-sizing: border-box;
+}
+
+.formulario-hilo label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.formulario-hilo input,
+.formulario-hilo select,
+.formulario-hilo textarea {
+    padding: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    border: 2px inset #ffffff;
+    box-sizing: border-box;
+}
+
+.formulario-hilo textarea {
+    resize: vertical;
+}
+
+.acciones-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+.aviso-formulario {
+    font-size: 12px;
+    color: #555555;
+    font-style: italic;
+}
+
+@media (min-width: 768px) {
+    .cabecera-foro {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

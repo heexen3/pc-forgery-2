@@ -1,0 +1,31 @@
+.hilo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-sizing: border-box;
+}
+
+.hilo-titulo {
+    font-size: 15px;
+}
+
+.hilo-meta {
+    font-size: 12px;
+    color: #333333;
+}
+
+.hilo-stats {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+@media (min-width: 768px) {
+    .hilo {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
