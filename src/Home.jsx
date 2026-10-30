@@ -3,12 +3,23 @@ import VentanaColapsable from "./components/VentanaColapsable"
 import './Home.css'
 import './App.css'
 import { rutaPublica } from "./utils/rutaPublica.js"
+import IconosEscritorio from "./components/escritorio/IconosEscritorio.jsx"
 
 function Home() {
   return (
     <>
-    <main>
+    <main className="escritorio">
+      {/* Los íconos del escritorio hacen de menú de navegación en el Home */}
+      <IconosEscritorio />
+
+      <div className="escritorio-ventanas">
       <section className="hero">
+        <div className="barra-ventana">
+          <div className="marca">
+            <img src={rutaPublica("/wlogo.svg")} alt="" className="wlogo" width="25px" />
+            <span>Bienvenido - PC Forgery 98</span>
+          </div>
+        </div>
         <div className="hero-titulo">
           <img src={rutaPublica("/computer.png")} alt="" />
           <h1>¡Bienvenido a PC Forgery!</h1>
@@ -16,6 +27,7 @@ function Home() {
         <div className="hero-contenido">
           <p>¡Tu primer PC lo armas aquí!</p>
           <p>Aprende, elige tus componentes y construye tu propio computador.</p>
+          <p className="hero-pista">Haz doble clic en un ícono del escritorio para abrirlo.</p>
           <Link to="/Shop">Llévame a la tienda</Link>
         </div>
       </section>
@@ -24,11 +36,11 @@ function Home() {
         <div className="wtd-contenido">
           <div className="wtd-nosotros">
             <img src={rutaPublica("/tools.png")} alt="" />
-            <h3>¿Qué es PC Forgery?</h3>
+            <h3><Link to="/nosotros">¿Qué es PC Forgery?</Link></h3>
           </div>
           <div className="wtd-armado">
             <img src={rutaPublica("/computer2.png")} alt="" />
-            <h3>¡Quiero armar mi nuevo PC!</h3>
+            <h3><Link to="/arma-tu-pc">¡Quiero armar mi nuevo PC!</Link></h3>
           </div>
           <div className="wtd-diy">
             <img src={rutaPublica("/help.png")} alt="" />
@@ -80,6 +92,7 @@ function Home() {
           </div>
         </div>
       </VentanaColapsable>
+      </div>
     </main>
     </>
   )

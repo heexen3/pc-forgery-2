@@ -1,0 +1,113 @@
+/* Íconos del escritorio estilo Windows 98 (Mobile First) */
+
+.iconos-escritorio {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px 4px;
+    padding: 12px 8px 4px;
+    align-content: start;
+}
+
+.icono-escritorio,
+.icono-escritorio:hover:not(:disabled),
+.icono-escritorio:active:not(:disabled) {
+    /* se quita el bisel global de los botones: un ícono no es un botón 3D */
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
+}
+
+.icono-escritorio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 2px;
+    min-width: 0;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: default;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+.icono-escritorio:active:not(:disabled) > * {
+    transform: none;
+}
+
+.icono-escritorio-imagen {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 40px;
+}
+
+.icono-escritorio-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.icono-escritorio-texto {
+    max-width: 100%;
+    padding: 1px 3px;
+    line-height: 1.2;
+    text-align: center;
+    text-shadow: 1px 1px 0 #000000;
+    overflow-wrap: anywhere;
+}
+
+/* Seleccionado: imagen teñida de azul y texto con fondo azul marino */
+.icono-escritorio.seleccionado .icono-escritorio-imagen img {
+    filter: sepia(1) hue-rotate(190deg) saturate(4) brightness(0.65);
+}
+
+.icono-escritorio.seleccionado .icono-escritorio-texto {
+    background-color: #000080;
+    text-shadow: none;
+}
+
+.icono-escritorio:focus-visible {
+    outline: none;
+}
+
+.icono-escritorio:focus-visible .icono-escritorio-texto {
+    outline: 1px dotted #ffffff;
+}
+
+@media (max-width: 340px) {
+    .iconos-escritorio {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* Tablet: una fila de íconos sobre las ventanas */
+@media (min-width: 768px) {
+    .iconos-escritorio {
+        grid-template-columns: repeat(auto-fill, 92px);
+        justify-content: center;
+    }
+
+    .icono-escritorio {
+        cursor: pointer;
+    }
+
+    .icono-escritorio-imagen {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* Escritorio: íconos en columnas a la izquierda, como en Windows */
+@media (min-width: 1024px) {
+    .iconos-escritorio {
+        grid-template-columns: none;
+        grid-template-rows: repeat(5, auto);
+        grid-auto-flow: column;
+        grid-auto-columns: 92px;
+        justify-content: start;
+        gap: 14px 4px;
+        padding: 14px 6px;
+    }
+}
