@@ -1,0 +1,341 @@
+/* Contenedor principal de la página de usuario */
+.usuario-contenedor {
+    width: 90%;
+    max-width: 900px;
+    margin: 25px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Ventana estilo Windows 98 */
+.usuario-ventana {
+    width: 100%;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: 2px 2px 0 #000000;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cuerpo de la ventana */
+.usuario-cuerpo {
+    padding: 16px;
+    background-color: #c0c0c0;
+}
+
+/* Estado sin sesión */
+.usuario-no-sesion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+    gap: 12px;
+}
+
+.usuario-no-sesion h2 {
+    font-size: 18px;
+    font-family: "MS Shell Dlg", Tahoma, sans-serif;
+    color: #000000;
+}
+
+.usuario-no-sesion p {
+    font-size: 14px;
+    color: #222222;
+}
+
+.usuario-icono-aviso {
+    margin-bottom: 5px;
+    image-rendering: pixelated;
+}
+
+.usuario-acciones-no-sesion {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Contenedor flexible de usuario con sesión */
+.contenedor-usuario {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+/* Columna de la foto */
+.usuario-columna-foto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.usuario-foto {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Botón interactivo para cambiar la foto */
+.boton-cambiar-foto {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 140px;
+    height: 140px;
+    padding: 0;
+    background-color: transparent;
+    border: 2px inset #000080;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.boton-cambiar-foto .foto-perfil {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.boton-cambiar-foto:hover .foto-perfil {
+    opacity: 0.75;
+    filter: brightness(0.85);
+}
+
+/* Badge con editar.svg sobre la foto */
+.badge-editar-foto {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    background-color: #000080;
+    border: 2px outset #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.boton-cambiar-foto:hover .badge-editar-foto {
+    transform: scale(1.1);
+    background-color: #1084d0;
+}
+
+.badge-editar-foto .icono-editar-foto {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    /* editar.svg es blanco (#ffffff), resalta perfecto sobre el fondo azul marino #000080 */
+}
+
+.usuario-foto-ayuda {
+    font-size: 11px;
+    color: #444444;
+    text-align: center;
+    margin: 0;
+}
+
+/* Columna de información */
+.usuario-columna-info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Filas de datos */
+.usuario-dato {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 6px 10px;
+    background-color: #e4e4e4;
+    border: 1px solid #a0a0a0;
+}
+
+.usuario-dato-etiqueta {
+    min-width: 140px;
+    font-size: 13px;
+    color: #000000;
+}
+
+.usuario-dato-valor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.texto-valor {
+    font-size: 14px;
+    color: #000000;
+    word-break: break-all;
+}
+
+/* Badge de rol */
+.usuario-rol-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #000080;
+    color: #ffffff;
+    border: 1px outset #ffffff;
+}
+
+/* Botón de edición con icono editar.svg */
+.boton-editar {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 26px;
+    height: 26px;
+    padding: 2px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.boton-editar:hover {
+    background-color: #d6d6d6;
+}
+
+.boton-editar:active {
+    border: 2px inset #ffffff;
+    background-color: #b0b0b0;
+}
+
+/* Aplicación de filtro para convertir editar.svg blanco en negro estilo Windows 98 */
+.boton-editar img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    filter: brightness(0);
+    display: block;
+}
+
+/* Formularios de edición inline */
+.usuario-form-inline {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-grow: 1;
+}
+
+.usuario-input-inline {
+    flex-grow: 1;
+    padding: 3px 6px;
+    font-size: 13px;
+    background-color: #ffffff;
+    border: 2px inset #808080;
+    outline: none;
+}
+
+.boton-mini {
+    padding: 2px 8px;
+    font-size: 12px;
+}
+
+/* Bloque de descripción */
+.usuario-dato-bloque {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    background-color: #e4e4e4;
+    border: 1px solid #a0a0a0;
+}
+
+.usuario-desc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.usuario-texto-descripcion {
+    width: 100%;
+    min-height: 70px;
+    padding: 8px 10px;
+    margin: 0;
+    background-color: #ffffff;
+    border: 2px inset #808080;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #000000;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Edición de descripción */
+.usuario-form-desc {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.usuario-textarea {
+    width: 100%;
+    padding: 8px 10px;
+    background-color: #ffffff;
+    border: 2px inset #808080;
+    font-size: 13px;
+    font-family: inherit;
+    resize: vertical;
+    outline: none;
+}
+
+.usuario-desc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.usuario-desc-footer small {
+    color: #666666;
+    font-size: 11px;
+}
+
+.usuario-desc-botones {
+    display: flex;
+    gap: 6px;
+}
+
+/* Botones de acción al pie */
+.usuario-pie-acciones {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+/* Pantallas medianas y grandes */
+@media (min-width: 650px) {
+    .contenedor-usuario {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 28px;
+    }
+
+    .usuario-columna-foto {
+        width: 160px;
+        flex-shrink: 0;
+    }
+
+    .usuario-columna-info {
+        flex: 1;
+    }
+}

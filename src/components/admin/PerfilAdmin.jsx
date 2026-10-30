@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import BotonesWindows from "../BotonesWindows.jsx"
 import {
     obtenerPerfilAdmin,
     guardarPerfilAdmin
@@ -41,10 +42,11 @@ function PerfilAdmin() {
         <section className="contenido">
             <div className="admin-titulo">
                 <h2>Perfil del administrador</h2>
+                <BotonesWindows />
             </div>
 
             <div className="p-3">
-                <form onSubmit={guardarCambios}>
+                <form onSubmit={guardarCambios} className="border p-3 bg-light">
                     <div className="mb-3">
                         <label htmlFor="perfilNombre" className="form-label">
                             Nombre completo
@@ -76,7 +78,7 @@ function PerfilAdmin() {
                     </div>
 
                     {mensaje && (
-                        <p role="status">{mensaje}</p>
+                        <p role="status" className="alert py-2">{mensaje}</p>
                     )}
 
                     <button type="submit" className="btn btn-admin">

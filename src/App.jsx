@@ -8,6 +8,7 @@ import Product from './Product.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
 import Admin from './Admin.jsx'
+import Usuario from './Usuario.jsx'
 import Noticia from './Noticias.jsx'
 import NoticiaDetalle from './NoticiaDetalle.jsx'
 import Comunidad from './Comunidad.jsx'
@@ -47,6 +48,7 @@ function App() {
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Register" element={<Register />} />
                 {/* Rutas de usuario y admin */}
+                <Route path="/Usuario" element={<Usuario />} />
                 <Route path="/Admin" element={<Admin />} />
                 {/* Noticias */}
                 <Route path="/Noticias" element={<Noticia />} />
