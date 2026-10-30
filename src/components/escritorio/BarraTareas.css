@@ -125,9 +125,137 @@ body {
 .bandeja-sistema {
     border: 1px solid;
     border-color: #808080 #ffffff #ffffff #808080;
-    padding: 3px 10px;
+    padding: 1px 8px 1px 4px;
     font-size: 13px;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 26px;
+}
+
+/* Íconos de la bandeja del sistema (usuario y carrito) */
+.bandeja-iconos {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.bandeja-icono,
+.bandeja-icono:hover:not(:disabled),
+.bandeja-icono:active:not(:disabled) {
+    background: transparent;
+    border: 1px solid transparent;
+    box-shadow: none;
+}
+
+.bandeja-icono {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 22px;
+    padding: 0 3px;
+    color: #000000;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.bandeja-icono:hover,
+.bandeja-icono[aria-expanded="true"] {
+    border-color: #ffffff #808080 #808080 #ffffff;
+}
+
+.bandeja-icono:active:not(:disabled) > * {
+    transform: none;
+}
+
+.bandeja-icono:focus-visible {
+    outline: 1px dotted #000000;
+}
+
+.bandeja-icono img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.bandeja-nombre {
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bandeja-insignia {
+    position: absolute;
+    top: -4px;
+    right: -5px;
+    min-width: 15px;
+    height: 15px;
+    padding: 0 3px;
+    border-radius: 8px;
+    background-color: #c00000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    font-size: 10px;
+    font-weight: bold;
+    line-height: 13px;
+    text-align: center;
+}
+
+.menu-bandeja {
+    position: absolute;
+    right: -6px;
+    bottom: 30px;
+    min-width: 200px;
+    padding: 2px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: 2px 2px 0 #000000;
+    animation: abrir-menu 0.12s ease-out;
+    transform-origin: bottom right;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-bandeja-titulo {
+    padding: 4px 10px;
+    margin: 0 0 2px;
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.menu-bandeja a,
+.menu-bandeja button {
+    display: block;
+    width: 100%;
+    padding: 6px 10px;
+    text-align: left;
+    color: #000000;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    font-size: 13px;
+}
+
+.menu-bandeja a:hover,
+.menu-bandeja a:focus-visible,
+.menu-bandeja button:hover:not(:disabled),
+.menu-bandeja button:focus-visible {
+    background-color: #000080;
+    color: #ffffff;
+    outline: none;
+}
+
+.menu-bandeja hr {
+    margin: 2px 0;
+    border: none;
+    border-top: 1px solid #808080;
+    border-bottom: 1px solid #ffffff;
 }
 
 @keyframes abrir-menu {
@@ -144,5 +272,12 @@ body {
 @media (max-width: 480px) {
     .tarea-activa {
         max-width: 140px;
+    }
+}
+
+/* En celular el nombre del usuario se oculta: queda solo el ícono */
+@media (max-width: 767px) {
+    .bandeja-nombre {
+        display: none;
     }
 }
