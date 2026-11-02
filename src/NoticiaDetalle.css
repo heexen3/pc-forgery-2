@@ -10,8 +10,9 @@
     border: 2px outset #ffffff;
     box-sizing: border-box;
     justify-content: center;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
-
 .contenedor-noticia-detalle .boton-volver {
     display: inline-block;
     margin: 10px;

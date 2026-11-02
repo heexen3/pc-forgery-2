@@ -1,4 +1,5 @@
 import { mostrarAlerta } from "./dialogo/Dialogo.js"
+import { obtenerUsuarios } from "../data/usuariosData.js"
 function ValidacionLogin(event, navigate) {
     event.preventDefault()
 
