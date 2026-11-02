@@ -1,7 +1,7 @@
 /* Contenedor principal de la página de usuario */
 .usuario-contenedor {
     width: 90%;
-    max-width: 900px;
+    max-width: 920px;
     margin: 25px auto;
     display: flex;
     flex-direction: column;
@@ -16,6 +16,39 @@
     box-shadow: 2px 2px 0 #000000;
     display: flex;
     flex-direction: column;
+}
+
+/* Barra de ventana con título expandido */
+.barra-ventana-titulo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Botón colapsar estilo Windows 98 */
+.boton-colapsar {
+    width: 22px;
+    height: 22px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: inset -1px -1px 0 #000000, inset 1px 1px 0 #dfdfdf;
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    color: #000000;
+}
+
+.boton-colapsar:active {
+    border: 2px inset #ffffff;
+    background-color: #b0b0b0;
 }
 
 /* Cuerpo de la ventana */
@@ -136,7 +169,6 @@
     width: 18px;
     height: 18px;
     object-fit: contain;
-    /* editar.svg es blanco (#ffffff), resalta perfecto sobre el fondo azul marino #000080 */
 }
 
 .usuario-foto-ayuda {
@@ -208,6 +240,7 @@
     border: 2px outset #ffffff;
     cursor: pointer;
     flex-shrink: 0;
+    box-shadow: inset -1px -1px 0 #000000, inset 1px 1px 0 #dfdfdf;
 }
 
 .boton-editar:hover {
@@ -238,16 +271,29 @@
 
 .usuario-input-inline {
     flex-grow: 1;
-    padding: 3px 6px;
+    padding: 4px 6px;
     font-size: 13px;
     background-color: #ffffff;
     border: 2px inset #808080;
+    box-shadow: inset 1px 1px 0 #000000;
+    color: #000000;
     outline: none;
+    font-family: inherit;
 }
 
 .boton-mini {
-    padding: 2px 8px;
+    padding: 3px 8px;
     font-size: 12px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: inset -1px -1px 0 #000000, inset 1px 1px 0 #dfdfdf;
+    color: #000000;
+    cursor: pointer;
+}
+
+.boton-mini:active {
+    border: 2px inset #ffffff;
+    background-color: #b0b0b0;
 }
 
 /* Bloque de descripción */
@@ -273,6 +319,7 @@
     margin: 0;
     background-color: #ffffff;
     border: 2px inset #808080;
+    box-shadow: inset 1px 1px 0 #000000;
     font-size: 13px;
     line-height: 1.4;
     color: #000000;
@@ -292,10 +339,12 @@
     padding: 8px 10px;
     background-color: #ffffff;
     border: 2px inset #808080;
+    box-shadow: inset 1px 1px 0 #000000;
     font-size: 13px;
     font-family: inherit;
     resize: vertical;
     outline: none;
+    color: #000000;
 }
 
 .usuario-desc-footer {
@@ -314,12 +363,272 @@
     gap: 6px;
 }
 
+.usuario-desc-botones button {
+    padding: 3px 10px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: inset -1px -1px 0 #000000, inset 1px 1px 0 #dfdfdf;
+    cursor: pointer;
+    color: #000000;
+}
+
+.usuario-desc-botones button:active {
+    border: 2px inset #ffffff;
+    background-color: #b0b0b0;
+}
+
 /* Botones de acción al pie */
 .usuario-pie-acciones {
     display: flex;
     gap: 12px;
     margin-top: 10px;
     flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   SECCIÓN DE CONFIGURACIONES GUARDADAS (ARMA TU PC) ESTILO WINDOWS 98
+   ========================================================================== */
+
+.usuario-armados-cuerpo {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Estado sin armados guardados */
+.armados-vacio {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px;
+    background-color: #e4e4e4;
+    border: 2px inset #808080;
+    flex-wrap: wrap;
+}
+
+.armados-vacio strong {
+    display: block;
+    font-size: 13px;
+    color: #000000;
+    margin-bottom: 3px;
+}
+
+.armados-vacio p {
+    font-size: 12px;
+    color: #444444;
+    margin: 0;
+}
+
+/* Contenedor de la lista de armados */
+.armados-lista-contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Tarjeta individual de armado */
+.armado-tarjeta {
+    background-color: #e4e4e4;
+    border: 2px outset #ffffff;
+    box-shadow: 1px 1px 0 #000000;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.armado-tarjeta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.armado-tarjeta-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.armado-nombre-bloque {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.armado-nombre-texto {
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.armado-plataforma-badge {
+    padding: 2px 8px;
+    background-color: #000080;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    border: 1px outset #ffffff;
+    letter-spacing: 0.5px;
+}
+
+.armado-tarjeta-precio {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 12px;
+    color: #222222;
+}
+
+.armado-tarjeta-precio strong {
+    font-size: 15px;
+    color: #000080;
+}
+
+/* Barra de acciones de la tarjeta */
+.armado-tarjeta-acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    border-top: 1px solid #c0c0c0;
+    padding-top: 8px;
+}
+
+.armado-fecha small {
+    color: #555555;
+    font-size: 11px;
+}
+
+.armado-botones-grupo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+/* Botones retro Windows 98 */
+.btn-retro {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: inset -1px -1px 0 #000000, inset 1px 1px 0 #dfdfdf;
+    font-family: inherit;
+    font-size: 12px;
+    color: #000000;
+    cursor: pointer;
+    text-decoration: none;
+    line-height: 1.2;
+    user-select: none;
+}
+
+.btn-retro:hover {
+    background-color: #d6d6d6;
+}
+
+.btn-retro:active {
+    border: 2px inset #ffffff;
+    background-color: #b0b0b0;
+    box-shadow: inset 1px 1px 0 #000000;
+}
+
+.btn-destacado {
+    font-weight: bold;
+    color: #000080;
+    border-color: #ffffff;
+}
+
+.btn-destacado:hover {
+    color: #0000a0;
+    background-color: #e2e8f0;
+}
+
+.btn-peligro {
+    color: #800000;
+}
+
+.btn-peligro:hover {
+    background-color: #eedddd;
+}
+
+.btn-toggle-detalle {
+    font-size: 11px;
+}
+
+/* Desglose colapsable de componentes */
+.armado-desglose-componentes {
+    background-color: #ffffff;
+    border: 2px inset #808080;
+    box-shadow: inset 1px 1px 0 #000000;
+    padding: 10px;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.armado-desglose-titulo {
+    font-size: 12px;
+    color: #000000;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.armado-tabla-componentes {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.armado-tabla-componentes th {
+    background-color: #dfdfdf;
+    border: 1px solid #c0c0c0;
+    padding: 4px 8px;
+    text-align: left;
+    font-size: 11px;
+    color: #000000;
+}
+
+.armado-tabla-componentes td {
+    padding: 4px 8px;
+    border: 1px solid #e0e0e0;
+    color: #000000;
+}
+
+.armado-tabla-categoria {
+    width: 130px;
+    white-space: nowrap;
+    color: #333333;
+}
+
+.armado-tabla-nombre {
+    word-break: break-word;
+}
+
+.armado-tabla-precio {
+    text-align: right;
+    white-space: nowrap;
+    font-weight: bold;
+    width: 100px;
+    color: #000000;
+}
+
+.texto-sin-seleccionar {
+    color: #888888;
+}
+
+.armado-desglose-pie {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+    padding-top: 6px;
+    border-top: 1px dashed #dcdcdc;
 }
 
 /* Pantallas medianas y grandes */

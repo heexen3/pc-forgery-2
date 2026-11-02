@@ -1,9 +1,17 @@
 import { useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import BotonesWindows from "./components/BotonesWindows.jsx"
-import { mostrarAlerta } from "./components/dialogo/Dialogo.js"
+import { mostrarAlerta, confirmar as confirmarDialogo } from "./components/dialogo/Dialogo.js"
 import { obtenerUsuarios, guardarUsuarios } from "./data/usuariosData.js"
 import { rutaPublica } from "./utils/rutaPublica.js"
+import {
+    obtenerArmados,
+    eliminarArmado,
+    actualizarNombreArmado,
+    cargarSeleccion
+} from "./components/armado/ArmadosGuardados.js"
+import { PASOS } from "./components/armado/ArmadoPC.js"
+import { formatearPrecio } from "./components/carrito/Carrito.js"
 import "./Usuario.css"
 
 // Valida formato de nombre de usuario (letras, números o guion bajo, entre 3 y 20 caracteres)
@@ -18,6 +26,8 @@ function validarDescripcion(descripcion) {
 }
 
 function Usuario() {
+    const navigate = useNavigate()
+
     // Obtener usuario que inició sesión desde localStorage
     const [usuarioActual, setUsuarioActual] = useState(() => {
         try {
@@ -27,7 +37,7 @@ function Usuario() {
         }
     })
 
-    // Estados para edición inline
+    // Estados para edición inline del perfil
     const [editandoUsuario, setEditandoUsuario] = useState(false)
     const [tempUsuario, setTempUsuario] = useState("")
 
@@ -38,6 +48,15 @@ function Usuario() {
     const [tempDescripcion, setTempDescripcion] = useState("")
 
     const inputFoto = useRef(null)
+
+    // Estados para la sección desplegable de configuraciones de PC
+    const [armadosDesplegados, setArmadosDesplegados] = useState(true)
+    const [armados, setArmados] = useState(() => obtenerArmados(usuarioActual))
+    const [detallesAbiertos, setDetallesAbiertos] = useState({})
+
+    // Edición de nombre de un armado guardado inline
+    const [editandoArmadoId, setEditandoArmadoId] = useState(null)
+    const [tempNombreArmado, setTempNombreArmado] = useState("")
 
     // Si no hay sesión iniciada, mostrar ventana de advertencia estilo Windows 98
     if (!usuarioActual) {
@@ -195,10 +214,58 @@ function Usuario() {
         event.target.value = ""
     }
 
+    // Alternar vista detallada de componentes de una configuración
+    function alternarDetalleArmado(id) {
+        setDetallesAbiertos(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }))
+    }
+
+    // Cargar la configuración seleccionada y redirigir a Arma tu PC
+    function redirigirConArmado(armado) {
+        try {
+            sessionStorage.setItem("armadoSeleccionadoId", armado.id)
+        } catch {
+            // Ignorar en entornos sin sessionStorage
+        }
+        navigate("/arma-tu-pc", { state: { armadoId: armado.id } })
+    }
+
+    // Eliminar una configuración guardada
+    async function manejarEliminarArmado(armado) {
+        const confirmado = await confirmarDialogo(`¿Deseas eliminar la configuración "${armado.nombre}"?`)
+        if (!confirmado) return
+
+        const actualizados = eliminarArmado(usuarioActual, armado.id)
+        setArmados(actualizados)
+        mostrarAlerta(`Configuración "${armado.nombre}" eliminada.`)
+    }
+
+    // Guardar nuevo nombre de configuración inline
+    function guardarRenombrarArmado(e, id) {
+        e.preventDefault()
+        const limpio = tempNombreArmado.trim()
+        if (limpio.length < 3) {
+            mostrarAlerta("El nombre debe tener al menos 3 caracteres.", { icono: "advertencia" })
+            return
+        }
+
+        const resultado = actualizarNombreArmado(usuarioActual, id, limpio)
+        if (resultado.ok) {
+            setArmados(resultado.armados)
+            setEditandoArmadoId(null)
+            mostrarAlerta("Nombre de la configuración actualizado.")
+        } else {
+            mostrarAlerta(resultado.mensaje, { icono: "advertencia" })
+        }
+    }
+
     const descripcion = usuarioActual.descripcion || "Este usuario aún no tiene una descripción."
 
     return (
         <main className="usuario-contenedor">
+            {/* VENTANA 1: PERFIL DEL USUARIO */}
             <section className="usuario-ventana ventana-animada">
                 {/* Barra superior Windows 98 */}
                 <div className="barra-ventana">
@@ -401,6 +468,9 @@ function Usuario() {
                                 <Link to="/MisCompras" className="boton-enlace">
                                     Ver mis compras
                                 </Link>
+                                <Link to="/arma-tu-pc" className="boton-enlace">
+                                    Ir a Arma tu PC
+                                </Link>
                                 {usuarioActual.rol === "admin" && (
                                     <Link to="/Admin" className="boton-enlace">
                                         Panel de administración
@@ -410,6 +480,207 @@ function Usuario() {
                         </div>
                     </div>
                 </div>
+            </section>
+
+            {/* VENTANA 2: VISTA DESPLEGABLE DE CONFIGURACIONES GUARDADAS (ARMA TU PC) */}
+            <section className="usuario-ventana ventana-animada">
+                <div className="barra-ventana">
+                    <div className="barra-ventana-titulo">
+                        <img src={rutaPublica("/computer.png")} alt="" className="wlogo" width="22px" />
+                        <span>Mis Configuraciones de PC ({armados.length} guardadas)</span>
+                    </div>
+                    <div className="botones-windows">
+                        <button
+                            type="button"
+                            className="boton-colapsar"
+                            onClick={() => setArmadosDesplegados(!armadosDesplegados)}
+                            title={armadosDesplegados ? "Colapsar configuraciones" : "Desplegar configuraciones"}
+                            aria-expanded={armadosDesplegados}
+                        >
+                            {armadosDesplegados ? "-" : "+"}
+                        </button>
+                    </div>
+                </div>
+
+                {armadosDesplegados && (
+                    <div className="usuario-cuerpo usuario-armados-cuerpo">
+                        {/* Listado de configuraciones guardadas */}
+                        {armados.length === 0 ? (
+                            <div className="armados-vacio">
+                                <img src={rutaPublica("/computer.png")} alt="" width="36" height="36" />
+                                <div>
+                                    <strong>No tienes configuraciones de PC guardadas aún.</strong>
+                                    <p>Visita el Asistente de Arma tu PC para armar tu equipo y guardar tu configuración.</p>
+                                </div>
+                                <Link to="/arma-tu-pc" className="boton-enlace btn-retro">
+                                    Ir a Arma tu PC
+                                </Link>
+                            </div>
+                        ) : (
+                            <div className="armados-lista-contenedor">
+                                {armados.map(armado => {
+                                    const seleccionArmado = cargarSeleccion(armado)
+                                    const detalleVisible = Boolean(detallesAbiertos[armado.id])
+                                    const estaEditandoNombre = editandoArmadoId === armado.id
+
+                                    return (
+                                        <div key={armado.id} className="armado-tarjeta">
+                                            {/* Cabecera de la tarjeta del armado */}
+                                            <div className="armado-tarjeta-header">
+                                                <div className="armado-tarjeta-info">
+                                                    <img src={rutaPublica("/computer.png")} alt="PC" width="28" height="28" />
+
+                                                    {estaEditandoNombre ? (
+                                                        <form
+                                                            onSubmit={e => guardarRenombrarArmado(e, armado.id)}
+                                                            className="usuario-form-inline"
+                                                        >
+                                                            <input
+                                                                type="text"
+                                                                value={tempNombreArmado}
+                                                                onChange={e => setTempNombreArmado(e.target.value)}
+                                                                maxLength={40}
+                                                                required
+                                                                autoFocus
+                                                                className="usuario-input-inline"
+                                                            />
+                                                            <button type="submit" className="boton-mini">Guardar</button>
+                                                            <button
+                                                                type="button"
+                                                                className="boton-mini"
+                                                                onClick={() => setEditandoArmadoId(null)}
+                                                            >
+                                                                Cancelar
+                                                            </button>
+                                                        </form>
+                                                    ) : (
+                                                        <div className="armado-nombre-bloque">
+                                                            <span className="armado-nombre-texto">
+                                                                {armado.nombre}
+                                                            </span>
+                                                            <button
+                                                                type="button"
+                                                                className="boton-editar"
+                                                                title="Renombrar configuración"
+                                                                onClick={() => {
+                                                                    setTempNombreArmado(armado.nombre)
+                                                                    setEditandoArmadoId(armado.id)
+                                                                }}
+                                                            >
+                                                                <img src={rutaPublica("/editar.svg")} alt="Editar nombre" />
+                                                            </button>
+                                                        </div>
+                                                    )}
+
+                                                    <span className="armado-plataforma-badge">
+                                                        {armado.plataforma || "PC"}
+                                                    </span>
+                                                </div>
+
+                                                <div className="armado-tarjeta-precio">
+                                                    <span>Total estimado:</span>
+                                                    <strong>{formatearPrecio(armado.total)}</strong>
+                                                </div>
+                                            </div>
+
+                                            {/* Barra de metadatos y botones de acción */}
+                                            <div className="armado-tarjeta-acciones">
+                                                <div className="armado-fecha">
+                                                    <small>
+                                                        Guardado: {armado.fecha ? new Date(armado.fecha).toLocaleDateString("es-CL") : "Reciente"}
+                                                    </small>
+                                                </div>
+
+                                                <div className="armado-botones-grupo">
+                                                    {/* Botón desplegable para ver los componentes */}
+                                                    <button
+                                                        type="button"
+                                                        className="btn-retro btn-toggle-detalle"
+                                                        onClick={() => alternarDetalleArmado(armado.id)}
+                                                        title="Mostrar u ocultar los componentes de esta configuración"
+                                                    >
+                                                        {detalleVisible ? "▲ Ocultar componentes" : "▼ Ver componentes"}
+                                                    </button>
+
+                                                    {/* Botón principal: Redirigir a Arma tu PC con esta configuración */}
+                                                    <button
+                                                        type="button"
+                                                        className="btn-retro btn-destacado"
+                                                        onClick={() => redirigirConArmado(armado)}
+                                                        title="Cargar esta configuración en el Asistente Arma tu PC"
+                                                    >
+                                                        🛠 Cargar en Arma tu PC
+                                                    </button>
+
+                                                    {/* Botón secundario: Eliminar */}
+                                                    <button
+                                                        type="button"
+                                                        className="btn-retro btn-peligro"
+                                                        onClick={() => manejarEliminarArmado(armado)}
+                                                        title="Eliminar esta configuración"
+                                                    >
+                                                        ✕ Eliminar
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            {/* Vista desplegable: Detalle completo de los componentes de la configuración */}
+                                            {detalleVisible && (
+                                                <div className="armado-desglose-componentes">
+                                                    <div className="armado-desglose-titulo">
+                                                        <strong>Componentes seleccionados en "{armado.nombre}":</strong>
+                                                    </div>
+
+                                                    <table className="armado-tabla-componentes">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Pieza</th>
+                                                                <th>Componente</th>
+                                                                <th>Precio</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            {PASOS.slice(1).map(paso => {
+                                                                const pieza = seleccionArmado[paso.key]
+                                                                return (
+                                                                    <tr key={paso.key}>
+                                                                        <td className="armado-tabla-categoria">
+                                                                            <strong>{paso.label.split(". ")[1] || paso.label}:</strong>
+                                                                        </td>
+                                                                        <td className="armado-tabla-nombre">
+                                                                            {pieza ? (
+                                                                                <span>{pieza.nombre}</span>
+                                                                            ) : (
+                                                                                <em className="texto-sin-seleccionar">Sin seleccionar</em>
+                                                                            )}
+                                                                        </td>
+                                                                        <td className="armado-tabla-precio">
+                                                                            {pieza ? formatearPrecio(pieza.precio) : "-"}
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            })}
+                                                        </tbody>
+                                                    </table>
+
+                                                    <div className="armado-desglose-pie">
+                                                        <button
+                                                            type="button"
+                                                            className="btn-retro btn-destacado"
+                                                            onClick={() => redirigirConArmado(armado)}
+                                                        >
+                                                            Abrir en Arma tu PC para modificar o comprar →
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        )}
+                    </div>
+                )}
             </section>
         </main>
     )

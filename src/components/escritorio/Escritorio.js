@@ -5,6 +5,7 @@ export const PROGRAMAS = [
     { ruta: "/", etiqueta: "Escritorio", icono: "/computer.png" },
     { ruta: "/Shop", etiqueta: "Tienda", icono: "/shopping-bag.svg" },
     { ruta: "/arma-tu-pc", etiqueta: "Arma tu PC", icono: "/tools.png" },
+    { ruta: "/Usuario", etiqueta: "Mi Perfil", icono: "/computer2.png" },
     { ruta: "/noticias", etiqueta: "Noticias", icono: "/net.png" },
     { ruta: "/comunidad", etiqueta: "Comunidad", icono: "/group.png" },
     { ruta: "/Carrito", etiqueta: "Carrito", icono: "/shopping-bag.svg" },
@@ -17,6 +18,7 @@ export function ventanaActiva(ruta) {
     const minuscula = ruta.toLowerCase()
     if (minuscula.startsWith("/shop") || minuscula.startsWith("/producto")) return "Tienda - Explorador"
     if (minuscula.startsWith("/arma-tu-pc")) return "Asistente Arma tu PC"
+    if (minuscula.startsWith("/usuario")) return "Perfil de usuario"
     if (minuscula.startsWith("/noticias")) return "Noticias - Internet Explorer"
     if (minuscula.startsWith("/comunidad")) return "Comunidad - Outlook Express"
     if (minuscula.startsWith("/carrito")) return "Carrito de compras"

@@ -49,6 +49,8 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           {/* Rutas de usuario y admin */}
+          <Route path="/Usuario" element={<Usuario />} />
+          <Route path="/usuario" element={<Usuario />} />
           <Route path="/Admin" element={<Admin />} />
           {/* Noticias */}
           <Route path="/Noticias" element={<Noticia />} />

@@ -15,7 +15,7 @@ function leerTodos() {
 }
 
 function claveUsuario(usuario) {
-    return usuario?.email?.toLowerCase() || ""
+    return (usuario?.email || usuario?.correo)?.toLowerCase() || ""
 }
 
 export function obtenerArmados(usuario) {
@@ -72,6 +72,27 @@ export function eliminarArmado(usuario, id) {
     todos[claveUsuario(usuario)] = actualizados
     localStorage.setItem(CLAVE_ARMADOS, JSON.stringify(todos))
     return actualizados
+}
+
+// Actualiza el nombre de un armado existente
+export function actualizarNombreArmado(usuario, id, nuevoNombre) {
+    const nombreLimpio = String(nuevoNombre || "").trim()
+    if (nombreLimpio.length < 3) {
+        return { ok: false, mensaje: "El nombre debe tener al menos 3 caracteres.", armados: obtenerArmados(usuario) }
+    }
+
+    const armados = obtenerArmados(usuario)
+    const actualizados = armados.map(armado => {
+        if (armado.id === id) {
+            return { ...armado, nombre: nombreLimpio }
+        }
+        return armado
+    })
+
+    const todos = leerTodos()
+    todos[claveUsuario(usuario)] = actualizados
+    localStorage.setItem(CLAVE_ARMADOS, JSON.stringify(todos))
+    return { ok: true, mensaje: "Nombre actualizado.", armados: actualizados }
 }
 
 // Convierte un armado guardado en una selección con los datos actuales
