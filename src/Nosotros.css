@@ -1,0 +1,385 @@
+/* QUIÉNES SOMOS: cuadro "Propiedades del sistema" estilo Windows 98 (Mobile First) */
+
+.nosotros {
+    padding: 10px 8px 20px;
+}
+
+.propiedades {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: 1px 1px 0 #000000;
+    font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+    font-size: 13px;
+}
+
+.propiedades-titulo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 26px;
+    padding: 2px 4px;
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: #ffffff;
+}
+
+.propiedades-titulo img {
+    width: 18px;
+    height: 18px;
+}
+
+.propiedades-titulo h1 {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.propiedades-controles {
+    display: flex;
+    gap: 2px;
+}
+
+.propiedades-controles span {
+    width: 18px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c0c0c0;
+    color: #000000;
+    border: 2px outset #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* Pestañas */
+.propiedades-pestanas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    padding: 8px 8px 0;
+}
+
+.propiedades-pestanas button,
+.propiedades-pestanas button:active:not(:disabled) {
+    position: relative;
+    margin-right: -1px;
+    padding: 4px 12px;
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #808080 transparent #ffffff;
+    border-radius: 4px 4px 0 0;
+    box-shadow: none;
+    font-size: 13px;
+    top: 2px;
+}
+
+.propiedades-pestanas button:active:not(:disabled) > * {
+    transform: none;
+}
+
+.propiedades-pestanas button.activa,
+.propiedades-pestanas button.activa:active:not(:disabled) {
+    /* la pestaña activa se "pega" al panel tapando su borde superior */
+    top: 0;
+    z-index: 1;
+    margin-bottom: -2px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #c0c0c0;
+    background-color: #c0c0c0;
+    font-weight: bold;
+}
+
+.propiedades-pestanas button:focus-visible {
+    outline: 1px dotted #000000;
+    outline-offset: -5px;
+}
+
+.propiedades-panel {
+    margin: 0 8px;
+    padding: 14px 12px;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    min-height: 280px;
+    animation: abrir-panel 0.15s ease-out;
+}
+
+.propiedades-panel h2 {
+    font-family: "MS Shell Dlg", Tahoma, sans-serif;
+    font-size: 18px;
+    margin: 0 0 8px;
+}
+
+.propiedades-panel h3 {
+    font-family: "MS Shell Dlg", Tahoma, sans-serif;
+    font-size: 15px;
+    margin: 0 0 4px;
+}
+
+.propiedades-panel p {
+    line-height: 1.45;
+}
+
+/* General */
+.panel-general {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.general-monitor {
+    /* monitor CRT dibujado con bordes */
+    padding: 12px;
+    background-color: #008080;
+    border: 6px solid #c0c0c0;
+    outline: 2px solid #808080;
+    box-shadow: 4px 4px 0 #808080;
+}
+
+.general-monitor img {
+    width: 72px;
+    height: 72px;
+    image-rendering: pixelated;
+    display: block;
+}
+
+.general-info {
+    min-width: 0;
+}
+
+.general-ficha {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 4px 10px;
+    margin: 12px 0;
+}
+
+.general-ficha dt {
+    font-weight: bold;
+}
+
+.general-ficha dd {
+    margin: 0;
+    min-width: 0;
+}
+
+.general-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.propiedades-enlace {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: #c0c0c0;
+    color: #000000;
+    border: 2px outset #ffffff;
+    font-size: 13px;
+}
+
+.propiedades-enlace:hover {
+    background-color: #d0d0d0;
+}
+
+.propiedades-enlace:active {
+    border-style: inset;
+    box-shadow: inset 1px 1px 0 #000000;
+}
+
+/* Misión y visión */
+.panel-mision-vision {
+    display: grid;
+    gap: 12px;
+}
+
+.grupo-retro {
+    margin: 0;
+    padding: 8px 12px 12px;
+    border: 2px groove #ffffff;
+    min-width: 0;
+}
+
+.grupo-retro legend {
+    padding: 0 4px;
+}
+
+.grupo-retro legend h2 {
+    margin: 0;
+    font-size: 15px;
+    color: #000080;
+}
+
+.lista-valores {
+    margin: 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 4px;
+}
+
+/* Historia: línea de tiempo */
+.linea-tiempo {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0 10px;
+    border-left: 3px solid #000080;
+}
+
+.linea-tiempo li {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 0 16px 16px;
+}
+
+.linea-tiempo li::before {
+    /* punto del hito, como un botón de opción */
+    content: "";
+    position: absolute;
+    left: -19px;
+    top: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    border: 2px solid #808080;
+    box-shadow: inset 3px 3px 0 #000080, inset -3px -3px 0 #000080;
+}
+
+.linea-tiempo-anio {
+    width: fit-content;
+    padding: 1px 8px;
+    background-color: #000080;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.linea-tiempo-contenido {
+    padding: 8px 10px;
+    background-color: #ffffff;
+    border: 2px inset #ffffff;
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+/* Equipo */
+.tarjetas-equipo {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.tarjeta-equipo {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 2px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.tarjeta-equipo img {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    image-rendering: pixelated;
+}
+
+.tarjeta-equipo div {
+    min-width: 0;
+}
+
+.tarjeta-equipo-rol {
+    color: #000080;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+/* Botones inferiores: Aceptar, Cancelar, Aplicar */
+.propiedades-botones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    padding: 10px 8px;
+}
+
+.propiedades-botones button {
+    min-width: 76px;
+}
+
+@keyframes abrir-panel {
+    from {
+        opacity: 0.4;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .propiedades-pestanas button {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
+
+    .propiedades-panel {
+        padding: 12px 8px;
+    }
+
+    .general-ficha {
+        grid-template-columns: 1fr;
+        gap: 0 0;
+    }
+
+    .general-ficha dd {
+        margin-bottom: 6px;
+    }
+
+    .propiedades-botones button {
+        min-width: 0;
+        flex: 1;
+    }
+}
+
+@media (min-width: 768px) {
+    .nosotros {
+        padding: 20px;
+    }
+
+    .panel-general {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 22px;
+    }
+
+    .panel-mision-vision {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .panel-mision-vision .grupo-retro:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .tarjetas-equipo {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .tarjeta-equipo {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}

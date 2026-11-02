@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import "./BarraTareas.css"
 import { PROGRAMAS, ventanaActiva } from "./Escritorio.js"
 import { rutaPublica } from "../../utils/rutaPublica.js"
+import BandejaSistema from "./BandejaSistema.jsx"
 
 function formatearHora(fecha) {
     return fecha.toLocaleTimeString("es-CL", { hour: "2-digit", minute: "2-digit" })
@@ -79,6 +80,7 @@ function BarraTareas() {
             </div>
 
             <div className="bandeja-sistema">
+                <BandejaSistema />
                 <time dateTime={hora.toISOString()} aria-label="Hora actual">
                     {formatearHora(hora)}
                 </time>
