@@ -1,7 +1,33 @@
+/* Grilla Mobile First: 1 columna, 2 desde 360px, 3 en tablet, 4 en escritorio y 5 en pantallas grandes */
 .productos-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 12px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+}
+
+@media (min-width: 360px) {
+    .productos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 768px) {
+    .productos-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .productos-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1360px) {
+    .productos-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
 }
 
 /* Tarjeta de producto (tienda y productos relacionados) */
@@ -31,6 +57,9 @@
 .producto-card-imagen {
     position: relative;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
 .producto-card-imagen img {
@@ -42,14 +71,15 @@
     box-sizing: border-box;
 }
 
+/* Las insignias van en su propia fila sobre la imagen: ya no tapan la foto ni el texto alternativo.
+   min-height reserva el espacio para que todas las tarjetas queden alineadas. */
 .insignias {
-    position: absolute;
-    top: 4px;
-    left: 4px;
+    order: -1;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 3px;
+    min-height: 18px;
 }
 
 .insignia {
@@ -80,6 +110,7 @@
     font-size: 13px;
     color: #000080;
     min-height: 32px;
+    overflow-wrap: anywhere;
 }
 
 .producto-card-precio {
@@ -115,4 +146,35 @@
 
 .boton-enlace:active {
     border-style: inset;
+}
+
+/* Responsividad: tarjetas más compactas en celulares */
+.producto-card {
+    min-width: 0;
+}
+
+@media (max-width: 359px) {
+    .producto-card-imagen img {
+        max-width: 200px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 767px) {
+    .producto-card {
+        padding: 6px;
+    }
+
+    .producto-card-nombre {
+        font-size: 12px;
+    }
+
+    .insignia {
+        font-size: 10px;
+        padding: 0 4px;
+    }
+}
+
+.producto-card-imagen > a {
+    display: block;
 }

@@ -344,3 +344,62 @@
         width: 45%;
     }
 }
+
+/* Responsividad (celular): pestañas que se ajustan, tabla de especificaciones compacta y botones de ancho completo */
+@media (max-width: 575px) {
+    .producto-contenedor {
+        width: calc(100% - 16px);
+        margin: 10px auto;
+    }
+
+    .pestanas {
+        padding: 6px 4px 0;
+    }
+
+    .pestanas .pestana {
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 4px 6px;
+        font-size: 12px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .panel-pestana {
+        margin: 0 4px;
+        padding: 8px;
+        min-height: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .tabla-especificaciones {
+        table-layout: fixed;
+        font-size: 12px;
+    }
+
+    .tabla-especificaciones th:first-child,
+    .tabla-especificaciones td:first-child {
+        width: 42%;
+        font-weight: bold;
+    }
+
+    .tabla-especificaciones th,
+    .tabla-especificaciones td {
+        padding: 3px 4px;
+        overflow-wrap: anywhere;
+    }
+
+    .producto-acciones {
+        flex-wrap: wrap;
+    }
+
+    .producto-acciones > * {
+        flex: 1 1 100px;
+        min-width: 0;
+    }
+
+    .producto-agregar-carrito {
+        align-self: stretch;
+    }
+}

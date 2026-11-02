@@ -104,3 +104,22 @@
 .ventana-app-estado > *:first-child {
     flex: 1;
 }
+
+/* Responsividad: en celulares el marco usa casi todo el ancho y la barra de estado se ajusta */
+@media (max-width: 767px) {
+    .ventana-app {
+        width: calc(100% - 16px);
+        margin: 10px auto;
+    }
+
+    .ventana-app-estado {
+        flex-wrap: wrap;
+    }
+
+    .ventana-app-estado > * {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

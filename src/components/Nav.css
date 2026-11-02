@@ -67,10 +67,11 @@ header nav a:hover {
         display: flex;
 
         flex-direction: row;
-        flex-wrap: nowrap;
+        /* Responsividad: en tablet los enlaces pasan a una segunda fila en vez de salirse de la pantalla */
+        flex-wrap: wrap;
         align-items: center;
 
-        height: 25px;
+        min-height: 25px;
 
         padding: 0 0 0 5px;
     }

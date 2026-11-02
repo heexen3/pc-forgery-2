@@ -201,3 +201,105 @@
     color: #800000;
     width: 100%;
 }
+
+/* Responsividad (celular): cada fila de la tabla se muestra como una tarjeta apilada,
+   con el nombre de la columna a la izquierda (atributo data-label) */
+.carrito-titulo h1, .carrito-titulo h2 {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media screen and (max-width: 599px) {
+    .carrito-contenedor {
+        width: calc(100% - 16px);
+        margin: 10px auto;
+    }
+
+    .carrito-titulo h1, .carrito-titulo h2 {
+        font-size: 15px;
+    }
+
+    .tabla-apilable thead {
+        display: none;
+    }
+
+    .tabla-apilable,
+    .tabla-apilable tbody,
+    .tabla-apilable tr,
+    .tabla-apilable td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .tabla-apilable tr {
+        position: relative;
+        border-bottom: 2px solid #808080;
+        padding: 6px;
+        min-height: 60px;
+    }
+
+    .tabla-apilable td {
+        border: none;
+        padding: 2px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        text-align: right;
+    }
+
+    .tabla-apilable td[data-label]::before {
+        content: attr(data-label) ":";
+        font-weight: bold;
+        text-align: left;
+        flex-shrink: 0;
+    }
+
+    /* la imagen va a la izquierda y el resto de los datos a su lado */
+    .tabla-apilable .celda-imagen {
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: auto;
+        padding: 0;
+    }
+
+    .tabla-apilable .celda-imagen:empty {
+        display: none;
+    }
+
+    .tabla-apilable tr:has(.celda-imagen img) td:not(.celda-imagen) {
+        padding-left: 58px;
+    }
+
+    .tabla-apilable .celda-nombre {
+        display: block;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    .tabla-apilable .celda-nombre::before {
+        display: none;
+    }
+
+    .tabla-apilable .celda-acciones {
+        justify-content: flex-end;
+    }
+
+    .carrito-componentes {
+        font-weight: normal;
+        margin-left: 14px;
+    }
+
+    .carrito-resumen {
+        align-self: stretch;
+        min-width: 0;
+    }
+
+    .carrito-acciones > * {
+        flex: 1 1 140px;
+    }
+}

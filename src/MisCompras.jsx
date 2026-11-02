@@ -38,7 +38,7 @@ function MisCompras() {
                         <p className="carrito-vacio">Aún no tienes compras registradas.</p>
                     ) : (
                         <div className="carrito-tabla-contenedor">
-                            <table className="carrito-tabla">
+                            <table className="carrito-tabla tabla-apilable">
                                 <thead>
                                     <tr>
                                         <th>Boleta</th>
@@ -51,11 +51,11 @@ function MisCompras() {
                                 <tbody>
                                     {[...boletas].reverse().map(boleta => (
                                         <tr key={boleta.numero}>
-                                            <td>{formatearNumeroBoleta(boleta.numero)}</td>
-                                            <td>{formatearFecha(boleta.fecha)}</td>
-                                            <td>{boleta.items.reduce((total, item) => total + item.cantidad, 0)}</td>
-                                            <td>{formatearPrecio(boleta.total)}</td>
-                                            <td>
+                                            <td className="celda-nombre" data-label="Boleta">{formatearNumeroBoleta(boleta.numero)}</td>
+                                            <td data-label="Fecha">{formatearFecha(boleta.fecha)}</td>
+                                            <td data-label="Productos">{boleta.items.reduce((total, item) => total + item.cantidad, 0)}</td>
+                                            <td data-label="Total">{formatearPrecio(boleta.total)}</td>
+                                            <td className="celda-acciones">
                                                 <Link
                                                     to={`/Boleta?numero=${boleta.numero}`}
                                                     className="carrito-enlace"

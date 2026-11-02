@@ -26,15 +26,14 @@ function ProductoCard({ producto }) {
                 <Link to={`/producto/${id}`}>
                     <img src={rutaPublica(imagen || "/questionmark.png")} alt={nombre} />
                 </Link>
-                {insignias.length > 0 && (
-                    <div className="insignias">
-                        {insignias.map(insignia => (
-                            <span key={insignia.tipo} className={`insignia insignia-${insignia.tipo}`}>
-                                {insignia.texto}
-                            </span>
-                        ))}
-                    </div>
-                )}
+                {/* la fila de insignias se dibuja siempre (aunque esté vacía) para que las tarjetas queden alineadas */}
+                <div className="insignias">
+                    {insignias.map(insignia => (
+                        <span key={insignia.tipo} className={`insignia insignia-${insignia.tipo}`}>
+                            {insignia.texto}
+                        </span>
+                    ))}
+                </div>
             </div>
             <Link to={`/producto/${id}`} className="producto-card-nombre">
                 {nombre}

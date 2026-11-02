@@ -115,9 +115,11 @@
     text-shadow: 2px 2px 0 #000040;
 }
 
+/* En celular los pasos se reparten en varias filas: todos quedan visibles sin desplazamiento lateral */
 .wizard-steps {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 4px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -133,7 +135,7 @@
 }
 
 .step-tab {
-    flex-shrink: 0;
+    flex: 1 1 auto;
     min-height: 32px;
     background-color: transparent;
     border: 1px solid transparent;
@@ -575,22 +577,7 @@
 ======================================================= */
 
 @media (min-width: 768px) {
-    .wizard-container {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 15px;
-    }
-
-    .wizard-window {
-        flex: 1;
-        min-width: 0;
-    }
-
-    .wizard-lateral {
-        width: 280px;
-        flex-shrink: 0;
-    }
-
+    /* En tablet el panel de resumen sigue debajo del asistente; recién en escritorio pasa al costado */
     .wizard-cuerpo {
         flex-direction: row;
     }
@@ -614,7 +601,13 @@
 
     .wizard-steps {
         flex-direction: column;
+        flex-wrap: nowrap;
         overflow: visible;
+    }
+
+    .step-tab {
+        flex: 0 0 auto;
+        white-space: normal;
     }
 
     .wizard-content {
@@ -657,8 +650,20 @@
 ======================================================= */
 
 @media (min-width: 1024px) {
+    .wizard-container {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .wizard-window {
+        flex: 1;
+        min-width: 0;
+    }
+
     .wizard-lateral {
-        width: 320px;
+        width: 300px;
+        flex-shrink: 0;
     }
 
     .grid-productos {
@@ -782,4 +787,23 @@
     padding: 4px;
     border: 1px dashed #800000;
     background-color: #ffffe1;
+}
+
+/* Responsividad (celular): pasos compactos para que entren en dos o tres filas */
+@media (max-width: 575px) {
+    .wizard-container {
+        width: calc(100% - 16px);
+        margin: 10px auto 20px;
+    }
+
+    .step-tab {
+        min-height: 28px;
+        padding: 2px 6px;
+        font-size: 11px;
+        gap: 4px;
+    }
+
+    .wizard-content {
+        min-width: 0;
+    }
 }
