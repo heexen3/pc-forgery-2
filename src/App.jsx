@@ -17,6 +17,7 @@ import Nosotros from './Nosotros.jsx'
 import NuevoHilo from './NuevoHilo.jsx'
 import Carrito from './Carrito.jsx'
 import Boleta from './Boleta.jsx'
+import Pago from './Pago.jsx'
 import MisCompras from './MisCompras.jsx'
 import ArmaTuPC from './ArmaTuPC.jsx'
 import BarraTareas from './components/escritorio/BarraTareas.jsx'
@@ -42,6 +43,7 @@ function App() {
           <Route path="/Shop/Product" element={<Product />} />
           {/* Carrito de compras y boletas */}
           <Route path="/Carrito" element={<Carrito />} />
+          <Route path="/pago" element={<Pago />} />
           <Route path="/Boleta" element={<Boleta />} />
           <Route path="/MisCompras" element={<MisCompras />} />
           {/* Arma tu PC */}

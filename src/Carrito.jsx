@@ -11,7 +11,7 @@ import {
     calcularTotales,
     formatearPrecio
 } from "./components/carrito/Carrito.js"
-import { generarBoleta, METODOS_PAGO } from "./components/carrito/Boletas.js"
+import { validarCompra, guardarDatosPago, METODOS_PAGO } from "./components/carrito/Boletas.js"
 import { formatearRut, validarRut } from "./components/carrito/Rut.js"
 import { mostrarAlerta, confirmar as confirmarDialogo } from "./components/dialogo/Dialogo.js"
 
@@ -37,20 +37,23 @@ function Carrito() {
         }
     }
 
+    // Valida sesión, RUT, método de pago y stock; si todo está bien pasa a la
+    // página de pago simulado (/pago), que es la que genera la boleta.
     function finalizarCompra() {
         const usuario = JSON.parse(localStorage.getItem("usuarioActual"))
-        const resultado = generarBoleta(usuario, new Date(), { metodoPago, rut })
+        const datosPago = { metodoPago, rut }
+        const resultado = validarCompra(usuario, datosPago)
 
-        mostrarAlerta(resultado.mensaje, { icono: resultado.ok ? "info" : "error" })
-
-        if (!usuario) {
-            navigate("/Login")
+        if (!resultado.ok) {
+            mostrarAlerta(resultado.mensaje, { icono: "error" })
+            if (!usuario) {
+                navigate("/Login")
+            }
             return
         }
 
-        if (resultado.ok) {
-            navigate(`/Boleta?numero=${resultado.boleta.numero}`)
-        }
+        guardarDatosPago(datosPago)
+        navigate("/pago", { state: datosPago })
     }
 
     // Renderizado
