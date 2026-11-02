@@ -1,28 +1,13 @@
 import { mostrarAlerta } from "./dialogo/Dialogo.js"
+import { obtenerUsuarios } from "../data/usuariosData.js"
+
 function ValidacionLogin(event, navigate) {
     event.preventDefault()
 
     const identificador = event.target.elements.usuario.value.trim()
     const password = event.target.elements.password.value.trim()
 
-    const usuariosGuardados = JSON.parse(localStorage.getItem("usuarios")) || []
-
-    const adminExiste = usuariosGuardados.some(function(usuario) {
-    return usuario.usuario === "admin"})
-    
-    if (!adminExiste) {
-        usuariosGuardados.push({
-            usuario: "admin",
-            email: "admin@admin.com",
-            password: "admin123",
-            rol: "admin"
-        })
-    
-        localStorage.setItem(
-            "usuarios",
-            JSON.stringify(usuariosGuardados)
-        )
-    }
+    const usuariosGuardados = obtenerUsuarios()
 
     if (usuariosGuardados.length === 0) {
         mostrarAlerta("No se encontró ningún usuario registrado, por favor, regístrese primero.", { icono: "advertencia" })
@@ -31,6 +16,7 @@ function ValidacionLogin(event, navigate) {
     
     const usuarioEncontrado = usuariosGuardados.find(function(usuario){
         return usuario.email === identificador ||
+               usuario.correo === identificador ||
                usuario.usuario === identificador
     })
 
@@ -40,12 +26,13 @@ function ValidacionLogin(event, navigate) {
     }
 
     const passwordValida =
-        password === usuarioEncontrado.password
+        password === usuarioEncontrado.password ||
+        password === usuarioEncontrado.contrasena
     
-        if (!passwordValida) {
-            mostrarAlerta("Usuario o contraseña incorrectos, por favor, inténtelo de nuevo.", { icono: "advertencia" })
-            return
-        }
+    if (!passwordValida) {
+        mostrarAlerta("Usuario o contraseña incorrectos, por favor, inténtelo de nuevo.", { icono: "advertencia" })
+        return
+    }
     
     localStorage.setItem(
         "usuarioActual",

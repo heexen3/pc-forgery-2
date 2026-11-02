@@ -1,4 +1,5 @@
 import { useState } from "react"
+import BotonesWindows from "../BotonesWindows.jsx"
 import { CATEGORIAS, obtenerProductos } from "../../data/catalogoProductos.js"
 import { mostrarAlerta } from "../dialogo/Dialogo.js"
 
@@ -80,9 +81,10 @@ function NuevoProducto() {
         <section className="contenido">
             <div className="admin-titulo">
                 <h2>Nuevo Producto</h2>
+                <BotonesWindows />
             </div>
 
-            <form onSubmit={manejarEnvio}>
+            <form onSubmit={manejarEnvio} className="p-3">
                 <div className="mb-3">
                     <label htmlFor="nombre" className="form-label">
                         Nombre del producto *
