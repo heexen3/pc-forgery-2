@@ -1,3 +1,4 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import './Home.css'
@@ -21,10 +22,7 @@ function Home() {
 
       <div className="escritorio-ventanas">
         <section className="ventana-home ventana-bienvenida" aria-labelledby="titulo-bienvenida">
-          <div className="barra-ventana">
-            <img src={rutaPublica("/wlogo.svg")} alt="" className="wlogo" width="25px" />
-            <span>Bienvenida - PC Forgery 98</span>
-          </div>
+          <BarraTitulo titulo="Bienvenida - PC Forgery 98" id="ventana-bienvenida" />
           <div className="bienvenida-cabecera">
             <img src={rutaPublica("/wlogo.svg")} alt="Logo de PC Forgery" className="bienvenida-logo" />
             <h1 id="titulo-bienvenida">
@@ -44,10 +42,7 @@ function Home() {
         </section>
 
         <section className="ventana-home ventana-destacados" aria-labelledby="titulo-destacados">
-          <div className="barra-ventana">
-            <img src={rutaPublica("/group.png")} alt="" className="wlogo" width="20px" />
-            <span>Destacados - Comunidad</span>
-          </div>
+          <BarraTitulo titulo="Destacados - Comunidad" icono="/group.png" id="ventana-destacados" />
           <div className="ventana-home-contenido">
             <h2 id="titulo-destacados">Últimos hilos de la comunidad</h2>
             {destacados.length === 0 ? (

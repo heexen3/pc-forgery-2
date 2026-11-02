@@ -1,9 +1,10 @@
 /* Marco de aplicación Windows 98 (Explorador, Outlook Express, Internet Explorer...) */
+/* Mobile first: en celular el marco usa casi todo el ancho */
 
 .ventana-app {
-    width: 94%;
+    width: calc(100% - 16px);
     max-width: 1200px;
-    margin: 15px auto;
+    margin: 10px auto;
     background-color: #c0c0c0;
     border: 2px outset #ffffff;
     box-shadow: 1px 1px 0 #000000;
@@ -14,46 +15,7 @@
     flex-direction: column;
 }
 
-.ventana-app-titulo {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    min-height: 26px;
-    padding: 2px 4px;
-    background: linear-gradient(to right, #000080, #1084d0);
-    color: #ffffff;
-    font-weight: bold;
-}
-
-.ventana-app-titulo img {
-    width: 18px;
-    height: 18px;
-}
-
-.ventana-app-titulo > span {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.ventana-app-controles {
-    display: flex;
-    gap: 2px;
-}
-
-.ventana-app-controles span {
-    width: 18px;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #c0c0c0;
-    color: #000000;
-    border: 2px outset #ffffff;
-    font-size: 11px;
-    line-height: 1;
-}
+/* La barra de título ahora es <BarraTitulo /> (ver BarraTitulo.css) */
 
 .ventana-app-menu {
     display: flex;
@@ -90,12 +52,17 @@
 
 .ventana-app-estado {
     display: flex;
+    flex-wrap: wrap;
     gap: 3px;
     padding: 2px;
     font-size: 12px;
 }
 
 .ventana-app-estado > * {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     border: 1px inset #ffffff;
     border-color: #808080 #ffffff #ffffff #808080;
     padding: 2px 6px;
@@ -105,21 +72,20 @@
     flex: 1;
 }
 
-/* Responsividad: en celulares el marco usa casi todo el ancho y la barra de estado se ajusta */
-@media (max-width: 767px) {
+/* Pantallas medianas y grandes */
+@media (min-width: 768px) {
     .ventana-app {
-        width: calc(100% - 16px);
-        margin: 10px auto;
+        width: 94%;
+        margin: 15px auto;
     }
 
     .ventana-app-estado {
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
     }
 
     .ventana-app-estado > * {
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        min-width: auto;
+        overflow: visible;
+        white-space: normal;
     }
 }

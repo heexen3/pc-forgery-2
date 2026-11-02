@@ -40,6 +40,7 @@ export function ventanaActiva(ruta) {
     if (minuscula.startsWith("/noticias")) return "Noticias - Internet Explorer"
     if (minuscula.startsWith("/comunidad")) return "Comunidad - Outlook Express"
     if (minuscula.startsWith("/carrito")) return "Carrito de compras"
+    if (minuscula.startsWith("/pago")) return "Pago seguro"
     if (minuscula.startsWith("/boleta")) return "Visor de documentos"
     if (minuscula.startsWith("/miscompras")) return "Mis compras"
     if (minuscula.startsWith("/admin")) return "Panel de control"

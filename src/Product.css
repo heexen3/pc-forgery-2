@@ -4,10 +4,11 @@
 
 /* Detalle de producto como ventana de "Propiedades" de Windows 98 */
 
+/* Mobile first: en celular la ventana usa casi todo el ancho */
 .producto-contenedor {
-    width: 94%;
+    width: calc(100% - 16px);
     max-width: 1000px;
-    margin: 15px auto;
+    margin: 10px auto;
     font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
 }
 
@@ -346,12 +347,14 @@
 }
 
 /* Responsividad (celular): pestañas que se ajustan, tabla de especificaciones compacta y botones de ancho completo */
-@media (max-width: 575px) {
+@media (min-width: 576px) {
     .producto-contenedor {
-        width: calc(100% - 16px);
-        margin: 10px auto;
+        width: 94%;
+        margin: 15px auto;
     }
+}
 
+@media (max-width: 575px) {
     .pestanas {
         padding: 6px 4px 0;
     }

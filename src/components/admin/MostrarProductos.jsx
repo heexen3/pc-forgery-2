@@ -1,3 +1,4 @@
+import BarraTitulo from "../BarraTitulo.jsx"
 import { mostrarAlerta, confirmar as confirmarDialogo } from "../dialogo/Dialogo.js"
 import { useState } from "react"
 import {
@@ -100,10 +101,7 @@ function MostrarProductos() {
 
     return (
         <section className="contenido">
-            <div className="admin-titulo">
-                <h2>Mostrar Productos</h2>
-                <BotonesWindows />
-            </div>
+            <BarraTitulo titulo="Mostrar Productos" icono="/tools.png" como="h2" />
 
             {productoEditar && (
                 <form ref={refFormulario} onSubmit={guardarEdicion} className="p-3 mb-4 border bg-light">
