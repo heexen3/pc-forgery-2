@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import "./ArmaTuPC.css"
 import VentanaColapsable from "./components/VentanaColapsable.jsx"
 import { DB_COMPONENTES } from "./data/componentesData.js"
@@ -51,14 +51,31 @@ function leerUsuarioActual() {
 function ArmaTuPC() {
     // Lógica
     const navigate = useNavigate()
+    const location = useLocation()
     const usuario = leerUsuarioActual()
-    const [pasoActual, setPasoActual] = useState(0)
-    const [plataforma, setPlataforma] = useState(null)
-    const [seleccion, setSeleccion] = useState(seleccionVacia())
+
+    // Detectar si se solicitó cargar un armado desde /usuario (state, query o sessionStorage)
+    const armadoACargarId = (
+        location?.state?.armadoId ||
+        (typeof window !== "undefined" && new URLSearchParams(location?.search || "").get("cargar")) ||
+        (typeof window !== "undefined" && sessionStorage.getItem("armadoSeleccionadoId"))
+    )
+
+    const armadoInicial = armadoACargarId
+        ? obtenerArmados(usuario).find(a => String(a.id) === String(armadoACargarId))
+        : null
+
+    if (typeof window !== "undefined" && sessionStorage.getItem("armadoSeleccionadoId")) {
+        sessionStorage.removeItem("armadoSeleccionadoId")
+    }
+
+    const [pasoActual, setPasoActual] = useState(() => (armadoInicial ? PASOS.length - 1 : 0))
+    const [plataforma, setPlataforma] = useState(() => (armadoInicial?.plataforma || null))
+    const [seleccion, setSeleccion] = useState(() => (armadoInicial ? cargarSeleccion(armadoInicial) : seleccionVacia()))
     const [aviso, setAviso] = useState("")
-    const [nombreArmado, setNombreArmado] = useState("")
+    const [nombreArmado, setNombreArmado] = useState(() => (armadoInicial?.nombre || ""))
     const [armados, setArmados] = useState(() => obtenerArmados(usuario))
-    const [mensajeArmados, setMensajeArmados] = useState("")
+    const [mensajeArmados, setMensajeArmados] = useState(() => (armadoInicial ? `Armado "${armadoInicial.nombre}" cargado desde tu perfil.` : ""))
 
     const paso = PASOS[pasoActual]
     const conflicto = detectarConflicto(seleccion)

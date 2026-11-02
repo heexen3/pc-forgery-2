@@ -50,18 +50,16 @@ function Nav() {
             </Link>
         )}
 
-        {usuario && usuario.rol === "usuario" && (
+        {usuario && (
             <Link to="/Usuario">
                 Usuario
             </Link>
         )}
 
         {usuario && usuario.rol === "admin" && (
-            <>
-                <Link to="/Admin">
-                    Admin
-                </Link>
-            </>
+            <Link to="/Admin">
+                Admin
+            </Link>
         )}
 
         {usuario && (
