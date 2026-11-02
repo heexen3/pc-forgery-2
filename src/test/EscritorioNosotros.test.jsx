@@ -5,6 +5,7 @@ import { MemoryRouter, Routes, Route, useLocation } from "react-router-dom"
 import Nav from "../components/Nav.jsx"
 import Home from "../Home.jsx"
 import Nosotros from "../Nosotros.jsx"
+import { inicializarHilos } from "../data/hilosData.js"
 
 function RutaActual() {
     const location = useLocation()
@@ -34,19 +35,24 @@ describe("Escritorio del Home y Quiénes Somos", () => {
     })
 
     // PRUEBA UNITARIA 1: el Home es un escritorio con íconos en lugar del menú
-    test("muestra los íconos del escritorio sin el menú y abre la tienda con doble clic", async () => {
+    // y la ventana Destacados lista los hilos sembrados con su cantidad de respuestas
+    test("muestra los íconos sin el menú y los 3 hilos más recientes en Destacados", async () => {
         const user = userEvent.setup()
+        inicializarHilos()
         renderizar("/")
 
         expect(screen.queryByRole("button", { name: /Menú/ })).toBeNull()
-        const tienda = screen.getByRole("button", { name: "Tienda" })
         expect(screen.getByRole("button", { name: "Quiénes Somos" })).toBeTruthy()
 
-        await user.click(tienda)
-        expect(tienda.getAttribute("aria-pressed")).toBe("true")
+        const items = document.querySelectorAll(".destacado-item")
+        expect(items).toHaveLength(3)
+        expect(items[0].textContent).toContain("¿Vale la pena la RTX 4060 para jugar en 1080p?")
+        expect(items[0].textContent).toContain("6 respuestas")
+        expect(items[1].textContent).toContain("4 respuestas")
+        expect(items[2].textContent).toContain("2 respuestas")
 
-        await user.dblClick(tienda)
-        expect(screen.getByText("Ruta actual: /Shop")).toBeTruthy()
+        await user.dblClick(screen.getByRole("button", { name: "Comunidad" }))
+        expect(screen.getByText("Ruta actual: /comunidad")).toBeTruthy()
     })
 
     // PRUEBA UNITARIA 2: Quiénes Somos muestra Misión y Visión en su pestaña
