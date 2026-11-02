@@ -1,6 +1,15 @@
 /* Barra de tareas inferior estilo Windows 98 */
+/* La barra es fija: el body reserva su alto para que ningún contenido quede debajo de ella */
+:root {
+    --alto-barra-tareas: 34px;
+}
+
+html {
+    scroll-padding-bottom: calc(var(--alto-barra-tareas) + 8px);
+}
+
 body {
-    padding-bottom: 40px;
+    padding-bottom: calc(var(--alto-barra-tareas) + 6px);
 }
 
 .barra-tareas {
@@ -8,7 +17,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    height: 34px;
+    height: var(--alto-barra-tareas);
     background-color: #c0c0c0;
     border-top: 2px solid #ffffff;
     box-shadow: 0 -1px 0 #dfdfdf;
@@ -42,7 +51,7 @@ body {
 .menu-inicio {
     position: absolute;
     left: 2px;
-    bottom: 34px;
+    bottom: var(--alto-barra-tareas);
     display: flex;
     background-color: #c0c0c0;
     border: 2px outset #ffffff;
