@@ -281,5 +281,5 @@ function MostrarProductos() {
         </section>
     )
 }
-
+}
 export default MostrarProductos
