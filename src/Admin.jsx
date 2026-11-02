@@ -6,7 +6,6 @@ import Usuarios from "./components/admin/Usuarios.jsx"
 import Reportes from "./components/admin/Reportes.jsx"
 import PerfilAdmin from "./components/admin/PerfilAdmin.jsx"
 import Productos from "./components/admin/Productos.jsx"
-import NoticiasAdmin from "./components/admin/Noticias.jsx"
 
 function Admin() {
     // Lógica
@@ -84,13 +83,6 @@ function Admin() {
                             >
                                 Gestionar Productos
                             </button>
-
-                            <button
-                                className={vista === "noticias" ? "active" : ""}
-                                onClick={() => setVista("noticias")}
-                            >
-                                Gestionar Noticias
-                            </button>
                         </div>
                     </section>
                 </div>
@@ -147,8 +139,6 @@ function Admin() {
                     {vista === "perfil" && <PerfilAdmin />}
 
                     {vista === "productos" && <Productos />}
-
-                    {vista === "noticias" && <NoticiasAdmin />}
                 </div>
             </div>
         </main>

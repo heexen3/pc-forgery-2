@@ -2,15 +2,8 @@ import "./Noticias.css"
 import NoticiaCard from "./components/NoticiaCard"
 import MarcoNavegador from "./components/escritorio/MarcoNavegador.jsx"
 import { rutaPublica } from "./utils/rutaPublica.js"
-import { useNoticias } from "./components/noticias/useNoticias.js"
-import { formatearFecha } from "./data/catalogoNoticias.js"
 
 function Noticias() {
-    const { noticias, eliminarNoticia } = useNoticias()
-
-    const usuario = JSON.parse(localStorage.getItem("usuarioActual"))
-    const esAdmin = usuario?.rol === "admin"
-
     return (
         <main className="noticias-main">
             <MarcoNavegador titulo="Noticias PC Forgery" direccion="http://www.pcforgery.cl/noticias">
@@ -21,21 +14,24 @@ function Noticias() {
                 </div>
 
                 <ul className="lista-noticias">
-                    {noticias.map(noticia => (
-                        <NoticiaCard
-                            key={noticia.id}
-                            id={noticia.id}
-                            titulo={noticia.titulo}
-                            fecha={formatearFecha(noticia.fecha)}
-                            resumen={noticia.resumen}
-                            imagen={noticia.imagen}
-                            onEliminar={esAdmin ? eliminarNoticia : undefined}
-                        />
-                    ))}
-
-                    {noticias.length === 0 && (
-                        <p>No hay noticias publicadas todavía.</p>
-                    )}
+                    <NoticiaCard
+                        id="1"
+                        titulo="Nueva generación de tarjetas gráficas llega a la tienda"
+                        fecha="Publicado el 03 de septiembre, 2026"
+                        resumen="Ya disponibles los nuevos modelos con mejor rendimiento por precio, ideales para actualizar tu setup sin gastar de más."
+                    />
+                    <NoticiaCard
+                        id="2"
+                        titulo="PC Forgery suma la sección Comunidad"
+                        fecha="Publicado el 06 de septiembre, 2026"
+                        resumen="Ahora puedes compartir tus armados, hacer preguntas y ayudar a otros usuarios en nuestro nuevo espacio de foro."
+                    />
+                    <NoticiaCard
+                        id="3"
+                        titulo="Guía rápida: cómo elegir tu primera fuente de poder"
+                        fecha="Publicado el 01 de septiembre, 2026"
+                        resumen="Te explicamos qué significa el wattage, la certificación 80 Plus y qué debes considerar antes de comprar."
+                    />
                 </ul>
             </div>
             </MarcoNavegador>
