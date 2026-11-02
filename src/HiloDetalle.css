@@ -1,0 +1,120 @@
+.hilo-detalle-main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 15px auto;
+}
+
+.hilo-detalle-contenedor {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 0 20px 0;
+    box-sizing: border-box;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.hilo-detalle-cabecera {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.hilo-detalle-contenedor .boton-volver {
+    display: inline-block;
+    padding: 4px 12px;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.hilo-detalle-contenedor .boton-volver:active {
+    border: 2px inset #ffffff;
+}
+
+.hilo-detalle-vacio {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px;
+}
+
+.hilo-detalle {
+    margin: 0 10px 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 2px inset #ffffff;
+    box-sizing: border-box;
+}
+
+.hilo-detalle h2 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.hilo-detalle .hilo-meta {
+    font-size: 12px;
+    color: #333333;
+}
+
+.caja-respuesta {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.caja-respuesta label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.caja-respuesta textarea {
+    resize: vertical;
+    min-height: 60px;
+    padding: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    border: 2px inset #ffffff;
+}
+
+.caja-respuesta button {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.caja-respuesta-aviso {
+    font-size: 13px;
+    font-style: italic;
+    color: #555555;
+}
+
+.caja-respuesta-aviso a {
+    color: #000080;
+    text-decoration: underline;
+}
+
+.caja-respuesta-mensaje {
+    font-size: 12px;
+}
+
+.caja-respuesta-ok {
+    color: #006600;
+}
+
+.caja-respuesta-error {
+    color: #cc0000;
+}
+
+@media (min-width: 768px) {
+    .hilo-detalle-cabecera {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

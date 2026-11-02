@@ -1,5 +1,4 @@
 import { useState } from "react"
-import BotonesWindows from "../BotonesWindows.jsx"
 import { CATEGORIAS, obtenerProductos } from "../../data/catalogoProductos.js"
 import { mostrarAlerta } from "../dialogo/Dialogo.js"
 

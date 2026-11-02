@@ -1,6 +1,5 @@
 import { mostrarAlerta, confirmar as confirmarDialogo } from "../dialogo/Dialogo.js"
-import { useState, useRef } from "react"
-import BotonesWindows from "../BotonesWindows.jsx"
+import { useState } from "react"
 import {
     CATEGORIAS,
     etiquetaCategoria,
@@ -68,11 +67,20 @@ function MostrarProductos() {
     }
 
     async function eliminarProducto(id) {
-        const confirmar = await confirmarDialogo(
-            "¿Estás seguro de que deseas eliminar este producto?"
-        )
+    const confirmar = await confirmarDialogo(
+        "¿Estás seguro de que deseas eliminar este producto?"
+    )
 
-        if (!confirmar) return
+    if (!confirmar) return
+
+    const productosActualizados = productos.filter(
+        producto => producto.id !== id
+    )
+
+    if (productosActualizados.length === 0) {
+        setProductos(restablecerCatalogo())
+    } else {
+        setProductos(productosActualizados)
 
         const productosActualizados = productos.filter(
             producto => producto.id !== id
@@ -229,12 +237,10 @@ function MostrarProductos() {
                     <tbody>
                         {productos.map(producto => (
                             <tr key={producto.id}>
-                                <td data-label="ID">{producto.id}</td>
-                                <td data-label="Producto">
-                                    <strong>{producto.nombre}</strong>
-                                </td>
-                                <td data-label="Categoría">{etiquetaCategoria(producto.categoria)}</td>
-                                <td data-label="Precio">
+                                <td>{producto.id}</td>
+                                <td>{producto.nombre}</td>
+                                <td>{etiquetaCategoria(producto.categoria)}</td>
+                                <td>
                                     ${Number(producto.precio).toLocaleString("es-CL")}
                                 </td>
                                 <td data-label="Stock">
@@ -275,5 +281,5 @@ function MostrarProductos() {
         </section>
     )
 }
-
+}
 export default MostrarProductos

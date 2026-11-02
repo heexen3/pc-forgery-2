@@ -1,6 +1,5 @@
 import { useState } from "react"
 import { mostrarAlerta } from "../dialogo/Dialogo.js"
-import { obtenerUsuarios, guardarUsuarios } from "../../data/usuariosData.js"
 
 function NuevoUsuario() {
     const [nombre, setNombre] = useState("")
@@ -35,6 +34,11 @@ function NuevoUsuario() {
 
         usuariosGuardados.push(nuevoUsuario)
         guardarUsuarios(usuariosGuardados)
+
+        localStorage.setItem(
+            "usuarios",
+            JSON.stringify(usuariosGuardados)
+        )
 
         mostrarAlerta("Usuario registrado correctamente.")
 

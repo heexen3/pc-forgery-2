@@ -1,6 +1,5 @@
-import { useState, useRef, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { mostrarAlerta } from "../dialogo/Dialogo.js"
-import { obtenerUsuarios, guardarUsuarios } from "../../data/usuariosData.js"
 
 function EditarUsuario({ usuarioSeleccionadoInicial = null, onVolver = null }) {
     const [usuarios, setUsuarios] = useState(() => obtenerUsuarios())
@@ -79,8 +78,8 @@ function EditarUsuario({ usuarioSeleccionadoInicial = null, onVolver = null }) {
         const limpioUsuario = (usuarioNombre || nombre).trim()
         const limpioCorreo = correo.trim().toLowerCase()
 
-        if (!limpioNombre || !limpioCorreo) {
-            mostrarAlerta("Por favor completa los campos requeridos.", { icono: "advertencia" })
+        if (correoExiste) {
+            mostrarAlerta("Ya existe otro usuario con ese correo.", { icono: "advertencia" })
             return
         }
 
@@ -141,28 +140,7 @@ function EditarUsuario({ usuarioSeleccionadoInicial = null, onVolver = null }) {
         setUsuarios(usuariosActualizados)
         setCorreoSeleccionado(limpioCorreo)
 
-        // Si el usuario editado es el que tiene la sesión activa actual, sincronizar 'usuarioActual'
-        try {
-            const sesionActiva = JSON.parse(localStorage.getItem("usuarioActual"))
-            if (
-                sesionActiva &&
-                ((sesionActiva.correo || sesionActiva.email)?.toLowerCase() === correoSeleccionado.toLowerCase() ||
-                 (sesionActiva.usuario || sesionActiva.nombre)?.toLowerCase() === correoSeleccionado.toLowerCase())
-            ) {
-                localStorage.setItem(
-                    "usuarioActual",
-                    JSON.stringify({
-                        ...sesionActiva,
-                        ...usuarioEditadoRef
-                    })
-                )
-            }
-        } catch {
-            // Ignorar error al leer sesión
-        }
-
-        setPassword("")
-        mostrarAlerta("Usuario actualizado correctamente con éxito.")
+        mostrarAlerta("Usuario actualizado correctamente.")
     }
 
     const usuarioActualEnEdicion = usuarios.find(

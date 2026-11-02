@@ -3,22 +3,28 @@ import VentanaApp from "../VentanaApp.jsx"
 import "./Marcos.css"
 
 const CARPETAS = [
-    { nombre: "Bandeja de entrada", cantidad: 3 },
+    { nombre: "Bandeja de entrada", cantidad: 0 },
     { nombre: "Bandeja de salida", cantidad: 0 },
     { nombre: "Elementos enviados", cantidad: 0 },
     { nombre: "Elementos eliminados", cantidad: 0 },
-    { nombre: "Borradores", cantidad: 1 }
+    { nombre: "Borradores", cantidad: 0 }
 ]
 
-// Marco estilo Outlook Express para la sección Comunidad (solo visual)
-function MarcoCorreo({ titulo = "Comunidad", carpetaActiva = "Bandeja de entrada", estado, children }) {
+// marco estilo Outlook Express para la seccion Comunidad
+// cantidad numero de hilos (se muestra en bandeja de entrada)
+
+function MarcoCorreo({ titulo = "Comunidad", carpetaActiva = "Bandeja de entrada", estado, cantidad = 0, alResponder, children }) {
+    const carpetas = CARPETAS.map(carpeta =>
+        carpeta.nombre === "Bandeja de entrada" ? { ...carpeta, cantidad } : carpeta
+    )
+
     const herramientas = (
         <div className="oe-herramientas">
             <Link to="/comunidad/nuevo-hilo" className="boton-plano oe-boton">
                 <span aria-hidden="true">✉</span>
                 Nuevo hilo
             </Link>
-            <button type="button" className="boton-plano oe-boton" disabled>
+            <button type="button" className="boton-plano oe-boton" disabled={!alResponder} onClick={alResponder}>
                 <span aria-hidden="true">↩</span>
                 Responder
             </button>
@@ -47,7 +53,7 @@ function MarcoCorreo({ titulo = "Comunidad", carpetaActiva = "Bandeja de entrada
                     <p className="oe-carpetas-titulo">Carpetas</p>
                     <ul>
                         <li className="oe-raiz">📁 Outlook Express</li>
-                        {CARPETAS.map(carpeta => (
+                        {carpetas.map(carpeta => (
                             <li
                                 key={carpeta.nombre}
                                 className={carpeta.nombre === carpetaActiva ? "oe-activa" : ""}
