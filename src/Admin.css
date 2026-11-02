@@ -1,45 +1,170 @@
-
 @import url(./App.css);
 @import url(./components/Header.css);
 @import url(./components/Footer.css);
 
-.contenido {
-    width: 90%;
-    max-width: 1200px;
+/* ==========================================================================
+   ESTILOS GENERALES Y TIPOGRAFÍA WINDOWS 98 - PANEL DE ADMINISTRACIÓN
+   ========================================================================== */
+
+/* Tipografía corporativa Windows 98 en todo el panel */
+.admin-panel,
+.admin-panel * {
+    font-family: "MS Sans Serif", Tahoma, Arial, Helvetica, sans-serif !important;
+    font-size: 12px;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Color de texto en Windows 98: NEGRO PURO (se anula todo azul moderno de Bootstrap) */
+.admin-panel,
+.admin-panel p,
+.admin-panel span:not(.admin-titulo *),
+.admin-panel div,
+.admin-panel label,
+.admin-panel td,
+.admin-panel th,
+.admin-panel h1,
+.admin-panel h2:not(.admin-titulo h2),
+.admin-panel h3,
+.admin-panel h4,
+.admin-panel button,
+.admin-panel strong,
+.admin-panel code,
+.admin-panel small,
+.admin-panel a:not(.btn) {
+    color: #000000 !important;
+}
+
+.admin-panel {
+    width: 92%;
+    max-width: 1240px;
     margin: 20px auto;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
-.contenido {
-    background-color: #c0c0c0;
-    border: 2px outset #ffffff;
-    margin-bottom: 15px;
+/* Marco de ventana Windows 98 (Contenedor gris biselado) */
+.admin-panel .contenido {
+    background-color: #c0c0c0 !important;
+    border: 2px solid !important;
+    border-color: #ffffff #808080 #808080 #ffffff !important;
+    box-shadow: 1px 1px 0 #000000, -1px -1px 0 #dfdfdf !important;
+    border-radius: 0 !important;
+    margin-bottom: 16px;
+    padding: 2px;
 }
 
-/* Título */
-
-.admin-titulo h2 {
-    font-family: "MS Shell Dlg";
-    font-style: normal;
-    color: #ffffff;
-    padding-top: 10px;
-}
+/* ==========================================================================
+   BARRA DE TÍTULO WINDOWS 98
+   ========================================================================== */
 
 .admin-titulo {
-    height: 33px;
-    display: flex;
-    width: 100%;
-    align-items: center;
-
-    padding: 0 5px;
-    background: linear-gradient(
-        to right,
-        #000080,
-        #537d99
-    );
-    margin-bottom: 4px;
+    height: 26px !important;
+    min-height: 26px !important;
+    display: flex !important;
+    width: 100% !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 2px 3px 2px 6px !important;
+    background: linear-gradient(90deg, #000080 0%, #1084d0 100%) !important;
+    margin-bottom: 6px !important;
+    user-select: none;
+    border-radius: 0 !important;
 }
 
-/* Columnas de administración */
+.admin-titulo h2,
+.admin-titulo h2 * {
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 22px !important;
+    letter-spacing: 0.3px !important;
+    text-shadow: none !important;
+}
+
+/* Encabezados secundarios */
+.admin-panel h3 {
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif !important;
+    font-size: 13px !important;
+    font-weight: bold !important;
+    color: #000000 !important;
+    margin-bottom: 10px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #808080;
+}
+
+/* ==========================================================================
+   BOTONES WINDOWS 98 (BISELADOS 3D CON TEXTO NEGRO)
+   ========================================================================== */
+
+.admin-panel button,
+.admin-panel .btn,
+.admin-panel .btn-admin {
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: normal !important;
+    color: #000000 !important;
+    background-color: #c0c0c0 !important;
+    border: 2px outset #ffffff !important;
+    border-radius: 0 !important;
+    box-shadow: inset -1px -1px 0 #000000, inset 1px 1px 0 #dfdfdf !important;
+    padding: 4px 12px !important;
+    margin: 0;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1.3 !important;
+    text-shadow: none !important;
+}
+
+.admin-panel button:hover:not(:disabled),
+.admin-panel .btn:hover:not(:disabled),
+.admin-panel .btn-admin:hover:not(:disabled) {
+    background-color: #d6d6d6 !important;
+    color: #000000 !important;
+    border-color: #ffffff !important;
+}
+
+.admin-panel button:active:not(:disabled),
+.admin-panel .btn:active:not(:disabled),
+.admin-panel .btn-admin:active:not(:disabled),
+.admin-panel button.active,
+.admin-panel .btn.active {
+    border: 2px inset #ffffff !important;
+    background-color: #b0b0b0 !important;
+    color: #000000 !important;
+    box-shadow: inset 1px 1px 0 #000000 !important;
+    padding: 5px 11px 3px 13px !important;
+    font-weight: bold !important;
+}
+
+.admin-panel button:focus-visible,
+.admin-panel .btn:focus-visible {
+    outline: 1px dotted #000000 !important;
+    outline-offset: -3px !important;
+}
+
+.admin-panel .btn-danger {
+    color: #800000 !important;
+    font-weight: bold !important;
+}
+
+.admin-panel .btn-danger:hover {
+    background-color: #e2caca !important;
+}
+
+.admin-panel .btn-secondary {
+    color: #000000 !important;
+}
+
+/* ==========================================================================
+   MENÚ LATERAL IZQUIERDO Y BOTONES DE NAVEGACIÓN
+   ========================================================================== */
 
 .admin-menu .contenido {
     width: 100%;
@@ -51,124 +176,327 @@
     margin: 0 0 15px;
 }
 
-/* Botones del menú y contenido */
-
-.contenido-botones {
+.admin-menu .contenido-botones {
     display: flex;
-    justify-content: flex-start;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
+    padding: 8px;
 }
-
-/* Menú de administración */
 
 .admin-menu .contenido-botones button {
-    background-color: #c0c0c0;
-    color: #000000;
-    border: 2px outset #ffffff;
-    border-radius: 0;
-    padding: 6px 12px;
-    text-align: center;
-}
-
-.admin-menu .contenido-botones button:hover {
-    background-color: #c0c0c0;
-    color: #000000;
-}
-
-.admin-menu .contenido-botones button:active {
-    border: 2px inset #ffffff;
-}
-
-/* Panel de administración */
-
-.admin-panel {
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-/* Columnas */
-
-.admin-menu .contenido,
-.admin-vista .contenido {
     width: 100%;
-    margin: 0 0 15px;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    padding: 6px 12px !important;
+    font-size: 12px !important;
+    font-weight: normal !important;
+    color: #000000 !important;
 }
 
-/* Botones */
-
-.btn-admin {
-    background-color: #c0c0c0;
-    color: #000000;
-    border: 2px outset #ffffff;
-    border-radius: 0;
-    padding: 6px 12px;
+.admin-menu .contenido-botones button.active {
+    background-color: #b0b0b0 !important;
+    color: #000000 !important;
+    border: 2px inset #ffffff !important;
+    box-shadow: inset 1px 1px 0 #000000 !important;
+    font-weight: bold !important;
+    outline: 1px dotted #000000 !important;
+    outline-offset: -3px !important;
 }
 
-.btn-admin:hover {
-    background-color: #c0c0c0;
-    color: #000000;
-    border: 2px outset #ffffff;
-}
-
-.btn-admin:active {
-    border: 2px inset #ffffff;
-}
-
-/* Historial */
-
-.historial-contenedor {
+/* Pestañas de submenú en el área de contenido */
+.admin-vista .contenido-botones {
     display: flex;
-    flex-direction: column;
-    padding: 10px;
-    overflow-x: auto;
-}
-
-.historial-tabla {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.historial-tabla th,
-.historial-tabla td {
-    border: 1px solid #000000;
+    flex-wrap: wrap;
+    gap: 4px;
     padding: 8px;
-    text-align: center;
+    background-color: #c0c0c0;
+    border-bottom: 2px groove #ffffff;
+    margin-bottom: 12px;
 }
 
-/* Tablet */
+.admin-vista .contenido-botones button {
+    border-bottom: none !important;
+    color: #000000 !important;
+}
 
-@media (min-width: 768px) {
-    .admin-menu .contenido-botones {
-        padding: 5px;
-        flex-direction: column;
-        justify-content: flex-start;
+.admin-vista .contenido-botones button.active {
+    background-color: #dfdfdf !important;
+    border: 2px outset #ffffff !important;
+    border-bottom: 2px solid #dfdfdf !important;
+    color: #000000 !important;
+    font-weight: bold !important;
+}
+
+/* ==========================================================================
+   FORMULARIOS, INPUTS Y SELECTS (CAMPOS HUNDIDOS BLANCOS CON TEXTO NEGRO)
+   ========================================================================== */
+
+.admin-panel input[type="text"],
+.admin-panel input[type="email"],
+.admin-panel input[type="password"],
+.admin-panel input[type="number"],
+.admin-panel textarea,
+.admin-panel select,
+.admin-panel .form-control,
+.admin-panel .form-select {
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif !important;
+    font-size: 12px !important;
+    color: #000000 !important;
+    background-color: #ffffff !important;
+    border: 2px inset #808080 !important;
+    border-radius: 0 !important;
+    box-shadow: inset 1px 1px 0 #000000, inset -1px -1px 0 #dfdfdf !important;
+    padding: 3px 6px !important;
+    height: auto !important;
+    min-height: 25px !important;
+}
+
+.admin-panel input:focus,
+.admin-panel textarea:focus,
+.admin-panel select:focus,
+.admin-panel .form-control:focus,
+.admin-panel .form-select:focus {
+    background-color: #ffffff !important;
+    border-color: #808080 !important;
+    color: #000000 !important;
+    outline: 1px dotted #000000 !important;
+    outline-offset: -3px !important;
+    box-shadow: inset 1px 1px 0 #000000, inset -1px -1px 0 #dfdfdf !important;
+}
+
+.admin-panel label,
+.admin-panel .form-label {
+    font-family: "MS Sans Serif", Tahoma, Arial, sans-serif !important;
+    font-size: 12px !important;
+    color: #000000 !important;
+    font-weight: normal !important;
+    margin-bottom: 2px !important;
+}
+
+.admin-panel form.bg-light,
+.admin-panel form.border,
+.admin-panel .border {
+    background-color: #c0c0c0 !important;
+    border: 2px groove #ffffff !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    scroll-margin-top: 24px;
+}
+
+.admin-panel input[type="checkbox"],
+.admin-panel .form-check-input {
+    width: 14px !important;
+    height: 14px !important;
+    border: 2px inset #808080 !important;
+    border-radius: 0 !important;
+    margin-top: 2px !important;
+    cursor: pointer !important;
+}
+
+/* ==========================================================================
+   TABLAS WINDOWS 98 (CABECERAS EN RELIEVE Y TEXTO NEGRO NÍTIDO)
+   ========================================================================== */
+
+.admin-panel table,
+.admin-panel .table,
+.admin-panel .historial-tabla {
+    background-color: #ffffff !important;
+    border: 2px inset #808080 !important;
+    box-shadow: inset 1px 1px 0 #000000 !important;
+    border-radius: 0 !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+}
+
+.admin-panel table th,
+.admin-panel .table th,
+.admin-panel .historial-tabla th {
+    background: #c0c0c0 !important;
+    color: #000000 !important;
+    font-family: "MS Sans Serif", Tahoma, sans-serif !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    border: 2px outset #ffffff !important;
+    box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080 !important;
+    padding: 4px 8px !important;
+    text-align: left !important;
+    vertical-align: middle !important;
+    border-radius: 0 !important;
+}
+
+.admin-panel table td,
+.admin-panel .table td,
+.admin-panel .historial-tabla td {
+    border: 1px solid #dcdcdc !important;
+    padding: 4px 8px !important;
+    color: #000000 !important;
+    font-family: "MS Sans Serif", Tahoma, sans-serif !important;
+    font-size: 12px !important;
+    vertical-align: middle !important;
+    border-radius: 0 !important;
+}
+
+.admin-panel .table-striped tbody tr:nth-of-type(odd) td {
+    background-color: #f7f7f7 !important;
+}
+
+.admin-panel .table tbody tr:hover td {
+    background-color: #000080 !important;
+    color: #ffffff !important;
+}
+
+.admin-panel .table tbody tr:hover td strong,
+.admin-panel .table tbody tr:hover td span,
+.admin-panel .table tbody tr:hover td small {
+    color: #ffffff !important;
+}
+
+/* ==========================================================================
+   ALERTAS Y CUADROS DE MENSAJE (SIN AZULES PASTEL)
+   ========================================================================== */
+
+.admin-panel .alert,
+.admin-panel .alert-primary,
+.admin-panel .alert-info,
+.admin-panel .alert-secondary {
+    background-color: #ffffff !important;
+    border: 2px inset #808080 !important;
+    box-shadow: inset 1px 1px 0 #000000, inset -1px -1px 0 #dfdfdf !important;
+    border-radius: 0 !important;
+    color: #000000 !important;
+    font-family: "MS Sans Serif", Tahoma, sans-serif !important;
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+}
+
+.admin-panel .alert strong,
+.admin-panel .alert span,
+.admin-panel .alert code {
+    color: #000000 !important;
+}
+
+.admin-panel .badge {
+    background-color: #c0c0c0 !important;
+    color: #000000 !important;
+    border: 1px outset #ffffff !important;
+    box-shadow: inset -1px -1px 0 #000000, inset 1px 1px 0 #dfdfdf !important;
+    border-radius: 0 !important;
+    font-family: "MS Sans Serif", Tahoma, sans-serif !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    padding: 2px 6px !important;
+    letter-spacing: 0.3px !important;
+}
+
+/* ==========================================================================
+   TABLA RESPONSIVA EN MÓVILES (TEXTO NEGRO PURO)
+   ========================================================================== */
+
+.admin-tabla-contenedor {
+    width: 100%;
+}
+
+@media (max-width: 767.98px) {
+    .admin-tabla-contenedor {
+        overflow-x: visible !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 
-    .admin-vista .contenido-botones {
-        padding: 5px;
-        flex-direction: row;
-        justify-content: space-between;
+    .tabla-admin-responsiva {
+        display: block !important;
+        width: 100% !important;
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .tabla-admin-responsiva thead {
+        display: none !important;
+    }
+
+    .tabla-admin-responsiva tbody {
+        display: block !important;
+        width: 100% !important;
+    }
+
+    .tabla-admin-responsiva tr {
+        display: block !important;
+        width: 100% !important;
+        margin-bottom: 14px !important;
+        background-color: #ffffff !important;
+        border: 2px inset #808080 !important;
+        box-shadow: inset 1px 1px 0 #000000 !important;
+        padding: 10px 12px !important;
+        border-radius: 0 !important;
+    }
+
+    .tabla-admin-responsiva td {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        text-align: right !important;
+        padding: 7px 2px !important;
+        border: none !important;
+        border-bottom: 1px dotted #c4c4c4 !important;
+        font-size: 12px !important;
+        background-color: transparent !important;
+        color: #000000 !important;
+    }
+
+    .tabla-admin-responsiva tr:hover td {
+        background-color: transparent !important;
+        color: #000000 !important;
+    }
+
+    .tabla-admin-responsiva td:last-child {
+        border-bottom: none !important;
+        justify-content: flex-end !important;
+        padding-top: 10px !important;
+        gap: 8px;
+    }
+
+    .tabla-admin-responsiva td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #000000 !important; /* Negro clásico de Windows 98 en lugar de azul */
+        text-align: left !important;
+        margin-right: 12px;
+        flex-shrink: 0;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 }
 
-/* Ajuste del título en tablet */
-@media (min-width: 768px) and (max-width: 1023px) {
-    .admin-titulo {
-        height: auto;
-        min-height: 33px;
-        padding: 5px 8px;
-        box-sizing: border-box;
-    }
+/* ==========================================================================
+   BARRAS DE DESPLAZAMIENTO WINDOWS 98 (DESKTOP)
+   ========================================================================== */
 
-    .admin-titulo h2 {
-        font-size: 18px;
-        line-height: 1.2;
-        padding-top: 0;
-        margin: 0;
-        overflow-wrap: anywhere;
-    }
+.admin-panel ::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+}
+
+.admin-panel ::-webkit-scrollbar-track {
+    background-color: #dfdfdf;
+}
+
+.admin-panel ::-webkit-scrollbar-thumb {
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+}
+
+.admin-panel ::-webkit-scrollbar-thumb:active {
+    border: 2px inset #ffffff;
+    background-color: #b0b0b0;
+}
+
+.admin-panel ::-webkit-scrollbar-button {
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    width: 16px;
+    height: 16px;
 }

@@ -10,9 +10,7 @@ function NuevoUsuario() {
     function registrarUsuario(e) {
         e.preventDefault()
 
-        const usuariosGuardados = JSON.parse(
-            localStorage.getItem("usuarios")
-        ) || []
+        const usuariosGuardados = obtenerUsuarios()
 
         const correoExiste = usuariosGuardados.some(
             usuario =>
@@ -26,12 +24,16 @@ function NuevoUsuario() {
 
         const nuevoUsuario = {
             nombre: nombre.trim(),
+            usuario: nombre.trim(),
             correo: correo.trim(),
+            email: correo.trim(),
             contrasena: contrasena,
+            password: contrasena,
             rol: rol
         }
 
         usuariosGuardados.push(nuevoUsuario)
+        guardarUsuarios(usuariosGuardados)
 
         localStorage.setItem(
             "usuarios",

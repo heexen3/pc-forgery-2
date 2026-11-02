@@ -1,4 +1,5 @@
 import { useState } from "react"
+import BotonesWindows from "../BotonesWindows.jsx"
 import { generarReporte } from "./Reportes"
 
 function Reportes() {
@@ -12,6 +13,7 @@ function Reportes() {
         <section className="contenido">
             <div className="admin-titulo">
                 <h2>Reportes</h2>
+                <BotonesWindows />
             </div>
 
             <div className="p-3">

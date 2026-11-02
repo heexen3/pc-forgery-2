@@ -12,6 +12,16 @@ function MostrarProductos() {
     const [productos, setProductos] = useState(() => inicializarCatalogo())
 
     const [productoEditar, setProductoEditar] = useState(null)
+    const refFormulario = useRef(null)
+
+    function iniciarEdicion(producto) {
+        setProductoEditar({ ...producto })
+        setTimeout(() => {
+            if (refFormulario.current) {
+                refFormulario.current.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+        }, 80)
+    }
 
     function manejarCambio(event) {
         const { name, value, type, checked } = event.target
@@ -72,21 +82,32 @@ function MostrarProductos() {
     } else {
         setProductos(productosActualizados)
 
-        localStorage.setItem(
-            "productos",
-            JSON.stringify(productosActualizados)
+        const productosActualizados = productos.filter(
+            producto => producto.id !== id
         )
-    }}
+
+        if (productosActualizados.length === 0) {
+            setProductos(restablecerCatalogo())
+        } else {
+            setProductos(productosActualizados)
+
+            localStorage.setItem(
+                "productos",
+                JSON.stringify(productosActualizados)
+            )
+        }
+    }
 
     return (
         <section className="contenido">
             <div className="admin-titulo">
                 <h2>Mostrar Productos</h2>
+                <BotonesWindows />
             </div>
 
             {productoEditar && (
-                <form onSubmit={guardarEdicion} className="mb-4">
-                    <h3>Editar producto</h3>
+                <form ref={refFormulario} onSubmit={guardarEdicion} className="p-3 mb-4 border bg-light">
+                    <h3>Editar producto #{productoEditar.id}</h3>
 
                     <div className="mb-3">
                         <label htmlFor="nombre-editar" className="form-label">
@@ -184,22 +205,24 @@ function MostrarProductos() {
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-admin me-2">
-                        Guardar cambios
-                    </button>
+                    <div className="d-flex flex-wrap gap-2">
+                        <button type="submit" className="btn btn-admin">
+                            Guardar cambios
+                        </button>
 
-                    <button
-                        type="button"
-                        className="btn btn-secondary"
-                        onClick={() => setProductoEditar(null)}
-                    >
-                        Cancelar
-                    </button>
+                        <button
+                            type="button"
+                            className="btn btn-secondary"
+                            onClick={() => setProductoEditar(null)}
+                        >
+                            Cancelar
+                        </button>
+                    </div>
                 </form>
             )}
 
-            <div className="table-responsive">
-                <table className="table table-bordered table-striped">
+            <div className="admin-tabla-contenedor p-2 p-md-3">
+                <table className="table table-bordered table-striped tabla-admin-responsiva mb-0">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -220,12 +243,16 @@ function MostrarProductos() {
                                 <td>
                                     ${Number(producto.precio).toLocaleString("es-CL")}
                                 </td>
-                                <td>{producto.stock}</td>
-                                <td>
+                                <td data-label="Stock">
+                                    <span className={Number(producto.stock) <= 3 ? "text-danger fw-bold" : ""}>
+                                        {producto.stock}
+                                    </span>
+                                </td>
+                                <td data-label="Acciones">
                                     <button
                                         type="button"
                                         className="btn btn-admin btn-sm me-2 mb-1"
-                                        onClick={() => setProductoEditar({ ...producto })}
+                                        onClick={() => iniciarEdicion(producto)}
                                     >
                                         Editar
                                     </button>
@@ -243,7 +270,7 @@ function MostrarProductos() {
 
                         {productos.length === 0 && (
                             <tr>
-                                <td colSpan="6" className="text-center">
+                                <td colSpan="6" className="text-center py-3">
                                     No hay productos registrados.
                                 </td>
                             </tr>
@@ -256,4 +283,3 @@ function MostrarProductos() {
 }
 
 export default MostrarProductos
-

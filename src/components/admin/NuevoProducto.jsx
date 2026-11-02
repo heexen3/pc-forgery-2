@@ -80,9 +80,10 @@ function NuevoProducto() {
         <section className="contenido">
             <div className="admin-titulo">
                 <h2>Nuevo Producto</h2>
+                <BotonesWindows />
             </div>
 
-            <form onSubmit={manejarEnvio}>
+            <form onSubmit={manejarEnvio} className="p-3">
                 <div className="mb-3">
                     <label htmlFor="nombre" className="form-label">
                         Nombre del producto *
