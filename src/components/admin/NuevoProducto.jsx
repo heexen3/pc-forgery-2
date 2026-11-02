@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { CATEGORIAS, obtenerProductos } from "../../data/catalogoProductos.js"
+import { mostrarAlerta } from "../dialogo/Dialogo.js"
 
 function NuevoProducto() {
     const [producto, setProducto] = useState({
@@ -28,7 +30,7 @@ function NuevoProducto() {
             producto.precio === "" ||
             producto.stock === ""
         ) {
-            alert("Completa todos los campos obligatorios.")
+            mostrarAlerta("Completa todos los campos obligatorios.", { icono: "advertencia" })
             return
         }
 
@@ -36,13 +38,12 @@ function NuevoProducto() {
             Number(producto.precio) <= 0 ||
             Number(producto.stock) < 0
         ) {
-            alert("El precio debe ser mayor que cero y el stock no puede ser negativo.")
+            mostrarAlerta("El precio debe ser mayor que cero y el stock no puede ser negativo.", { icono: "advertencia" })
             return
         }
 
-        const productosGuardados = JSON.parse(
-            localStorage.getItem("productos")
-        ) || []
+        // se parte del catálogo actual (base o guardado) para no perder los productos iniciales
+        const productosGuardados = [...obtenerProductos()]
 
         const nuevoProducto = {
             ...producto,
@@ -50,7 +51,9 @@ function NuevoProducto() {
                 ? Math.max(...productosGuardados.map(producto => producto.id)) + 1
                 : 1,
             precio: Number(producto.precio),
-            stock: Number(producto.stock)
+            stock: Number(producto.stock),
+            // los productos creados por el admin aparecen con la insignia "Nuevo" en la tienda
+            nuevo: true
         }
 
         productosGuardados.push(nuevoProducto)
@@ -59,8 +62,9 @@ function NuevoProducto() {
             "productos",
             JSON.stringify(productosGuardados)
         )
+        localStorage.setItem("productosInicialesCargados", "true")
 
-        alert("Producto creado correctamente.")
+        mostrarAlerta("Producto creado correctamente.")
 
         setProducto({
             nombre: "",
@@ -109,10 +113,9 @@ function NuevoProducto() {
                         required
                     >
                         <option value="">Selecciona una categoría</option>
-                        <option value="Perifericos">Periféricos</option>
-                        <option value="Componentes">Componentes</option>
-                        <option value="Monitores">Monitores</option>
-                        <option value="Almacenamiento">Almacenamiento</option>
+                        {CATEGORIAS.map(categoria => (
+                            <option key={categoria.valor} value={categoria.valor}>{categoria.etiqueta}</option>
+                        ))}
                     </select>
                 </div>
 
@@ -177,7 +180,7 @@ function NuevoProducto() {
                         id="imagen"
                         name="imagen"
                         className="form-control"
-                        placeholder="/img/producto.jpg"
+                        placeholder="/producto.jpg"
                         value={producto.imagen}
                         onChange={manejarCambio}
                     />

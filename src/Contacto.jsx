@@ -1,14 +1,15 @@
 import "./contacto.css"
+import { mostrarAlerta } from "./components/dialogo/Dialogo.js"
 
 function Contacto() {
     function enviarFormulario(event) {
         event.preventDefault()
-        alert("Gracias por tu mensaje. Esta función estará disponible próximamente.")
+        mostrarAlerta("Gracias por tu mensaje. Esta función estará disponible próximamente.")
         event.target.reset()
     }
     return (
         <main className="contacto-contenido">
-            <section className="contacto-info">
+            <section className="contacto-info ventana-animada">
                 <div className="contacto-titulo">
                     <h2>Contacto</h2>
                 </div>

@@ -1,39 +1,72 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import "./comunidad.css"
 import HiloCard from "./components/HiloCard"
-import MensajeForo from "./components/MensajeForo"
+import MarcoCorreo from "./components/escritorio/MarcoCorreo.jsx"
+import { rutaPublica } from "./utils/rutaPublica.js"
 
 function Comunidad() {
+    // Lógica
+    function leerHilos() {
+        try {
+            const datos = JSON.parse(localStorage.getItem("hilos"))
+            return Array.isArray(datos) ? datos : []
+        } catch {
+            return []
+        }
+    }
+
+    function formatearFecha(iso) {
+        const fecha = new Date(iso)
+        if (Number.isNaN(fecha.getTime())) return ""
+        return fecha.toLocaleString("es-CL", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        })
+    }
+
+    // primero va el hilo con la actividad mas reciente
+    // (un hilo nuevo, o con una respuesta nueva, sube hasta arriba)
+    const [hilos] = useState(() =>
+        [...leerHilos()].sort(
+            (a, b) => new Date(b.ultimaActividad) - new Date(a.ultimaActividad)
+        )
+    )
+
+    // Renderizado
     return (
         <main className="comunidad-main">
-            <section className="contenedor-foro">
-                <div className="cabecera-foro">
-                    <div className="cabecera-titulo">
-                        <img src="/img/computer.png" alt="" />
-                        <h1>Comunidad</h1>
+            <MarcoCorreo cantidad={hilos.length} estado={`${hilos.length} hilo(s)`}>
+                <div className="contenedor-foro">
+                    <div className="cabecera-foro">
+                        <div className="cabecera-titulo">
+                            <img src={rutaPublica("/computer.png")} alt="" />
+                            <h1>Comunidad</h1>
+                        </div>
+                        <Link to="/comunidad/nuevo-hilo" className="boton-nuevo-hilo">+ Nuevo hilo</Link>
                     </div>
-                    <Link to="/comunidad/nuevo-hilo" className="boton-nuevo-hilo">+ Nuevo hilo</Link>
+                    {hilos.length === 0 ? (
+                        <p className="foro-vacio">Aún no hay hilos. ¡Crea el primero!</p>
+                    ) : (
+                        <ul className="lista-hilos">
+                            {hilos.map(hilo => (
+                                <HiloCard
+                                    key={hilo.id}
+                                    id={hilo.id}
+                                    titulo={hilo.titulo}
+                                    autor={hilo.autor}
+                                    categoria={hilo.categoria}
+                                    respuestas={hilo.respuestas.length}
+                                    ultimaActividad={formatearFecha(hilo.ultimaActividad)}
+                                />
+                            ))}
+                        </ul>
+                    )}
                 </div>
-                <ul className="lista-hilos">
-                    <HiloCard titulo="¿Qué placa madre me recomiendan para un Ryzen 5 5600?" autor="jgamer99" categoria="Armado de PC" respuestas="12" />
-                    <HiloCard titulo="Mi PC no enciende después de cambiar la fuente de poder" autor="anafix" categoria="Soporte técnico" respuestas="7" />
-                    <HiloCard titulo="Muestren sus setups armados con PC Forgery" autor="retrotech_cl" categoria="Showcase" respuestas="34" />
-                </ul>
-                <article className="hilo-detalle">
-                    <h2>¿Qué placa madre me recomiendan para un Ryzen 5 5600?</h2>
-                    <p className="hilo-meta">Publicado por <strong>jgamer99</strong></p>
-                    <MensajeForo autor="jgamer99" esOriginal={true}
-                        texto="Ando armando un PC nuevo y ya tengo el procesador, pero no sé bien qué placa madre elegir. ¿Alguna recomendación en el catálogo de la tienda?" />
-                    <MensajeForo autor="retrotech_cl"
-                        texto="Yo usé la ASUS Prime B450M-A y me fue bien, tiene socket AM4 igual que tu procesador." />
-                    <MensajeForo autor="anafix"
-                        texto="Depende también de si quieres overclockear después, ahí conviene una gama más alta." />
-                    <div className="caja-respuesta">
-                        <textarea placeholder="Escribe tu respuesta..." disabled></textarea>
-                        <button disabled>Responder</button>
-                    </div>
-                </article>
-            </section>
+            </MarcoCorreo>
         </main>
     )
 }

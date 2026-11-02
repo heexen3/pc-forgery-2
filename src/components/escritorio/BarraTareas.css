@@ -1,0 +1,148 @@
+/* Barra de tareas inferior estilo Windows 98 */
+body {
+    padding-bottom: 40px;
+}
+
+.barra-tareas {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 34px;
+    background-color: #c0c0c0;
+    border-top: 2px solid #ffffff;
+    box-shadow: 0 -1px 0 #dfdfdf;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 3px;
+    z-index: 1500;
+}
+
+.boton-inicio {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: bold;
+    height: 26px;
+    padding: 0 8px;
+    flex-shrink: 0;
+}
+
+.boton-inicio img {
+    width: 18px;
+    height: 18px;
+}
+
+.boton-inicio.activo {
+    border: 2px inset #ffffff;
+    background-color: #d8d8d8;
+}
+
+.menu-inicio {
+    position: absolute;
+    left: 2px;
+    bottom: 34px;
+    display: flex;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: 2px 2px 0 #000000;
+    min-width: 210px;
+    animation: abrir-menu 0.12s ease-out;
+    transform-origin: bottom left;
+}
+
+.menu-inicio-lateral {
+    width: 26px;
+    background: linear-gradient(to top, #000080, #1084d0);
+    color: #c0c0c0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 6px;
+}
+
+.menu-inicio-lateral span {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+.menu-inicio-lateral b {
+    color: #ffffff;
+}
+
+.menu-inicio ul {
+    list-style: none;
+    flex: 1;
+    padding: 2px;
+}
+
+.menu-inicio a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 10px;
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.menu-inicio a img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.menu-inicio a:hover,
+.menu-inicio a:focus-visible {
+    background-color: #000080;
+    color: #ffffff;
+    outline: none;
+}
+
+.barra-tareas-ventanas {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+}
+
+.tarea-activa {
+    border: 2px inset #ffffff;
+    background-color: #e0e0e0;
+    background-image: repeating-conic-gradient(#c0c0c0 0 25%, #ffffff 0 50%);
+    background-size: 2px 2px;
+    padding: 3px 8px;
+    font-size: 13px;
+    font-weight: bold;
+    max-width: 240px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bandeja-sistema {
+    border: 1px solid;
+    border-color: #808080 #ffffff #ffffff #808080;
+    padding: 3px 10px;
+    font-size: 13px;
+    flex-shrink: 0;
+}
+
+@keyframes abrir-menu {
+    from {
+        transform: scaleY(0.6);
+        opacity: 0;
+    }
+    to {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .tarea-activa {
+        max-width: 140px;
+    }
+}

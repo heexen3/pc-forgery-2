@@ -1,3 +1,4 @@
+import { mostrarAlerta } from "./dialogo/Dialogo.js"
 
 
 
@@ -17,22 +18,22 @@ function ValidacionRegistro(event, navigate) {
     const regexUsuario = /^(?=.*[a-zA-Z])[a-zA-Z0-9]{3,}$/
 
     if (!regexPassword.test(password)) {
-        alert("La contraseña debe tener al menos 6 caracteres, una mayúscula, una minúscula, un número y un carácter especial.")
+        mostrarAlerta("La contraseña debe tener al menos 6 caracteres, una mayúscula, una minúscula, un número y un carácter especial.", { icono: "advertencia" })
         return
     }
 
     if (!regexEmail.test(email)) {
-        alert("El correo debe ser Gmail, Outlook o Duoc UC.")
+        mostrarAlerta("El correo debe ser Gmail, Outlook o Duoc UC.", { icono: "advertencia" })
         return
     }
 
     if (!regexUsuario.test(usuario)) {
-        alert("El usuario debe tener al menos 3 caracteres, contener al menos una letra y no tener caracteres especiales.")
+        mostrarAlerta("El usuario debe tener al menos 3 caracteres, contener al menos una letra y no tener caracteres especiales.", { icono: "advertencia" })
         return
     }
 
     if (password !== confirmPassword) {
-        alert("Las contraseñas no coinciden.")
+        mostrarAlerta("Las contraseñas no coinciden.", { icono: "advertencia" })
         return
     }
 
@@ -51,7 +52,7 @@ function ValidacionRegistro(event, navigate) {
     })
 
     if (usuarioExiste) {
-        alert("El nombre de usuario ya está registrado.")
+        mostrarAlerta("El nombre de usuario ya está registrado.", { icono: "advertencia" })
         return
     }
 
@@ -62,7 +63,7 @@ function ValidacionRegistro(event, navigate) {
         JSON.stringify(listaUsuarios)
     )
 
-    alert("¡Usuario registrado con éxito!")
+    mostrarAlerta("¡Usuario registrado con éxito!")
 
     navigate("/Login")
 }

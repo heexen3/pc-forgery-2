@@ -1,11 +1,20 @@
+import { textoEstrellas } from "./resenas/Resenas.js"
 
-
-
-function Resena({ usuario, texto }) {
+function Resena({ autor, estrellas, comentario, fecha }) {
     return (
         <div className="reseña">
-            <p className="reseña-usuario">{usuario}:</p>
-            <p className="reseña-texto">{texto}</p>
+            <div className="reseña-usuario">
+                <span>{autor}</span>
+                <span className="reseña-estrellas" aria-label={`${estrellas} de 5 estrellas`}>
+                    {textoEstrellas(estrellas)}
+                </span>
+            </div>
+            <p className="reseña-texto">{comentario}</p>
+            {fecha && (
+                <p className="reseña-fecha">
+                    {new Date(fecha).toLocaleDateString("es-CL")}
+                </p>
+            )}
         </div>
     )
 }

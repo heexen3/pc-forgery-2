@@ -1,0 +1,106 @@
+/* Marco de aplicación Windows 98 (Explorador, Outlook Express, Internet Explorer...) */
+
+.ventana-app {
+    width: 94%;
+    max-width: 1200px;
+    margin: 15px auto;
+    background-color: #c0c0c0;
+    border: 2px outset #ffffff;
+    box-shadow: 1px 1px 0 #000000;
+    box-sizing: border-box;
+    font-family: Tahoma, "MS Sans Serif", Arial, sans-serif;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ventana-app-titulo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 26px;
+    padding: 2px 4px;
+    background: linear-gradient(to right, #000080, #1084d0);
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.ventana-app-titulo img {
+    width: 18px;
+    height: 18px;
+}
+
+.ventana-app-titulo > span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.ventana-app-controles {
+    display: flex;
+    gap: 2px;
+}
+
+.ventana-app-controles span {
+    width: 18px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c0c0c0;
+    color: #000000;
+    border: 2px outset #ffffff;
+    font-size: 11px;
+    line-height: 1;
+}
+
+.ventana-app-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding: 2px 4px;
+    border-bottom: 1px solid #808080;
+}
+
+.ventana-app-menu span {
+    padding: 2px 6px;
+    cursor: default;
+}
+
+.ventana-app-menu span:hover {
+    background-color: #000080;
+    color: #ffffff;
+}
+
+.ventana-app-herramientas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    border-top: 1px solid #ffffff;
+    border-bottom: 2px groove #ffffff;
+}
+
+.ventana-app-cuerpo {
+    flex: 1;
+    min-height: 0;
+}
+
+.ventana-app-estado {
+    display: flex;
+    gap: 3px;
+    padding: 2px;
+    font-size: 12px;
+}
+
+.ventana-app-estado > * {
+    border: 1px inset #ffffff;
+    border-color: #808080 #ffffff #ffffff #808080;
+    padding: 2px 6px;
+}
+
+.ventana-app-estado > *:first-child {
+    flex: 1;
+}

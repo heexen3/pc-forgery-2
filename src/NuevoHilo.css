@@ -75,10 +75,21 @@
     margin-top: 10px;
 }
 
-.aviso-formulario {
-    font-size: 12px;
-    color: #555555;
+.aviso-sesion {
+    font-size: 13px;
     font-style: italic;
+    color: #555555;
+}
+
+.aviso-sesion a {
+    color: #000080;
+    text-decoration: underline;
+}
+
+.error-formulario {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #cc0000;
 }
 
 @media (min-width: 768px) {

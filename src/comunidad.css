@@ -56,37 +56,10 @@
     padding: 0 10px 10px;
 }
 
-.hilo-detalle {
-    margin: 0 10px 10px;
+.foro-vacio {
     padding: 10px;
-    background-color: #ffffff;
-    border: 2px inset #ffffff;
-    box-sizing: border-box;
-}
-
-.hilo-detalle .hilo-meta {
-    font-size: 12px;
-    color: #333333;
-}
-
-.caja-respuesta {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 15px;
-}
-
-.caja-respuesta textarea {
-    resize: vertical;
-    min-height: 60px;
-    padding: 6px;
-    font-family: inherit;
-    border: 2px inset #ffffff;
-}
-
-.caja-respuesta button {
-    margin-top: 10px;
-    width: 100%;
+    font-size: 14px;
+    font-style: italic;
 }
 
 @media (min-width: 768px) {

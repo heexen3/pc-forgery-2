@@ -9,7 +9,7 @@ function Login() {
     // Renderizado
     return(
         <main>
-        <section className="formulario-login">
+        <section className="formulario-login ventana-animada">
             <h1>Iniciar sesión</h1>
             <form onSubmit={(event) => ValidacionLogin(event,navigate)}>
             <label htmlFor="usuario" >Correo electrónico o Nombre de usuario:</label>

@@ -1,3 +1,4 @@
+import { mostrarAlerta } from "./dialogo/Dialogo.js"
 function ValidacionLogin(event, navigate) {
     event.preventDefault()
 
@@ -24,7 +25,7 @@ function ValidacionLogin(event, navigate) {
     }
 
     if (usuariosGuardados.length === 0) {
-        alert("No se encontró ningún usuario registrado, por favor, regístrese primero.")
+        mostrarAlerta("No se encontró ningún usuario registrado, por favor, regístrese primero.", { icono: "advertencia" })
         return
     }
     
@@ -34,7 +35,7 @@ function ValidacionLogin(event, navigate) {
     })
 
     if (!usuarioEncontrado) {
-        alert("Usuario o correo no encontrado.")
+        mostrarAlerta("Usuario o correo no encontrado.", { icono: "advertencia" })
         return 
     }
 
@@ -42,7 +43,7 @@ function ValidacionLogin(event, navigate) {
         password === usuarioEncontrado.password
     
         if (!passwordValida) {
-            alert("Usuario o contraseña incorrectos, por favor, inténtelo de nuevo.")
+            mostrarAlerta("Usuario o contraseña incorrectos, por favor, inténtelo de nuevo.", { icono: "advertencia" })
             return
         }
     
@@ -51,14 +52,14 @@ function ValidacionLogin(event, navigate) {
         JSON.stringify(usuarioEncontrado)
     )
 
-    alert("Iniciando sesión como: "+usuarioEncontrado.rol)
+    mostrarAlerta("Iniciando sesión como: "+usuarioEncontrado.rol)
 
     if (usuarioEncontrado.rol === "admin") {
         navigate("/Admin")
     } else if (usuarioEncontrado.rol === "usuario") {
         navigate("/Home")
     } else {
-        alert("Rol de usuario desconocido, por favor, contacte al administrador.")
+        mostrarAlerta("Rol de usuario desconocido, por favor, contacte al administrador.", { icono: "advertencia" })
     }
 }
 

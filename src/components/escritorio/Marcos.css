@@ -1,0 +1,169 @@
+/* Botones planos de barras de herramientas (se levantan al pasar el mouse) */
+.boton-plano {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #000000;
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.boton-plano:hover:not(:disabled) {
+    border-color: #ffffff #808080 #808080 #ffffff;
+    background-color: transparent;
+}
+
+.boton-plano:active:not(:disabled) {
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.boton-plano:disabled {
+    color: #808080;
+    text-shadow: 1px 1px 0 #ffffff;
+    cursor: default;
+}
+
+/* Internet Explorer */
+.ie-herramientas {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+}
+
+.ie-botones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.ie-direccion {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ie-direccion input {
+    flex: 1;
+    min-width: 0;
+    border: 2px inset #ffffff;
+    padding: 2px 4px;
+    font-size: 13px;
+    background-color: #ffffff;
+}
+
+.ie-logo {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: italic bold 20px "Times New Roman", serif;
+    color: #1084d0;
+    border: 1px solid #808080;
+    background-color: #ffffff;
+}
+
+.ie-pagina {
+    background-color: #ffffff;
+    border: 2px inset #ffffff;
+    margin: 4px;
+    min-height: 300px;
+}
+
+/* Las páginas internas ya no necesitan su propio marco */
+.ie-pagina .contenedor-noticias,
+.ie-pagina .contenedor-noticia-detalle,
+.oe-contenido .contenedor-foro {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+}
+
+/* Outlook Express */
+.oe-herramientas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.oe-boton {
+    flex-direction: column;
+    min-width: 72px;
+    gap: 0;
+    font-size: 12px;
+}
+
+.oe-boton span {
+    font-size: 20px;
+    line-height: 22px;
+}
+
+.oe-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 4px;
+}
+
+.oe-carpetas {
+    background-color: #ffffff;
+    border: 2px inset #ffffff;
+    font-size: 13px;
+}
+
+.oe-carpetas-titulo {
+    background-color: #c0c0c0;
+    border-bottom: 1px solid #808080;
+    padding: 2px 6px;
+}
+
+.oe-carpetas ul {
+    list-style: none;
+    padding: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 12px;
+}
+
+.oe-carpetas li {
+    padding: 1px 4px;
+    white-space: nowrap;
+}
+
+.oe-carpetas .oe-activa {
+    background-color: #000080;
+    color: #ffffff;
+}
+
+.oe-contenido {
+    flex: 1;
+    min-width: 0;
+}
+
+@media (min-width: 768px) {
+    .oe-layout {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    .oe-carpetas {
+        width: 200px;
+        flex-shrink: 0;
+    }
+
+    .oe-carpetas ul {
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .oe-carpetas .oe-raiz ~ li {
+        padding-left: 16px;
+    }
+}

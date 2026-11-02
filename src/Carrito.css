@@ -156,3 +156,48 @@
         font-size: 20px;
     }
 }
+
+/* Datos de pago del checkout */
+.carrito-pago {
+    border: 2px groove #ffffff;
+    padding: 8px 10px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+}
+
+.carrito-pago legend {
+    padding: 0 4px;
+}
+
+.carrito-pago-campo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+}
+
+.carrito-pago-campo input[type="text"] {
+    border: 2px inset #ffffff;
+    padding: 3px 5px;
+    font-size: 14px;
+    width: 150px;
+}
+
+.carrito-pago-campo input[aria-invalid="true"] {
+    background-color: #ffe0e0;
+}
+
+.carrito-radio {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.carrito-error {
+    color: #800000;
+    width: 100%;
+}

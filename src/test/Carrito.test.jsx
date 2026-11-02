@@ -3,6 +3,7 @@ import { render, screen, cleanup } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { MemoryRouter, useLocation } from "react-router-dom"
 import Carrito from "../Carrito.jsx"
+import DialogoWindows from "../components/dialogo/DialogoWindows.jsx"
 import { obtenerCarrito, agregarAlCarrito } from "../components/carrito/Carrito.js"
 import { obtenerBoletas } from "../components/carrito/Boletas.js"
 import { obtenerCompras } from "../components/admin/HistorialCompras.js"
@@ -30,11 +31,12 @@ describe("Carrito de compras", () => {
         vi.restoreAllMocks()
     })
 
-    function renderCarrito() {
+    function renderCarrito({ conDialogos = false } = {}) {
         render(
             <MemoryRouter initialEntries={["/Carrito"]}>
                 <Carrito />
                 <RutaActual />
+                {conDialogos && <DialogoWindows />}
             </MemoryRouter>
         )
     }
@@ -62,24 +64,33 @@ describe("Carrito de compras", () => {
         expect(screen.getByTestId("carrito-total").textContent).toBe("$129.990")
     })
 
-    // PRUEBA UNITARIA 2: Finalizar compra genera la boleta
+    // PRUEBA UNITARIA 2: Finalizar compra genera la boleta (con RUT y método de pago)
     test("finaliza la compra, genera la boleta, la registra en el historial y descuenta stock", async () => {
         const user = userEvent.setup()
         localStorage.setItem("usuarioActual", JSON.stringify({
             usuario: "Juanito", email: "juan@gmail.com", rol: "usuario"
         }))
         agregarAlCarrito(teclado, 2)
-        renderCarrito()
+        renderCarrito({ conDialogos: true })
 
+        // datos para la boleta: RUT opcional y método de pago
+        await user.type(screen.getByLabelText("RUT (opcional):"), "12345678-5")
+        await user.click(screen.getByRole("radio", { name: "Crédito" }))
         await user.click(screen.getByRole("button", { name: "Finalizar compra" }))
 
-        expect(window.alert).toHaveBeenCalledWith("Compra realizada con éxito.")
+        // el mensaje se muestra en el diálogo estilo Windows, no con alert()
+        const dialogo = screen.getByRole("alertdialog")
+        expect(dialogo.textContent).toContain("Compra realizada con éxito.")
+        expect(window.alert).not.toHaveBeenCalled()
+        await user.click(screen.getByRole("button", { name: "Aceptar" }))
+        expect(screen.queryByRole("alertdialog")).toBeNull()
         expect(screen.getByText("Ruta actual: /Boleta?numero=1")).toBeTruthy()
         expect(obtenerCarrito()).toHaveLength(0)
 
         const [boleta] = obtenerBoletas()
         expect(boleta).toMatchObject({ numero: 1, correo: "juan@gmail.com", total: 259980, subtotal: 218471, iva: 41509 })
-        expect(boleta.items[0]).toMatchObject({ nombre: "Corsair K70 RGB Pro", cantidad: 2, totalLinea: 259980 })
+        expect(boleta.items[0]).toMatchObject({ nombre: "Corsair K70 RGB Pro", cantidad: 2, totalLinea: 259980, codigo: "PF-00001" })
+        expect(boleta).toMatchObject({ metodoPago: "Crédito", cliente: { rut: "12.345.678-5" } })
 
         expect(obtenerCompras()[0]).toMatchObject({ correo: "juan@gmail.com", producto: "Corsair K70 RGB Pro x2", total: 259980 })
         expect(JSON.parse(localStorage.getItem("productos"))[0].stock).toBe(3)
