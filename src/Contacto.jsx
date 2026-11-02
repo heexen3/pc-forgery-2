@@ -1,3 +1,4 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import "./contacto.css"
 import { mostrarAlerta } from "./components/dialogo/Dialogo.js"
 
@@ -10,9 +11,7 @@ function Contacto() {
     return (
         <main className="contacto-contenido">
             <section className="contacto-info ventana-animada">
-                <div className="contacto-titulo">
-                    <h2>Contacto</h2>
-                </div>
+                <BarraTitulo titulo="Contacto" icono="/help.png" como="h2" />
                 <div className="contacto-formulario">
                     <form className="formulario" onSubmit={enviarFormulario}>
                         <label htmlFor="nombre">Nombre:</label>

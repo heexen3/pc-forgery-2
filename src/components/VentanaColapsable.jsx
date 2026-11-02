@@ -1,23 +1,22 @@
+import BarraTitulo from "./BarraTitulo.jsx"
 import {useState} from 'react'
-import { rutaPublica } from "../utils/rutaPublica.js"
 
 function VentanaColapsable({titulo, className, children}) {
     const [colapsada, setColapsada] = useState(false)
 
     return (
     <section className={className}>
-      <div className="barra-ventana">
-        <img src={rutaPublica("/wlogo.svg")} alt="" className="wlogo" width="25px" />
-        <span>{titulo}</span>
-        <div className="botones-windows">
-          <button
-            className="boton-colapsar"
-            onClick={() => setColapsada(!colapsada)}
-          >
-            {colapsada ? "+" : "-"}
-          </button>
-        </div>
-      </div>
+      <BarraTitulo titulo={titulo}>
+        {/* extra: botón para colapsar/expandir el contenido */}
+        <button
+          type="button"
+          className="boton-colapsar"
+          aria-expanded={!colapsada}
+          onClick={() => setColapsada(!colapsada)}
+        >
+          {colapsada ? "+" : "-"}
+        </button>
+      </BarraTitulo>
       <div className={`contenido-ventana ${colapsada ? "oculto" : ""}`}>
         {children}
       </div>

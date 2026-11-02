@@ -1,3 +1,4 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import { Link, useNavigate } from "react-router-dom"
 import "./Register.css"
 import ValidacionRegistro from "./components/ValidacionRegistro"
@@ -10,7 +11,7 @@ function Register() {
     return(
     <main>
         <section className="formulario-registro ventana-animada">
-            <h1>Registrarse</h1>
+            <BarraTitulo titulo="Registrarse" icono="/wlogo.svg" como="h1" className="barra-titulo-en-formulario" />
             <form onSubmit={(event) => ValidacionRegistro(event,navigate)}>
                 {/* <!-- Nombre de usuario --> */}
             <label htmlFor="usuario">Nombre de Usuario:</label>

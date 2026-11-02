@@ -1,8 +1,9 @@
 import { describe, test, expect, beforeEach, afterEach, vi } from "vitest"
 import { render, screen, cleanup } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { MemoryRouter, useLocation } from "react-router-dom"
+import { MemoryRouter, Routes, Route, useLocation } from "react-router-dom"
 import Carrito from "../Carrito.jsx"
+import Pago from "../Pago.jsx"
 import DialogoWindows from "../components/dialogo/DialogoWindows.jsx"
 import { obtenerCarrito, agregarAlCarrito } from "../components/carrito/Carrito.js"
 import { obtenerBoletas } from "../components/carrito/Boletas.js"
@@ -34,7 +35,11 @@ describe("Carrito de compras", () => {
     function renderCarrito({ conDialogos = false } = {}) {
         render(
             <MemoryRouter initialEntries={["/Carrito"]}>
-                <Carrito />
+                <Routes>
+                    <Route path="/Carrito" element={<Carrito />} />
+                    <Route path="/pago" element={<Pago />} />
+                    <Route path="*" element={null} />
+                </Routes>
                 <RutaActual />
                 {conDialogos && <DialogoWindows />}
             </MemoryRouter>
@@ -64,7 +69,7 @@ describe("Carrito de compras", () => {
         expect(screen.getByTestId("carrito-total").textContent).toBe("$129.990")
     })
 
-    // PRUEBA UNITARIA 2: Finalizar compra genera la boleta (con RUT y método de pago)
+    // PRUEBA UNITARIA 2: Finalizar compra (pasando por /pago) genera la boleta (con RUT y método de pago)
     test("finaliza la compra, genera la boleta, la registra en el historial y descuenta stock", async () => {
         const user = userEvent.setup()
         localStorage.setItem("usuarioActual", JSON.stringify({
@@ -77,6 +82,10 @@ describe("Carrito de compras", () => {
         await user.type(screen.getByLabelText("RUT (opcional):"), "12345678-5")
         await user.click(screen.getByRole("radio", { name: "Crédito" }))
         await user.click(screen.getByRole("button", { name: "Finalizar compra" }))
+
+        // ahora se pasa por la página de pago simulado
+        expect(screen.getByText("Ruta actual: /pago")).toBeTruthy()
+        await user.click(screen.getByRole("button", { name: "Simular pago exitoso" }))
 
         // el mensaje se muestra en el diálogo estilo Windows, no con alert()
         const dialogo = screen.getByRole("alertdialog")

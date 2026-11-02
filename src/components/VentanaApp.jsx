@@ -1,5 +1,5 @@
+import BarraTitulo from "./BarraTitulo.jsx"
 import "./VentanaApp.css"
-import { rutaPublica } from "../utils/rutaPublica.js"
 
 // Marco reutilizable de "aplicación" Windows 98: barra de título, menú,
 // barra de herramientas opcional, contenido y barra de estado.
@@ -10,19 +10,12 @@ function VentanaApp({
     barraHerramientas,
     barraEstado,
     className = "",
+    id,
     children
 }) {
     return (
         <div className={`ventana-app ventana-animada ${className}`}>
-            <div className="ventana-app-titulo">
-                <img src={rutaPublica(icono)} alt="" />
-                <span>{titulo}</span>
-                <div className="ventana-app-controles" aria-hidden="true">
-                    <span>_</span>
-                    <span>□</span>
-                    <span>×</span>
-                </div>
-            </div>
+            <BarraTitulo titulo={titulo} icono={icono} id={id} />
 
             {menu.length > 0 && (
                 <div className="ventana-app-menu" aria-hidden="true">

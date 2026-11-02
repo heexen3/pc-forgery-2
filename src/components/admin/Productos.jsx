@@ -1,5 +1,5 @@
+import BarraTitulo from "../BarraTitulo.jsx"
 import { useState } from "react"
-import BotonesWindows from "../BotonesWindows.jsx"
 import NuevoProducto from "./NuevoProducto.jsx"
 import MostrarProductos from "./MostrarProductos.jsx"
 import ProductosCriticos from "./ProductosCriticos.jsx"
@@ -10,10 +10,7 @@ function Productos() {
 
     return (
         <section className="contenido">
-            <div className="admin-titulo">
-                <h2>Gestión de Productos</h2>
-                <BotonesWindows />
-            </div>
+            <BarraTitulo titulo="Gestión de Productos" icono="/tools.png" como="h2" />
 
             {vista === "menu" && (
                 <div className="contenido-botones">

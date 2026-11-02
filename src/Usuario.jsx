@@ -1,6 +1,6 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import { useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import BotonesWindows from "./components/BotonesWindows.jsx"
 import { mostrarAlerta, confirmar as confirmarDialogo } from "./components/dialogo/Dialogo.js"
 import { obtenerUsuarios, guardarUsuarios } from "./data/usuariosData.js"
 import { rutaPublica } from "./utils/rutaPublica.js"
@@ -63,11 +63,7 @@ function Usuario() {
         return (
             <main className="usuario-contenedor">
                 <section className="usuario-ventana ventana-animada">
-                    <div className="barra-ventana">
-                        <img src={rutaPublica("/wlogo.svg")} alt="" className="wlogo" width="25px" />
-                        <span>Perfil de usuario</span>
-                        <BotonesWindows />
-                    </div>
+                    <BarraTitulo titulo="Perfil de usuario" />
 
                     <div className="usuario-cuerpo usuario-no-sesion">
                         <img
@@ -268,11 +264,7 @@ function Usuario() {
             {/* VENTANA 1: PERFIL DEL USUARIO */}
             <section className="usuario-ventana ventana-animada">
                 {/* Barra superior Windows 98 */}
-                <div className="barra-ventana">
-                    <img src={rutaPublica("/wlogo.svg")} alt="" className="wlogo" width="25px" />
-                    <span>Perfil de usuario - {usuarioActual.usuario || usuarioActual.nombre}</span>
-                    <BotonesWindows />
-                </div>
+                <BarraTitulo titulo={`Perfil de usuario - ${usuarioActual.usuario || usuarioActual.nombre}`} />
 
                 <div className="usuario-cuerpo">
                     <div className="contenedor-usuario">
@@ -484,23 +476,18 @@ function Usuario() {
 
             {/* VENTANA 2: VISTA DESPLEGABLE DE CONFIGURACIONES GUARDADAS (ARMA TU PC) */}
             <section className="usuario-ventana ventana-animada">
-                <div className="barra-ventana">
-                    <div className="barra-ventana-titulo">
-                        <img src={rutaPublica("/computer.png")} alt="" className="wlogo" width="22px" />
-                        <span>Mis Configuraciones de PC ({armados.length} guardadas)</span>
-                    </div>
-                    <div className="botones-windows">
-                        <button
-                            type="button"
-                            className="boton-colapsar"
-                            onClick={() => setArmadosDesplegados(!armadosDesplegados)}
-                            title={armadosDesplegados ? "Colapsar configuraciones" : "Desplegar configuraciones"}
-                            aria-expanded={armadosDesplegados}
-                        >
-                            {armadosDesplegados ? "-" : "+"}
-                        </button>
-                    </div>
-                </div>
+                <BarraTitulo titulo={`Mis Configuraciones de PC (${armados.length} guardadas)`} icono="/computer.png">
+                    {/* extra: desplegar/colapsar la lista de armados */}
+                    <button
+                        type="button"
+                        className="boton-colapsar"
+                        onClick={() => setArmadosDesplegados(!armadosDesplegados)}
+                        title={armadosDesplegados ? "Colapsar configuraciones" : "Desplegar configuraciones"}
+                        aria-expanded={armadosDesplegados}
+                    >
+                        {armadosDesplegados ? "-" : "+"}
+                    </button>
+                </BarraTitulo>
 
                 {armadosDesplegados && (
                     <div className="usuario-cuerpo usuario-armados-cuerpo">
