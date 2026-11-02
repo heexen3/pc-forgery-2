@@ -79,11 +79,11 @@ function BandejaSistema() {
             {menuAbierto && usuario && (
                 <div className="menu-bandeja" role="menu" onClick={() => setMenuAbierto(false)}>
                     <p className="menu-bandeja-titulo">{usuario.usuario}</p>
+                    <Link to="/Usuario" role="menuitem">Mi perfil</Link>
                     {usuario.rol === "admin" && (
                         <Link to="/Admin" role="menuitem">Panel de administración</Link>
                     )}
                     <Link to="/MisCompras" role="menuitem">Mis compras</Link>
-                    <Link to="/Carrito" role="menuitem">Ver carrito ({cantidad})</Link>
                     <hr />
                     <button type="button" role="menuitem" onClick={cerrarSesion}>Cerrar sesión</button>
                 </div>
