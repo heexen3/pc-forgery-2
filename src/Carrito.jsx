@@ -1,7 +1,7 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "./Carrito.css"
-import BotonesWindows from "./components/BotonesWindows.jsx"
 import useCarrito from "./components/carrito/useCarrito.js"
 import { rutaPublica } from "./utils/rutaPublica.js"
 import {
@@ -60,10 +60,7 @@ function Carrito() {
     return (
         <main className="carrito-contenedor">
             <section className="carrito-ventana ventana-animada">
-                <div className="carrito-titulo">
-                    <h1>Carrito de compras</h1>
-                    <BotonesWindows />
-                </div>
+                <BarraTitulo titulo="Carrito de compras" icono="/shopping-bag.svg" como="h1" />
 
                 <div className="carrito-cuerpo">
                     {carrito.length === 0 ? (

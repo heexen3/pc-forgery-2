@@ -1,3 +1,4 @@
+import BarraTitulo from "../BarraTitulo.jsx"
 import { useState } from "react"
 import { CATEGORIAS, obtenerProductos } from "../../data/catalogoProductos.js"
 import { mostrarAlerta } from "../dialogo/Dialogo.js"
@@ -78,10 +79,7 @@ function NuevoProducto() {
 
     return (
         <section className="contenido">
-            <div className="admin-titulo">
-                <h2>Nuevo Producto</h2>
-                <BotonesWindows />
-            </div>
+            <BarraTitulo titulo="Nuevo Producto" icono="/tools.png" como="h2" />
 
             <form onSubmit={manejarEnvio} className="p-3">
                 <div className="mb-3">

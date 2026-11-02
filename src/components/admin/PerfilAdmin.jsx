@@ -1,5 +1,5 @@
+import BarraTitulo from "../BarraTitulo.jsx"
 import { useEffect, useState } from "react"
-import BotonesWindows from "../BotonesWindows.jsx"
 import {
     obtenerPerfilAdmin,
     guardarPerfilAdmin
@@ -40,10 +40,7 @@ function PerfilAdmin() {
 
     return (
         <section className="contenido">
-            <div className="admin-titulo">
-                <h2>Perfil del administrador</h2>
-                <BotonesWindows />
-            </div>
+            <BarraTitulo titulo="Perfil del administrador" icono="/tools.png" como="h2" />
 
             <div className="p-3">
                 <form onSubmit={guardarCambios} className="border p-3 bg-light">

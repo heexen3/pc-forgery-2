@@ -1,5 +1,5 @@
+import BarraTitulo from "../BarraTitulo.jsx"
 import { useState } from "react"
-import BotonesWindows from "../BotonesWindows.jsx"
 import NuevaNoticia from "./NuevaNoticia.jsx"
 import MostrarNoticias from "./MostrarNoticias.jsx"
 
@@ -8,10 +8,7 @@ function Noticias() {
 
     return (
         <section className="contenido">
-            <div className="admin-titulo">
-                <h2>Gestión de Noticias</h2>
-                <BotonesWindows />
-            </div>
+            <BarraTitulo titulo="Gestión de Noticias" icono="/tools.png" como="h2" />
 
             <div className="contenido-botones">
                 <button

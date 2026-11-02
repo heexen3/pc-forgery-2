@@ -1,3 +1,4 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import { useState } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import "./ArmaTuPC.css"
@@ -296,9 +297,7 @@ function ArmaTuPC() {
 
             <div className="wizard-lateral">
                 <aside className="window summary-window ventana-animada">
-                    <div className="window-header">
-                        <span className="window-title">Resumen de Construcción</span>
-                    </div>
+                    <BarraTitulo titulo="Resumen de Construcción" icono="/hardware-icon.svg" />
                     <div className="summary-body">
                         <ul className="summary-list">
                             {PASOS.slice(1).map(pasoResumen => {
@@ -378,9 +377,7 @@ function ArmaTuPC() {
 
                 {/* Armados guardados del usuario (RF-09) */}
                 <aside className="window summary-window ventana-animada">
-                    <div className="window-header">
-                        <span className="window-title">Mis armados guardados</span>
-                    </div>
+                    <BarraTitulo titulo="Mis armados guardados" icono="/computer.png" />
                     <div className="summary-body">
                         {!usuario ? (
                             <p className="armados-info">Inicia sesión para guardar tus armados y retomarlos después.</p>

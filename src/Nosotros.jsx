@@ -1,3 +1,4 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "./Nosotros.css"
@@ -74,14 +75,15 @@ function Nosotros() {
     return (
         <main className="nosotros">
             <section className="propiedades ventana-animada" aria-labelledby="titulo-nosotros">
-                <div className="propiedades-titulo">
-                    <img src={rutaPublica("/computer2.png")} alt="" />
-                    <h1 id="titulo-nosotros">Propiedades de PC Forgery — Quiénes Somos</h1>
-                    <div className="propiedades-controles" aria-hidden="true">
-                        <span>?</span>
-                        <span>×</span>
-                    </div>
-                </div>
+                <BarraTitulo
+                    titulo="Propiedades de PC Forgery — Quiénes Somos"
+                    icono="/computer2.png"
+                    como="h1"
+                    idTitulo="titulo-nosotros"
+                    id="ventana-nosotros"
+                    ayuda
+                    botones={["minimizar", "cerrar"]}
+                />
 
                 <div className="propiedades-pestanas" role="tablist" aria-label="Secciones de Quiénes Somos">
                     {PESTANAS.map(p => (

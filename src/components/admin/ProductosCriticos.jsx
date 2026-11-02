@@ -1,5 +1,5 @@
+import BarraTitulo from "../BarraTitulo.jsx"
 import { useState } from "react"
-import BotonesWindows from "../BotonesWindows.jsx"
 import { obtenerProductosCriticos } from "./ProductosCriticos.js"
 
 function ProductosCriticos() {
@@ -7,10 +7,7 @@ function ProductosCriticos() {
 
     return (
         <section className="contenido">
-            <div className="admin-titulo">
-                <h2>Productos con Stock Crítico</h2>
-                <BotonesWindows />
-            </div>
+            <BarraTitulo titulo="Productos con Stock Crítico" icono="/tools.png" como="h2" />
 
             <div className="admin-tabla-contenedor p-2 p-md-3">
                 <table className="table table-bordered table-striped tabla-admin-responsiva mb-0">

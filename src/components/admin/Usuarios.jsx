@@ -1,5 +1,5 @@
+import BarraTitulo from "../BarraTitulo.jsx"
 import { useState, useRef } from "react"
-import BotonesWindows from "../BotonesWindows.jsx"
 import NuevoUsuario from "./NuevoUsuario.jsx"
 import MostrarUsuarios from "./MostrarUsuarios.jsx"
 import EditarUsuario from "./EditarUsuario.jsx"
@@ -22,10 +22,7 @@ function Usuarios() {
 
     return (
         <section className="contenido">
-            <div className="admin-titulo">
-                <h2>Administración de Usuarios</h2>
-                <BotonesWindows />
-            </div>
+            <BarraTitulo titulo="Administración de Usuarios" icono="/tools.png" como="h2" />
 
             <div className="contenido-botones">
                 <button
