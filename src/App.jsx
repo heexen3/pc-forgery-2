@@ -8,6 +8,7 @@ import Product from './Product.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
 import Admin from './Admin.jsx'
+import RutaProtegida from './components/RutaProtegida.jsx'
 import Usuario from './Usuario.jsx'
 import Noticia from './Noticias.jsx'
 import NoticiaDetalle from './NoticiaDetalle.jsx'
@@ -54,7 +55,7 @@ function App() {
           {/* Rutas de usuario y admin */}
           <Route path="/Usuario" element={<Usuario />} />
           <Route path="/usuario" element={<Usuario />} />
-          <Route path="/Admin" element={<Admin />} />
+          <Route path="/Admin" element={<RutaProtegida rol="admin"><Admin /></RutaProtegida>} />
           {/* Noticias */}
           <Route path="/Noticias" element={<Noticia />} />
           <Route path="/noticias/detalle" element={<NoticiaDetalle />} />
