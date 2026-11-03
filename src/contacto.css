@@ -35,13 +35,11 @@
     border: 2px outset #ffffff;
     padding: 10px;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: stretch;
+    align-items: flex-start;
 }
 
 .contacto-formulario p {
-    margin: 0;
+    padding-left: 30px;
 }
 
 .formulario {
@@ -58,15 +56,6 @@
 }
 
 @media (min-width: 768px) {
-    .contacto-formulario {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-
-    .contacto-formulario p {
-        padding-left: 30px;
-    }
-
     .formulario {
         width: 500px;
     }
