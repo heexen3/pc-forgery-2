@@ -70,7 +70,9 @@ describe("Detalle de hilo de la comunidad", () => {
         // No hay "usuarioActual" en el localStorage (nadie inició sesión),
         // así que se invita a iniciar sesión y no aparece el botón para responder
         expect(screen.getByRole("link", { name: "iniciar sesión" })).toBeTruthy()
-        expect(screen.queryByRole("button", { name: "Responder" })).toBeNull()
+        // (No se busca el botón "Responder": el marco de la página siempre trae uno, aunque deshabilitado)
+        expect(screen.getByRole("link", { name: "iniciar sesión" })).toBeTruthy()
+        expect(screen.queryByPlaceholderText("Escribe tu respuesta...")).toBeNull()
     })
 
     // PRUEBA UNITARIA 2: con un parámetro que no corresponde a ningún hilo
