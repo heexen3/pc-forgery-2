@@ -37,21 +37,21 @@ const HISTORIA = [
 
 const EQUIPO = [
     {
-        nombre: "Luis",
+        nombre: "Luis Echevarría",
         rol: "Ventas y armado de equipos",
-        frase: "Si no prende al primer intento, revisa el cable de 8 pines.",
+        frase: "Era esto o ser pintor.",
         icono: "/tools.png"
     },
     {
-        nombre: "Daniel",
+        nombre: "Daniel Nuñez",
         rol: "Soporte técnico y comunidad",
-        frase: "El dueño original del Pentium II (bueno, su tío).",
+        frase: "El fantasma.",
         icono: "/computer.png"
     },
     {
-        nombre: "J. Vargas",
+        nombre: "Juan Vargas",
         rol: "Diseño y experiencia retro",
-        frase: "Cree que todo se ve mejor con un borde biselado.",
+        frase: "We are Charlie Kirk.",
         icono: "/net.png"
     }
 ]
