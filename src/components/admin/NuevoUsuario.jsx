@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { obtenerUsuarios, guardarUsuarios } from "../../data/usuariosData.js"
 import { mostrarAlerta } from "../dialogo/Dialogo.js"
 
 function NuevoUsuario() {
