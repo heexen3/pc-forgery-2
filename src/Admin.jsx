@@ -1,7 +1,7 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import { useEffect, useState } from "react"
 import bootstrapCSS from "bootstrap/dist/css/bootstrap.min.css?url"
 import adminCSS from "./Admin.css?url"
-import BotonesWindows from "./components/BotonesWindows.jsx"
 import Usuarios from "./components/admin/Usuarios.jsx"
 import Reportes from "./components/admin/Reportes.jsx"
 import PerfilAdmin from "./components/admin/PerfilAdmin.jsx"
@@ -38,10 +38,7 @@ function Admin() {
                 {/* Columna izquierda: Menú de navegación de administración */}
                 <div className="col-12 col-md-3 admin-menu">
                     <section className="contenido">
-                        <div className="admin-titulo">
-                            <h2>Administración</h2>
-                            <BotonesWindows />
-                        </div>
+                        <BarraTitulo titulo="Administración" icono="/tools.png" como="h2" />
 
                         <div className="contenido-botones">
                             <button
@@ -100,10 +97,7 @@ function Admin() {
                 <div className="col-12 col-md-9 admin-vista">
                     {vista === "comandos" && (
                         <section className="contenido">
-                            <div className="admin-titulo">
-                                <h2>Comandos Admin</h2>
-                                <BotonesWindows />
-                            </div>
+                            <BarraTitulo titulo="Comandos Admin" icono="/tools.png" como="h2" />
 
                             <div className="contenido-botones p-3">
                                 <button

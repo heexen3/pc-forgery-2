@@ -1,5 +1,5 @@
+import BarraTitulo from "../BarraTitulo.jsx"
 import { useState } from "react"
-import BotonesWindows from "../BotonesWindows.jsx"
 import { generarReporteProd } from "./Reportes.js"
 
 function Reportes() {
@@ -11,10 +11,7 @@ function Reportes() {
 
     return (
         <section className="contenido">
-            <div className="admin-titulo">
-                <h2>Reportes del Inventario</h2>
-                <BotonesWindows />
-            </div>
+            <BarraTitulo titulo="Reportes del Inventario" icono="/tools.png" como="h2" />
 
             <div className="p-3">
                 <div className="table-responsive mb-3">

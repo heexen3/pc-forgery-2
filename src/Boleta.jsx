@@ -1,7 +1,7 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import { Link, useSearchParams } from "react-router-dom"
 import "./Carrito.css"
 import "./Boleta.css"
-import BotonesWindows from "./components/BotonesWindows.jsx"
 import TimbreSimulado from "./components/carrito/TimbreSimulado.jsx"
 import { formatearPrecio } from "./components/carrito/Carrito.js"
 import { obtenerBoleta, formatearNumeroBoleta } from "./components/carrito/Boletas.js"
@@ -30,10 +30,7 @@ function Boleta() {
         return (
             <main className="carrito-contenedor">
                 <section className="carrito-ventana">
-                    <div className="carrito-titulo">
-                        <h1>Boleta no encontrada</h1>
-                        <BotonesWindows />
-                    </div>
+                    <BarraTitulo titulo="Boleta no encontrada" icono="/shopping-bag.svg" como="h1" />
                     <div className="carrito-cuerpo">
                         <p>La boleta que buscas no existe.</p>
                         <Link to="/MisCompras" className="carrito-enlace">Ver mis compras</Link>
@@ -49,10 +46,7 @@ function Boleta() {
     return (
         <main className="carrito-contenedor boleta-contenedor">
             <section className="carrito-ventana ventana-animada">
-                <div className="carrito-titulo no-imprimir">
-                    <h1>Visor de documentos - Boleta {formatearNumeroBoleta(boleta.numero)}</h1>
-                    <BotonesWindows />
-                </div>
+                <BarraTitulo titulo={`Visor de documentos - Boleta ${formatearNumeroBoleta(boleta.numero)}`} icono="/shopping-bag.svg" como="h1" className="no-imprimir" />
 
                 <div className="carrito-cuerpo">
                     {/* Hoja de la boleta */}

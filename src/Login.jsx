@@ -1,3 +1,4 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import { Link, useNavigate } from "react-router-dom"
 import "./Login.css"
 import ValidacionLogin from "./components/ValidacionLogin"
@@ -10,7 +11,7 @@ function Login() {
     return(
         <main>
         <section className="formulario-login ventana-animada">
-            <h1>Iniciar sesión</h1>
+            <BarraTitulo titulo="Iniciar sesión" icono="/wlogo.svg" como="h1" className="barra-titulo-en-formulario" />
             <form onSubmit={(event) => ValidacionLogin(event,navigate)}>
             <label htmlFor="usuario" >Correo electrónico o Nombre de usuario:</label>
             <input type="text" id="usuario" name="usuario" minLength="3" required placeholder="john_doe OR john.doe@example.com" />

@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom"
 import "./BarraTareas.css"
 import { PROGRAMAS, ventanaActiva } from "./Escritorio.js"
 import { rutaPublica } from "../../utils/rutaPublica.js"
+import BandejaSistema from "./BandejaSistema.jsx"
+import { restaurarVentana, useVentanasMinimizadas } from "./VentanasMinimizadas.js"
 
 function formatearHora(fecha) {
     return fecha.toLocaleTimeString("es-CL", { hour: "2-digit", minute: "2-digit" })
@@ -13,6 +15,7 @@ function BarraTareas() {
     const [hora, setHora] = useState(() => new Date())
     const location = useLocation()
     const contenedor = useRef(null)
+    const minimizadas = useVentanasMinimizadas()
 
     // Reloj en vivo
     useEffect(() => {
@@ -76,9 +79,24 @@ function BarraTareas() {
 
             <div className="barra-tareas-ventanas">
                 <span className="tarea-activa">{ventanaActiva(location.pathname)}</span>
+                {/* Ventanas minimizadas con BarraTitulo: un clic las restaura */}
+                {minimizadas.map(ventana => (
+                    <button
+                        key={ventana.id}
+                        type="button"
+                        className="tarea-minimizada"
+                        title={`Restaurar ${ventana.titulo}`}
+                        aria-label={`Restaurar ${ventana.titulo}`}
+                        onClick={() => restaurarVentana(ventana.id)}
+                    >
+                        {ventana.icono && <img src={rutaPublica(ventana.icono)} alt="" />}
+                        <span>{ventana.titulo}</span>
+                    </button>
+                ))}
             </div>
 
             <div className="bandeja-sistema">
+                <BandejaSistema />
                 <time dateTime={hora.toISOString()} aria-label="Hora actual">
                     {formatearHora(hora)}
                 </time>

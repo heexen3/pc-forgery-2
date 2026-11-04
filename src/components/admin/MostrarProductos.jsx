@@ -1,5 +1,6 @@
+import BarraTitulo from "../BarraTitulo.jsx"
 import { mostrarAlerta, confirmar as confirmarDialogo } from "../dialogo/Dialogo.js"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import {
     CATEGORIAS,
     etiquetaCategoria,
@@ -67,20 +68,11 @@ function MostrarProductos() {
     }
 
     async function eliminarProducto(id) {
-    const confirmar = await confirmarDialogo(
-        "¿Estás seguro de que deseas eliminar este producto?"
-    )
+        const confirmar = await confirmarDialogo(
+            "¿Estás seguro de que deseas eliminar este producto?"
+        )
 
-    if (!confirmar) return
-
-    const productosActualizados = productos.filter(
-        producto => producto.id !== id
-    )
-
-    if (productosActualizados.length === 0) {
-        setProductos(restablecerCatalogo())
-    } else {
-        setProductos(productosActualizados)
+        if (!confirmar) return
 
         const productosActualizados = productos.filter(
             producto => producto.id !== id
@@ -100,10 +92,7 @@ function MostrarProductos() {
 
     return (
         <section className="contenido">
-            <div className="admin-titulo">
-                <h2>Mostrar Productos</h2>
-                <BotonesWindows />
-            </div>
+            <BarraTitulo titulo="Mostrar Productos" icono="/tools.png" como="h2" />
 
             {productoEditar && (
                 <form ref={refFormulario} onSubmit={guardarEdicion} className="p-3 mb-4 border bg-light">
@@ -280,6 +269,5 @@ function MostrarProductos() {
             </div>
         </section>
     )
-}
 }
 export default MostrarProductos

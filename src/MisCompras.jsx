@@ -1,6 +1,6 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import { Link } from "react-router-dom"
 import "./Carrito.css"
-import BotonesWindows from "./components/BotonesWindows.jsx"
 import { formatearPrecio } from "./components/carrito/Carrito.js"
 import {
     obtenerBoletas,
@@ -24,10 +24,7 @@ function MisCompras() {
     return (
         <main className="carrito-contenedor">
             <section className="carrito-ventana ventana-animada">
-                <div className="carrito-titulo">
-                    <h1>Mis compras</h1>
-                    <BotonesWindows />
-                </div>
+                <BarraTitulo titulo="Mis compras" icono="/shopping-bag.svg" como="h1" />
 
                 <div className="carrito-cuerpo">
                     {!usuario ? (

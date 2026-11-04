@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { obtenerUsuarios, guardarUsuarios } from "../../data/usuariosData.js"
 import { mostrarAlerta } from "../dialogo/Dialogo.js"
 
 function EditarUsuario({ usuarioSeleccionadoInicial = null, onVolver = null }) {
@@ -78,11 +79,6 @@ function EditarUsuario({ usuarioSeleccionadoInicial = null, onVolver = null }) {
         const limpioUsuario = (usuarioNombre || nombre).trim()
         const limpioCorreo = correo.trim().toLowerCase()
 
-        if (correoExiste) {
-            mostrarAlerta("Ya existe otro usuario con ese correo.", { icono: "advertencia" })
-            return
-        }
-
         // Verificar que no choque con el correo de otro usuario
         const correoExiste = usuarios.some(
             usuario =>
@@ -111,7 +107,6 @@ function EditarUsuario({ usuarioSeleccionadoInicial = null, onVolver = null }) {
         }
 
         // Actualizar el usuario con todos sus campos consistentes (nombre, usuario, correo, email, rol, pass)
-        let usuarioEditadoRef = null
         const usuariosActualizados = usuarios.map(usuario => {
             if ((usuario.correo || usuario.email) === correoSeleccionado) {
                 const actualizado = {
@@ -128,7 +123,6 @@ function EditarUsuario({ usuarioSeleccionadoInicial = null, onVolver = null }) {
                     actualizado.contrasena = password.trim()
                 }
 
-                usuarioEditadoRef = actualizado
                 return actualizado
             }
 

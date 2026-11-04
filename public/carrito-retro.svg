@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <!-- Carrito de compras estilo ícono Windows 98 -->
+  <path d="M2 5h5l1 3h21l-3 11H10l1 3h15v2H10L5 7H2z" fill="#000000"/>
+  <path d="M9 10h18l-2 7H11z" fill="#ffffff"/>
+  <path d="M11 11h3v5h-2zM16 11h3v5h-3zM21 11h4l-1 5h-3z" fill="#1084d0"/>
+  <rect x="10" y="24" width="5" height="5" fill="#000000"/>
+  <rect x="11" y="25" width="3" height="3" fill="#808080"/>
+  <rect x="21" y="24" width="5" height="5" fill="#000000"/>
+  <rect x="22" y="25" width="3" height="3" fill="#808080"/>
+</svg>

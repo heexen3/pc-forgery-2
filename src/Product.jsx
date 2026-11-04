@@ -1,3 +1,4 @@
+import BarraTitulo from "./components/BarraTitulo.jsx"
 import { mostrarAlerta } from "./components/dialogo/Dialogo.js"
 import { useState } from "react"
 import { Link, useParams, useSearchParams } from "react-router-dom"
@@ -54,9 +55,7 @@ function DetalleProducto({ id }) {
         return (
             <main className="producto-contenedor">
                 <div className="producto ventana-animada">
-                    <div className="titulo-producto">
-                        <h1 className="producto-nombre">Producto no encontrado</h1>
-                    </div>
+                    <BarraTitulo titulo="Producto no encontrado" como="h1" />
                     <div className="producto-error">
                         <img src={rutaPublica("/questionmark.png")} alt="" />
                         <p>El producto que buscas no existe.</p>
@@ -101,14 +100,7 @@ function DetalleProducto({ id }) {
         <main className="producto-contenedor">
             {/* Ventana de "Propiedades" estilo Windows 98 */}
             <div className="producto ventana-animada">
-                <div className="titulo-producto">
-                    <img src={rutaPublica("/wlogo.svg")} alt="" className="wlogo" width="20" />
-                    <span>Propiedades de {producto.nombre}</span>
-                    <div className="botones-titulo" aria-hidden="true">
-                        <span>?</span>
-                        <span>×</span>
-                    </div>
-                </div>
+                <BarraTitulo titulo={`Propiedades de ${producto.nombre}`} ayuda botones={["minimizar", "cerrar"]} />
 
                 <div className="pestanas" role="tablist" aria-label="Información del producto">
                     {PESTANAS.map(item => (
@@ -262,10 +254,7 @@ function DetalleProducto({ id }) {
 
             {relacionados.length > 0 && (
                 <div className="producto-relacionados ventana-animada">
-                    <div className="titulo-producto">
-                        <img src={rutaPublica("/wlogo.svg")} alt="" className="wlogo" width="20" />
-                        <h2>Productos relacionados</h2>
-                    </div>
+                    <BarraTitulo titulo="Productos relacionados" como="h2" />
                     <div className="productos-grid">
                         {relacionados.map(item => (
                             <ProductoCard key={item.id} producto={item} />

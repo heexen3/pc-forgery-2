@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import "../components/Header.css"
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import BotonesWindows from './BotonesWindows'
 import useCarrito from './carrito/useCarrito.js'
 import { contarProductos } from './carrito/Carrito.js'
 import { rutaPublica } from "../utils/rutaPublica.js"
+import { esRutaEscritorio } from './escritorio/Escritorio.js'
 
 function Nav() {
     // logica
     const [menuAbierto, setMenuAbierto] = useState(false);
     const navigate = useNavigate()
+    const location = useLocation()
 
     const usuario = JSON.parse(localStorage.getItem("usuarioActual"))
     const cantidadCarrito = contarProductos(useCarrito())
@@ -18,6 +20,11 @@ function Nav() {
         localStorage.removeItem("usuarioActual")
         navigate("/Home")
     }
+    // En el Home (escritorio) los íconos reemplazan al menú: no se muestra
+    if (esRutaEscritorio(location.pathname)) {
+        return null
+    }
+
     // renderizado
     return (
     <header>

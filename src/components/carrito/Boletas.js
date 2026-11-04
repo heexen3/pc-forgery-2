@@ -116,13 +116,12 @@ function descontarStock(items) {
     localStorage.setItem("productosInicialesCargados", "true")
 }
 
-// Checkout: genera la boleta del carrito actual, la guarda en el historial
-// de compras, descuenta stock y vacía el carrito. Devuelve { ok, mensaje, boleta }
-// datosPago: { metodoPago, rut } (el RUT del cliente es opcional)
-export function generarBoleta(usuario, fecha = new Date(), datosPago = {}) {
+// Validaciones previas al pago (sesión, carrito, RUT, método y stock).
+// Se usan en el Carrito antes de ir a /pago y otra vez al generar la boleta.
+// Devuelve { ok, mensaje }
+export function validarCompra(usuario, datosPago = {}) {
     const metodoPago = datosPago.metodoPago || METODOS_PAGO[0]
     const rutCliente = String(datosPago.rut ?? "").trim()
-
     const carrito = obtenerCarrito()
 
     if (!usuario) {
@@ -149,6 +148,22 @@ export function generarBoleta(usuario, fecha = new Date(), datosPago = {}) {
         }
     }
 
+    return { ok: true, mensaje: "" }
+}
+
+// Checkout: genera la boleta del carrito actual, la guarda en el historial
+// de compras, descuenta stock y vacía el carrito. Devuelve { ok, mensaje, boleta }
+// datosPago: { metodoPago, rut } (el RUT del cliente es opcional)
+export function generarBoleta(usuario, fecha = new Date(), datosPago = {}) {
+    const metodoPago = datosPago.metodoPago || METODOS_PAGO[0]
+    const rutCliente = String(datosPago.rut ?? "").trim()
+
+    const validacion = validarCompra(usuario, datosPago)
+    if (!validacion.ok) {
+        return validacion
+    }
+
+    const carrito = obtenerCarrito()
     const boletas = obtenerBoletas()
     const { subtotal, iva, total } = calcularTotales(carrito)
 
@@ -203,4 +218,24 @@ export function generarBoleta(usuario, fecha = new Date(), datosPago = {}) {
     vaciarCarrito()
 
     return { ok: true, mensaje: "Compra realizada con éxito.", boleta }
+}
+
+// Datos del paso de pago (método y RUT) entre el Carrito y /pago.
+// Viajan en location.state y se respaldan en sessionStorage por si se recarga /pago.
+const CLAVE_DATOS_PAGO = "datosPago"
+
+export function guardarDatosPago(datosPago) {
+    sessionStorage.setItem(CLAVE_DATOS_PAGO, JSON.stringify(datosPago))
+}
+
+export function obtenerDatosPago() {
+    try {
+        return JSON.parse(sessionStorage.getItem(CLAVE_DATOS_PAGO)) || {}
+    } catch {
+        return {}
+    }
+}
+
+export function borrarDatosPago() {
+    sessionStorage.removeItem(CLAVE_DATOS_PAGO)
 }

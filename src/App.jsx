@@ -8,14 +8,17 @@ import Product from './Product.jsx'
 import Login from './Login.jsx'
 import Register from './Register.jsx'
 import Admin from './Admin.jsx'
+import RutaProtegida from './components/RutaProtegida.jsx'
 import Usuario from './Usuario.jsx'
 import Noticia from './Noticias.jsx'
 import NoticiaDetalle from './NoticiaDetalle.jsx'
 import Comunidad from './Comunidad.jsx'
 import Contacto from './Contacto.jsx'
+import Nosotros from './Nosotros.jsx'
 import NuevoHilo from './NuevoHilo.jsx'
 import Carrito from './Carrito.jsx'
 import Boleta from './Boleta.jsx'
+import Pago from './Pago.jsx'
 import MisCompras from './MisCompras.jsx'
 import ArmaTuPC from './ArmaTuPC.jsx'
 import BarraTareas from './components/escritorio/BarraTareas.jsx'
@@ -41,6 +44,7 @@ function App() {
           <Route path="/Shop/Product" element={<Product />} />
           {/* Carrito de compras y boletas */}
           <Route path="/Carrito" element={<Carrito />} />
+          <Route path="/pago" element={<Pago />} />
           <Route path="/Boleta" element={<Boleta />} />
           <Route path="/MisCompras" element={<MisCompras />} />
           {/* Arma tu PC */}
@@ -51,7 +55,7 @@ function App() {
           {/* Rutas de usuario y admin */}
           <Route path="/Usuario" element={<Usuario />} />
           <Route path="/usuario" element={<Usuario />} />
-          <Route path="/Admin" element={<Admin />} />
+          <Route path="/Admin" element={<RutaProtegida rol="admin"><Admin /></RutaProtegida>} />
           {/* Noticias */}
           <Route path="/Noticias" element={<Noticia />} />
           <Route path="/noticias/detalle" element={<NoticiaDetalle />} />
@@ -61,6 +65,8 @@ function App() {
           <Route path="/comunidad/hilo/:id" element={<HiloDetalle />} />
           {/* Contacto */}
           <Route path="/contacto" element={<Contacto />} />
+          {/* Quiénes somos */}
+          <Route path="/nosotros" element={<Nosotros />} />
           {/* si el usuario pone cualquier otra ruta va a ir al Home*/}
           <Route path="*" element={<Home />} />
         </Routes>
