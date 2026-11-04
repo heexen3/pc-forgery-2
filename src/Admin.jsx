@@ -6,6 +6,7 @@ import Usuarios from "./components/admin/Usuarios.jsx"
 import Reportes from "./components/admin/Reportes.jsx"
 import PerfilAdmin from "./components/admin/PerfilAdmin.jsx"
 import Productos from "./components/admin/Productos.jsx"
+import Dashboard from "./components/admin/Dashboard.jsx"
 import NoticiasAdmin from "./components/admin/Noticias.jsx"
 
 function Admin() {
@@ -48,10 +49,10 @@ function Admin() {
                             </button>
 
                             <button
-                                className={vista === "historial" ? "active" : ""}
-                                onClick={() => setVista("historial")}
+                                className={vista === "dashboard" ? "active" : ""}
+                                onClick={() => setVista("dashboard")}
                             >
-                                Historial
+                                Dashboard
                             </button>
 
                             <button
@@ -99,37 +100,20 @@ function Admin() {
                             <BarraTitulo titulo="Comandos Admin" icono="/tools.png" como="h2" />
 
                             <div className="contenido-botones p-3">
-                                <button className="btn btn-admin me-2 mb-2">
+                                <button
+                                    className="btn btn-admin me-2 mb-2"
+                                    onClick={() => {
+                                        localStorage.clear()
+                                        alert("LocalStorage borrado correctamente.")
+                                    }}
+                                >
                                     Borrar LocalStorage
                                 </button>
-
-                                <button className="btn btn-admin mb-2">
-                                    Limpiar Historial
-                                </button>
                             </div>
                         </section>
                     )}
 
-                    {vista === "historial" && (
-                        <section className="contenido">
-                            <BarraTitulo titulo="Historial" icono="/tools.png" como="h2" />
-
-                            <div className="historial-contenedor">
-                                <table className="historial-tabla">
-                                    <thead>
-                                        <tr>
-                                            <th>Fecha</th>
-                                            <th>Acción</th>
-                                            <th>Usuario</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {/* Registros del historial */}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
-                    )}
+                    {vista === "dashboard" && <Dashboard />}
 
                     {vista === "usuarios" && <Usuarios />}
 
