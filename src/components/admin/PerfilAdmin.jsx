@@ -4,6 +4,7 @@ import {
     obtenerPerfilAdmin,
     guardarPerfilAdmin
 } from "./PerfilAdmin.js"
+import { cuandoListo } from "../../utils/api.js"
 
 function PerfilAdmin() {
     const [nombre, setNombre] = useState("")
@@ -24,18 +25,18 @@ function PerfilAdmin() {
     function guardarCambios(e) {
         e.preventDefault()
 
-        const resultado = guardarPerfilAdmin(nombre, correo)
+        cuandoListo(guardarPerfilAdmin(nombre, correo), resultado => {
+            setMensaje(resultado.mensaje)
 
-        setMensaje(resultado.mensaje)
+            if (resultado.correcto) {
+                const usuarioActual = obtenerPerfilAdmin()
 
-        if (resultado.correcto) {
-            const usuarioActual = obtenerPerfilAdmin()
-
-            if (usuarioActual) {
-                setNombre(usuarioActual.nombre || usuarioActual.usuario || "")
-                setCorreo(usuarioActual.correo || usuarioActual.email || "")
+                if (usuarioActual) {
+                    setNombre(usuarioActual.nombre || usuarioActual.usuario || "")
+                    setCorreo(usuarioActual.correo || usuarioActual.email || "")
+                }
             }
-        }
+        })
     }
 
     return (

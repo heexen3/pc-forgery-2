@@ -6,12 +6,14 @@ import "./Product.css"
 import Resena from "./components/Resena.jsx"
 import ProductoCard from "./components/ProductoCard.jsx"
 import { agregarAlCarrito, formatearPrecio } from "./components/carrito/Carrito.js"
-import { etiquetaCategoria, obtenerProducto, obtenerProductos } from "./data/catalogoProductos.js"
+import { etiquetaCategoria, obtenerProducto, obtenerProductos, sincronizarProductos } from "./data/catalogoProductos.js"
+import { cuandoListo, useSincronizacion } from "./utils/api.js"
 import { obtenerInsignias } from "./components/tienda/FiltrosTienda.js"
 import { rutaPublica } from "./utils/rutaPublica.js"
 import {
     agregarResena,
     obtenerResenas,
+    sincronizarResenas,
     resumenResenas,
     textoEstrellas
 } from "./components/resenas/Resenas.js"
@@ -50,6 +52,11 @@ function DetalleProducto({ id }) {
     const [estrellas, setEstrellas] = useState(0)
     const [comentario, setComentario] = useState("")
     const [mensajeResena, setMensajeResena] = useState("")
+    // con backend: producto, stock y reseñas actualizados desde los microservicios
+    useSincronizacion(
+        () => Promise.all([sincronizarProductos(), sincronizarResenas(id)]),
+        () => setResenas(obtenerResenas(id))
+    )
 
     if (!producto) {
         return (
@@ -86,13 +93,14 @@ function DetalleProducto({ id }) {
 
     function publicarResena(event) {
         event.preventDefault()
-        const resultado = agregarResena(usuario, producto.id, { estrellas, comentario })
-        setResenas(resultado.resenas)
-        setMensajeResena(resultado.mensaje)
-        if (resultado.ok) {
-            setEstrellas(0)
-            setComentario("")
-        }
+        cuandoListo(agregarResena(usuario, producto.id, { estrellas, comentario }), resultado => {
+            setResenas(resultado.resenas)
+            setMensajeResena(resultado.mensaje)
+            if (resultado.ok) {
+                setEstrellas(0)
+                setComentario("")
+            }
+        })
     }
 
     // Renderizado

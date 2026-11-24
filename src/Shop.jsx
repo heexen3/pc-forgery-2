@@ -2,13 +2,16 @@ import { useState } from "react"
 import "./Shop.css"
 import ProductoCard from "./components/ProductoCard"
 import VentanaApp from "./components/VentanaApp"
-import { CATEGORIAS, etiquetaCategoria, obtenerProductos } from "./data/catalogoProductos.js"
+import { CATEGORIAS, etiquetaCategoria, obtenerProductos, sincronizarProductos } from "./data/catalogoProductos.js"
+import { useSincronizacion } from "./utils/api.js"
 import { ORDENES, filtrarProductos, contarPorCategoria } from "./components/tienda/FiltrosTienda.js"
 import { rutaPublica } from "./utils/rutaPublica.js"
 
 function Shop() {
     // Lógica
-    const [productos] = useState(() => obtenerProductos())
+    const [productos, setProductos] = useState(() => obtenerProductos())
+    // con backend: catálogo y stock actualizados desde productos-service e inventario-service
+    useSincronizacion(sincronizarProductos, () => setProductos(obtenerProductos()))
     const [categoria, setCategoria] = useState("")
     const [busqueda, setBusqueda] = useState("")
     const [orden, setOrden] = useState("relevancia")

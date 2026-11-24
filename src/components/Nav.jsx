@@ -6,6 +6,7 @@ import useCarrito from './carrito/useCarrito.js'
 import { contarProductos } from './carrito/Carrito.js'
 import { rutaPublica } from "../utils/rutaPublica.js"
 import { esRutaEscritorio } from './escritorio/Escritorio.js'
+import { cerrarSesion as cerrarSesionApi } from "../utils/api.js"
 
 function Nav() {
     // logica
@@ -17,7 +18,8 @@ function Nav() {
     const cantidadCarrito = contarProductos(useCarrito())
 
     function cerrarSesion() {
-        localStorage.removeItem("usuarioActual")
+        // borra tokens y usuarioActual; con backend también revoca el refresh token
+        cerrarSesionApi()
         navigate("/Home")
     }
     // En el Home (escritorio) los íconos reemplazan al menú: no se muestra

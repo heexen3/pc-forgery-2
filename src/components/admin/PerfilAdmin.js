@@ -1,3 +1,5 @@
+import { apiHabilitada, peticion, usuarioDesdeApi } from "../../utils/api.js"
+
 export function obtenerPerfilAdmin() {
     return JSON.parse(localStorage.getItem("usuarioActual"))
 }
@@ -10,6 +12,24 @@ export function guardarPerfilAdmin(nombre, correo) {
             correcto: false,
             mensaje: "No se encontró una sesión activa."
         }
+    }
+
+    // Con backend: PUT /api/usuarios/{id} sobre la propia cuenta (devuelve una promesa)
+    if (apiHabilitada()) {
+        return peticion(`/usuarios/${usuarioActual.id}`, {
+            metodo: "PUT",
+            cuerpo: {
+                nombre: nombre.trim(),
+                usuario: usuarioActual.usuario,
+                email: correo.trim(),
+                rol: usuarioActual.rol
+            }
+        })
+            .then(actualizado => {
+                localStorage.setItem("usuarioActual", JSON.stringify(usuarioDesdeApi(actualizado)))
+                return { correcto: true, mensaje: "Perfil actualizado correctamente." }
+            })
+            .catch(error => ({ correcto: false, mensaje: error.message }))
     }
 
     const usuarios = JSON.parse(

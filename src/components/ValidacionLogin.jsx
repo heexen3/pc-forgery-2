@@ -1,11 +1,27 @@
 import { mostrarAlerta } from "./dialogo/Dialogo.js"
-import { obtenerUsuarios } from "../data/usuariosData.js"
+import { iniciarSesionApi, obtenerUsuarios } from "../data/usuariosData.js"
+import { apiHabilitada } from "../utils/api.js"
 
 function ValidacionLogin(event, navigate) {
     event.preventDefault()
 
     const identificador = event.target.elements.usuario.value.trim()
     const password = event.target.elements.password.value.trim()
+
+    // Con backend: auth-service valida la contraseña (BCrypt) y entrega el JWT + refresh token
+    if (apiHabilitada()) {
+        if (!identificador || !password) {
+            mostrarAlerta("Ingresa tu correo o nombre de usuario y tu contraseña.", { icono: "advertencia" })
+            return
+        }
+        iniciarSesionApi(identificador, password)
+            .then(usuario => {
+                mostrarAlerta("Iniciando sesión como: " + usuario.rol)
+                navigate(usuario.rol === "admin" ? "/Admin" : "/Home")
+            })
+            .catch(error => mostrarAlerta(error.message, { icono: "advertencia" }))
+        return
+    }
 
     const usuariosGuardados = obtenerUsuarios()
 

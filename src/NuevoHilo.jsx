@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import "./NuevoHilo.css"
 import MarcoCorreo from "./components/escritorio/MarcoCorreo.jsx"
+import { crearHiloApi } from "./data/hilosData.js"
+import { apiHabilitada } from "./utils/api.js"
 
 const CATEGORIAS = ["Armado de PC", "Soporte técnico", "Showcase", "General"]
 const LARGO_MINIMO_TITULO = 5
@@ -60,6 +62,14 @@ function NuevoHilo() {
         const mensajeLimpio = mensaje.trim()
         if (mensajeLimpio.length < LARGO_MINIMO_MENSAJE) {
             setError(`El mensaje debe tener al menos ${LARGO_MINIMO_MENSAJE} caracteres.`)
+            return
+        }
+
+        // Con backend: POST /api/hilos (comunidad-service)
+        if (apiHabilitada()) {
+            crearHiloApi({ titulo: tituloLimpio, categoria, mensaje: mensajeLimpio })
+                .then(hilo => navigate(`/comunidad/hilo/${hilo.id}`))
+                .catch(error => setError(error.message))
             return
         }
 

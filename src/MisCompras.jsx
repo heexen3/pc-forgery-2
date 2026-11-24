@@ -6,12 +6,16 @@ import {
     obtenerBoletas,
     obtenerBoletasUsuario,
     formatearNumeroBoleta,
-    formatearFecha
+    formatearFecha,
+    sincronizarBoletas
 } from "./components/carrito/Boletas.js"
+import { useSincronizacion } from "./utils/api.js"
 
 function MisCompras() {
     // Lógica
     const usuario = JSON.parse(localStorage.getItem("usuarioActual"))
+    // con backend: GET /api/boletas (el admin recibe todas, el cliente solo las suyas)
+    useSincronizacion(sincronizarBoletas)
 
     // El admin ve todas las boletas, el usuario solo las suyas
     const boletas = !usuario

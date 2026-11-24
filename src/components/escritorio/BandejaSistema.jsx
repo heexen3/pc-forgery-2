@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import useCarrito from "../carrito/useCarrito.js"
 import { contarProductos } from "../carrito/Carrito.js"
 import { rutaPublica } from "../../utils/rutaPublica.js"
+import { cerrarSesion as cerrarSesionApi } from "../../utils/api.js"
 
 function leerUsuario() {
     try {
@@ -39,7 +40,8 @@ function BandejaSistema() {
     }, [menuAbierto])
 
     function cerrarSesion() {
-        localStorage.removeItem("usuarioActual")
+        // borra tokens y usuarioActual; con backend también revoca el refresh token
+        cerrarSesionApi()
         setMenuAbierto(false)
         navigate("/Home")
     }

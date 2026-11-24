@@ -1,3 +1,5 @@
+import { apiHabilitada, peticion } from "../utils/api.js"
+
 // Catálogo base de la tienda (mismos datos iniciales que usa el panel admin).
 // Si el admin ya guardó productos en localStorage ("productos"), se usan esos (con su stock).
 // Los precios incluyen IVA.
@@ -385,4 +387,54 @@ export function obtenerStock(productoId) {
     }
 
     return Number(producto.stock)
+}
+
+// ---------- Backend (productos-service + inventario-service) ----------
+
+// Trae el catálogo y el stock desde el backend y los deja en localStorage ("productos"),
+// que funciona como caché: el resto de la app sigue leyendo con obtenerProductos().
+export async function sincronizarProductos() {
+    if (!apiHabilitada()) return obtenerProductos()
+    const [productos, inventario] = await Promise.all([
+        peticion("/productos"),
+        peticion("/inventario").catch(() => [])
+    ])
+    const stockPorProducto = new Map(inventario.map(fila => [Number(fila.productoId), fila.stock]))
+    const catalogo = productos.map(producto => ({
+        ...producto,
+        stock: stockPorProducto.get(Number(producto.id)) ?? 0
+    }))
+    localStorage.setItem(CLAVE_PRODUCTOS, JSON.stringify(catalogo))
+    localStorage.setItem(CLAVE_VERSION_CATALOGO, String(VERSION_CATALOGO))
+    localStorage.setItem("productosInicialesCargados", "true")
+    return catalogo
+}
+
+// Crea (sin id) o actualiza (con id) un producto y fija su stock (solo ADMIN).
+export async function guardarProductoApi(producto) {
+    const cuerpo = {
+        nombre: producto.nombre,
+        categoria: producto.categoria,
+        marca: producto.marca || "",
+        precio: Number(producto.precio),
+        descripcion: producto.descripcion || "",
+        imagen: producto.imagen || "",
+        nuevo: Boolean(producto.nuevo),
+        especificaciones: producto.especificaciones || {}
+    }
+    const guardado = producto.id
+        ? await peticion(`/productos/${producto.id}`, { metodo: "PUT", cuerpo })
+        : await peticion("/productos", { metodo: "POST", cuerpo })
+    await peticion(`/inventario/${guardado.id}`, {
+        metodo: "PUT",
+        cuerpo: { productoId: guardado.id, stock: Number(producto.stock) }
+    })
+    return sincronizarProductos()
+}
+
+// Elimina un producto del catálogo y su inventario (solo ADMIN).
+export async function eliminarProductoApi(productoId) {
+    await peticion(`/productos/${productoId}`, { metodo: "DELETE" })
+    await peticion(`/inventario/${productoId}`, { metodo: "DELETE" }).catch(() => null)
+    return sincronizarProductos()
 }

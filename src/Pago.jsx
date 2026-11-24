@@ -4,7 +4,8 @@ import "./Pago.css"
 import BarraTitulo from "./components/BarraTitulo.jsx"
 import useCarrito from "./components/carrito/useCarrito.js"
 import { calcularTotales, formatearPrecio } from "./components/carrito/Carrito.js"
-import { borrarDatosPago, generarBoleta, METODOS_PAGO, obtenerDatosPago } from "./components/carrito/Boletas.js"
+import { borrarDatosPago, generarBoleta, METODOS_PAGO, obtenerDatosPago, registrarPagoRechazado } from "./components/carrito/Boletas.js"
+import { cuandoListo } from "./utils/api.js"
 import { mostrarAlerta } from "./components/dialogo/Dialogo.js"
 
 // Página de pago simulado (/pago). Se llega desde "Finalizar compra" del Carrito,
@@ -28,20 +29,22 @@ function Pago() {
     function pagoExitoso() {
         setProcesando(true)
         const usuario = JSON.parse(localStorage.getItem("usuarioActual"))
-        const resultado = generarBoleta(usuario, new Date(), datosPago)
+        cuandoListo(generarBoleta(usuario, new Date(), datosPago), resultado => {
+            mostrarAlerta(resultado.mensaje, { icono: resultado.ok ? "info" : "error" })
 
-        mostrarAlerta(resultado.mensaje, { icono: resultado.ok ? "info" : "error" })
-
-        if (resultado.ok) {
-            borrarDatosPago()
-            navigate(`/Boleta?numero=${resultado.boleta.numero}`)
-        } else {
-            setProcesando(false)
-            navigate(usuario ? "/Carrito" : "/Login")
-        }
+            if (resultado.ok) {
+                borrarDatosPago()
+                navigate(`/Boleta?numero=${resultado.boleta.numero}`)
+            } else {
+                setProcesando(false)
+                navigate(usuario && resultado.status !== 401 ? "/Carrito" : "/Login")
+            }
+        })
     }
 
     function pagoFallido() {
+        // con backend queda registrado el pedido RECHAZADO (pagos-service); el carrito no se toca
+        registrarPagoRechazado(datosPago)
         mostrarAlerta("El pago no pudo completarse. Tu carrito se mantiene intacto, puedes intentarlo de nuevo.", {
             titulo: "Pago fallido",
             icono: "error"

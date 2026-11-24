@@ -4,13 +4,19 @@ import { useRef, useState } from "react"
 import {
     CATEGORIAS,
     etiquetaCategoria,
+    eliminarProductoApi,
+    guardarProductoApi,
     inicializarCatalogo,
-    restablecerCatalogo
+    restablecerCatalogo,
+    sincronizarProductos
 } from "../../data/catalogoProductos.js"
+import { apiHabilitada, useSincronizacion } from "../../utils/api.js"
 
 function MostrarProductos() {
     // El catálogo inicial vive en data/catalogoProductos.js (compartido con la tienda)
     const [productos, setProductos] = useState(() => inicializarCatalogo())
+    // con backend: recarga el catálogo y el stock desde productos-service e inventario-service
+    useSincronizacion(sincronizarProductos, () => setProductos(inicializarCatalogo()))
 
     const [productoEditar, setProductoEditar] = useState(null)
     const refFormulario = useRef(null)
@@ -46,6 +52,17 @@ function MostrarProductos() {
             return
         }
 
+        if (apiHabilitada()) {
+            guardarProductoApi(productoEditar)
+                .then(catalogo => {
+                    setProductos(catalogo)
+                    setProductoEditar(null)
+                    mostrarAlerta("Producto actualizado correctamente.")
+                })
+                .catch(error => mostrarAlerta(error.message, { icono: "error" }))
+            return
+        }
+
         const productosActualizados = productos.map(producto =>
             producto.id === productoEditar.id
                 ? {
@@ -73,6 +90,13 @@ function MostrarProductos() {
         )
 
         if (!confirmar) return
+
+        if (apiHabilitada()) {
+            eliminarProductoApi(id)
+                .then(catalogo => setProductos(catalogo))
+                .catch(error => mostrarAlerta(error.message, { icono: "error" }))
+            return
+        }
 
         const productosActualizados = productos.filter(
             producto => producto.id !== id

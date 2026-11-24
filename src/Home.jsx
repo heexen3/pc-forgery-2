@@ -5,7 +5,8 @@ import './Home.css'
 import './App.css'
 import { rutaPublica } from "./utils/rutaPublica.js"
 import IconosEscritorio from "./components/escritorio/IconosEscritorio.jsx"
-import { obtenerHilosRecientes } from "./data/hilosData.js"
+import { obtenerHilosRecientes, sincronizarHilos } from "./data/hilosData.js"
+import { useSincronizacion } from "./utils/api.js"
 
 function textoRespuestas(cantidad) {
   return `${cantidad} ${cantidad === 1 ? "respuesta" : "respuestas"}`
@@ -13,7 +14,9 @@ function textoRespuestas(cantidad) {
 
 function Home() {
   // Los 3 hilos más recientes de la comunidad (más adelante: los más votados)
-  const [destacados] = useState(() => obtenerHilosRecientes(3))
+  const [destacados, setDestacados] = useState(() => obtenerHilosRecientes(3))
+  // con backend: hilos más recientes desde comunidad-service
+  useSincronizacion(sincronizarHilos, () => setDestacados(obtenerHilosRecientes(3)))
 
   return (
     <main className="escritorio">

@@ -2,12 +2,14 @@ import { useSearchParams, Link } from "react-router-dom"
 import "./NoticiaDetalle.css"
 import MarcoNavegador from "./components/escritorio/MarcoNavegador.jsx"
 import { rutaPublica } from "./utils/rutaPublica.js"
-import { obtenerNoticia, formatearFecha } from "./data/catalogoNoticias.js"
+import { obtenerNoticia, formatearFecha, sincronizarNoticias } from "./data/catalogoNoticias.js"
+import { useSincronizacion } from "./utils/api.js"
 
 function NoticiaDetalle() {
     const [searchParams] = useSearchParams()
     const id = Number(searchParams.get("id"))
 
+    useSincronizacion(sincronizarNoticias)
     const noticia = obtenerNoticia(id)
 
     if (!noticia) {
