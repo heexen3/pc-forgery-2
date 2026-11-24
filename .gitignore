@@ -25,3 +25,7 @@ dist-ssr
 
 # Reportes de cobertura
 coverage
+
+# Backend (Maven / Docker)
+backend/**/target
+backend/.env

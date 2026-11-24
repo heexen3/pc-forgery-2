@@ -1,4 +1,5 @@
-import { obtenerProductos } from "../../data/catalogoProductos.js"
+import { obtenerProductos, sincronizarProductos } from "../../data/catalogoProductos.js"
+import { apiHabilitada, peticion } from "../../utils/api.js"
 import { obtenerCarrito, calcularTotales, stockDisponible, vaciarCarrito } from "./Carrito.js"
 import { formatearRut, validarRut } from "./Rut.js"
 
@@ -96,6 +97,21 @@ export function formatearFecha(fechaISO) {
     })
 }
 
+// Fila del historial de compras ("compras") a partir de una boleta
+function compraDesdeBoleta(boleta) {
+    return {
+        id: boleta.numero,
+        boleta: boleta.numero,
+        correo: boleta.correo,
+        producto: boleta.items
+            .map(item => `${item.nombre} x${item.cantidad}`)
+            .join(", "),
+        fecha: formatearFecha(boleta.fecha),
+        metodoPago: boleta.metodoPago,
+        total: boleta.total
+    }
+}
+
 // Descuenta del stock de la tienda los productos comprados
 function descontarStock(items) {
     const productosActualizados = obtenerProductos().map(producto => {
@@ -163,6 +179,12 @@ export function generarBoleta(usuario, fecha = new Date(), datosPago = {}) {
         return validacion
     }
 
+    // Con backend: POST /api/pedidos. pedidos-service toma los precios de productos-service,
+    // verifica stock en inventario-service, cobra en pagos-service y devuelve la boleta.
+    if (apiHabilitada()) {
+        return enviarCheckout(datosPago, false)
+    }
+
     const carrito = obtenerCarrito()
     const boletas = obtenerBoletas()
     const { subtotal, iva, total } = calcularTotales(carrito)
@@ -201,17 +223,7 @@ export function generarBoleta(usuario, fecha = new Date(), datosPago = {}) {
 
     // Registro para el historial de compras y reportes del panel admin
     const compras = JSON.parse(localStorage.getItem("compras")) || []
-    compras.push({
-        id: boleta.numero,
-        boleta: boleta.numero,
-        correo: boleta.correo,
-        producto: boleta.items
-            .map(item => `${item.nombre} x${item.cantidad}`)
-            .join(", "),
-        fecha: formatearFecha(boleta.fecha),
-        metodoPago: boleta.metodoPago,
-        total: boleta.total
-    })
+    compras.push(compraDesdeBoleta(boleta))
     localStorage.setItem("compras", JSON.stringify(compras))
 
     descontarStock(boleta.items)
@@ -238,4 +250,58 @@ export function obtenerDatosPago() {
 
 export function borrarDatosPago() {
     sessionStorage.removeItem(CLAVE_DATOS_PAGO)
+}
+
+// ---------- Backend (pedidos-service) ----------
+
+// Envía el carrito al checkout del backend. simularRechazo=true corresponde al botón
+// "Simular pago no exitoso": pagos-service rechaza el pago y el carrito queda intacto.
+async function enviarCheckout(datosPago, simularRechazo) {
+    const carrito = obtenerCarrito()
+    const metodoPago = datosPago.metodoPago || METODOS_PAGO[0]
+    const cuerpo = {
+        metodoPago,
+        rut: String(datosPago.rut ?? "").trim(),
+        simularRechazo,
+        items: carrito.map(item => ({
+            id: item.id,
+            tipo: item.tipo,
+            productoId: item.tipo === "armado" ? null : Number(item.productoId),
+            nombre: item.nombre,
+            cantidad: item.cantidad,
+            componentes: item.componentes
+        }))
+    }
+    try {
+        const boleta = await peticion("/pedidos", { metodo: "POST", cuerpo })
+        guardarBoletaLocal(boleta)
+        vaciarCarrito()
+        await sincronizarProductos().catch(() => null)
+        return { ok: true, mensaje: "Compra realizada con éxito.", boleta }
+    } catch (error) {
+        return { ok: false, mensaje: error.message, status: error.status }
+    }
+}
+
+// Registra en el backend un pago rechazado (botón "Simular pago no exitoso").
+export function registrarPagoRechazado(datosPago) {
+    if (!apiHabilitada()) return Promise.resolve({ ok: false })
+    return enviarCheckout(datosPago, true)
+}
+
+function guardarBoletaLocal(boleta) {
+    const boletas = obtenerBoletas().filter(item => item.numero !== boleta.numero)
+    localStorage.setItem(CLAVE_BOLETAS, JSON.stringify([...boletas, boleta]))
+    const compras = (JSON.parse(localStorage.getItem("compras")) || []).filter(item => item.boleta !== boleta.numero)
+    localStorage.setItem("compras", JSON.stringify([...compras, compraDesdeBoleta(boleta)]))
+}
+
+// Trae las boletas del backend (el ADMIN recibe todas, el cliente solo las suyas)
+// y actualiza las cachés "boletas" y "compras" que usan Mis compras, Boleta y el panel admin.
+export async function sincronizarBoletas() {
+    if (!apiHabilitada()) return obtenerBoletas()
+    const boletas = await peticion("/boletas")
+    localStorage.setItem(CLAVE_BOLETAS, JSON.stringify(boletas))
+    localStorage.setItem("compras", JSON.stringify(boletas.map(compraDesdeBoleta)))
+    return boletas
 }

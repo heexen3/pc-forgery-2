@@ -8,8 +8,20 @@ import PerfilAdmin from "./components/admin/PerfilAdmin.jsx"
 import Productos from "./components/admin/Productos.jsx"
 import Dashboard from "./components/admin/Dashboard.jsx"
 import NoticiasAdmin from "./components/admin/Noticias.jsx"
+import { sincronizarUsuarios } from "./data/usuariosData.js"
+import { sincronizarProductos } from "./data/catalogoProductos.js"
+import { sincronizarNoticias } from "./data/catalogoNoticias.js"
+import { sincronizarBoletas } from "./components/carrito/Boletas.js"
+import { useSincronizacion } from "./utils/api.js"
+
+// Con backend: al entrar al panel se cargan usuarios (auth), catálogo y stock
+// (productos + inventario), boletas (pedidos) y noticias (comunidad). Requiere rol ADMIN.
+function sincronizarPanel() {
+    return Promise.allSettled([sincronizarUsuarios(), sincronizarProductos(), sincronizarBoletas(), sincronizarNoticias()])
+}
 
 function Admin() {
+    useSincronizacion(sincronizarPanel)
     // Lógica
     const [vista, setVista] = useState("comandos")
 
@@ -103,7 +115,12 @@ function Admin() {
                                 <button
                                     className="btn btn-admin me-2 mb-2"
                                     onClick={() => {
+                                        // se conserva la sesión (tokens) para no cerrar la sesión del admin
+                                        const sesion = localStorage.getItem("sesion")
+                                        const usuarioActual = localStorage.getItem("usuarioActual")
                                         localStorage.clear()
+                                        if (sesion) localStorage.setItem("sesion", sesion)
+                                        if (usuarioActual) localStorage.setItem("usuarioActual", usuarioActual)
                                         alert("LocalStorage borrado correctamente.")
                                     }}
                                 >

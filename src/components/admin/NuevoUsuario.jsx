@@ -1,5 +1,6 @@
 import { useState } from "react"
-import { obtenerUsuarios, guardarUsuarios } from "../../data/usuariosData.js"
+import { obtenerUsuarios, guardarUsuarios, guardarUsuarioApi } from "../../data/usuariosData.js"
+import { apiHabilitada } from "../../utils/api.js"
 import { mostrarAlerta } from "../dialogo/Dialogo.js"
 
 function NuevoUsuario() {
@@ -10,6 +11,20 @@ function NuevoUsuario() {
 
     function registrarUsuario(e) {
         e.preventDefault()
+
+        // Con backend: POST /api/usuarios (solo ADMIN; la contraseña se guarda cifrada)
+        if (apiHabilitada()) {
+            guardarUsuarioApi({ nombre: nombre.trim(), usuario: nombre.trim().replace(/\s+/g, ""), email: correo.trim(), password: contrasena, rol })
+                .then(() => {
+                    mostrarAlerta("Usuario registrado correctamente.")
+                    setNombre("")
+                    setCorreo("")
+                    setContrasena("")
+                    setRol("usuario")
+                })
+                .catch(error => mostrarAlerta(error.message, { icono: "advertencia" }))
+            return
+        }
 
         const usuariosGuardados = obtenerUsuarios()
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
-import { obtenerUsuarios, guardarUsuarios } from "../../data/usuariosData.js"
+import { obtenerUsuarios, guardarUsuarios, guardarUsuarioApi } from "../../data/usuariosData.js"
+import { apiHabilitada } from "../../utils/api.js"
 import { mostrarAlerta } from "../dialogo/Dialogo.js"
 
 function EditarUsuario({ usuarioSeleccionadoInicial = null, onVolver = null }) {
@@ -103,6 +104,27 @@ function EditarUsuario({ usuarioSeleccionadoInicial = null, onVolver = null }) {
 
         if (usuarioExiste) {
             mostrarAlerta("Ese nombre de usuario ya está registrado por otra cuenta.", { icono: "advertencia" })
+            return
+        }
+
+        // Con backend: PUT /api/usuarios/{id} (solo ADMIN; la contraseña es opcional)
+        if (apiHabilitada()) {
+            const actual = usuarios.find(u => (u.correo || u.email) === correoSeleccionado)
+            guardarUsuarioApi({
+                id: actual?.id,
+                nombre: limpioNombre,
+                usuario: limpioUsuario,
+                email: limpioCorreo,
+                password: password.trim(),
+                rol
+            })
+                .then(lista => {
+                    setUsuarios(lista)
+                    setCorreoSeleccionado(limpioCorreo)
+                    setPassword("")
+                    mostrarAlerta("Usuario actualizado correctamente.")
+                })
+                .catch(error => mostrarAlerta(error.message, { icono: "advertencia" }))
             return
         }
 

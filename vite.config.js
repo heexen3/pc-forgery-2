@@ -2,7 +2,7 @@
 import { copyFileSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vitest/config'
+import { configDefaults, defineConfig } from 'vitest/config'
 
 // GitHub Pages no sabe nada de las rutas de React Router: si alguien entra directo
 // a /pc-forgery-2/Shop (o recarga la página) busca ese archivo, no lo encuentra y
@@ -28,13 +28,18 @@ export default defineConfig({
   // Subdirectorio donde GitHub Pages publica el sitio (https://heexen3.github.io/pc-forgery-2/)
   base: "/pc-forgery-2/",
   plugins: [react(), copiarIndexA404()],
+  // backend/ (microservicios Spring Boot) no es parte del frontend
+  server: {
+    watch: { ignored: ['**/backend/**'] },
+  },
   test: {
     environment: 'jsdom',
+    exclude: [...configDefaults.exclude, 'backend/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
       include: ['src/**/*.{js,jsx}'],
-      exclude: ['src/test/**', 'src/**/*.test.{js,jsx}', 'src/main.jsx'],
+      exclude: ['src/test/**', 'src/**/*.test.{js,jsx}', 'src/main.jsx', 'backend/**'],
     },
   },
 })

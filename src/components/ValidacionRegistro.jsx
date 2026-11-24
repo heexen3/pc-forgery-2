@@ -1,4 +1,6 @@
 import { mostrarAlerta } from "./dialogo/Dialogo.js"
+import { registrarUsuarioApi } from "../data/usuariosData.js"
+import { apiHabilitada } from "../utils/api.js"
 
 
 
@@ -34,6 +36,17 @@ function ValidacionRegistro(event, navigate) {
 
     if (password !== confirmPassword) {
         mostrarAlerta("Las contraseñas no coinciden.", { icono: "advertencia" })
+        return
+    }
+
+    // Con backend: POST /api/auth/register (auth-service guarda la contraseña cifrada)
+    if (apiHabilitada()) {
+        registrarUsuarioApi({ usuario, email, password })
+            .then(() => {
+                mostrarAlerta("¡Usuario registrado con éxito!")
+                navigate("/Login")
+            })
+            .catch(error => mostrarAlerta(error.message, { icono: "advertencia" }))
         return
     }
 

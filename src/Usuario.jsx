@@ -2,13 +2,15 @@ import BarraTitulo from "./components/BarraTitulo.jsx"
 import { useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { mostrarAlerta, confirmar as confirmarDialogo } from "./components/dialogo/Dialogo.js"
-import { obtenerUsuarios, guardarUsuarios } from "./data/usuariosData.js"
+import { obtenerUsuarios, guardarUsuarios, actualizarPerfilApi } from "./data/usuariosData.js"
+import { apiHabilitada, cuandoListo, useSincronizacion } from "./utils/api.js"
 import { rutaPublica } from "./utils/rutaPublica.js"
 import {
     obtenerArmados,
     eliminarArmado,
     actualizarNombreArmado,
-    cargarSeleccion
+    cargarSeleccion,
+    sincronizarArmados
 } from "./components/armado/ArmadosGuardados.js"
 import { PASOS } from "./components/armado/ArmadoPC.js"
 import { formatearPrecio } from "./components/carrito/Carrito.js"
@@ -52,6 +54,8 @@ function Usuario() {
     // Estados para la sección desplegable de configuraciones de PC
     const [armadosDesplegados, setArmadosDesplegados] = useState(true)
     const [armados, setArmados] = useState(() => obtenerArmados(usuarioActual))
+    // con backend: armados guardados desde pedidos-service
+    useSincronizacion(() => sincronizarArmados(usuarioActual), () => setArmados(obtenerArmados(usuarioActual)))
     const [detallesAbiertos, setDetallesAbiertos] = useState({})
 
     // Edición de nombre de un armado guardado inline
@@ -92,6 +96,19 @@ function Usuario() {
 
     // Persistir cambios en usuarioActual y en el listado de usuarios de usuariosData
     function guardarCambios(usuarioActualizado) {
+        // Con backend: PUT /api/auth/me (nombre, usuario, descripción y foto)
+        if (apiHabilitada()) {
+            actualizarPerfilApi({
+                nombre: usuarioActualizado.nombre,
+                usuario: usuarioActualizado.usuario,
+                descripcion: usuarioActualizado.descripcion,
+                foto: usuarioActualizado.foto
+            })
+                .then(actualizado => setUsuarioActual(actualizado))
+                .catch(error => mostrarAlerta(error.message, { icono: "advertencia" }))
+            return
+        }
+
         setUsuarioActual(usuarioActualizado)
 
         localStorage.setItem(
@@ -233,7 +250,7 @@ function Usuario() {
         const confirmado = await confirmarDialogo(`¿Deseas eliminar la configuración "${armado.nombre}"?`)
         if (!confirmado) return
 
-        const actualizados = eliminarArmado(usuarioActual, armado.id)
+        const actualizados = await eliminarArmado(usuarioActual, armado.id)
         setArmados(actualizados)
         mostrarAlerta(`Configuración "${armado.nombre}" eliminada.`)
     }
@@ -247,14 +264,15 @@ function Usuario() {
             return
         }
 
-        const resultado = actualizarNombreArmado(usuarioActual, id, limpio)
-        if (resultado.ok) {
-            setArmados(resultado.armados)
-            setEditandoArmadoId(null)
-            mostrarAlerta("Nombre de la configuración actualizado.")
-        } else {
-            mostrarAlerta(resultado.mensaje, { icono: "advertencia" })
-        }
+        cuandoListo(actualizarNombreArmado(usuarioActual, id, limpio), resultado => {
+            if (resultado.ok) {
+                setArmados(resultado.armados)
+                setEditandoArmadoId(null)
+                mostrarAlerta("Nombre de la configuración actualizado.")
+            } else {
+                mostrarAlerta(resultado.mensaje, { icono: "advertencia" })
+            }
+        })
     }
 
     const descripcion = usuarioActual.descripcion || "Este usuario aún no tiene una descripción."

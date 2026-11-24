@@ -1,6 +1,7 @@
 import BarraTitulo from "../BarraTitulo.jsx"
 import { useState } from "react"
-import { CATEGORIAS, obtenerProductos } from "../../data/catalogoProductos.js"
+import { CATEGORIAS, guardarProductoApi, obtenerProductos } from "../../data/catalogoProductos.js"
+import { apiHabilitada } from "../../utils/api.js"
 import { mostrarAlerta } from "../dialogo/Dialogo.js"
 
 function NuevoProducto() {
@@ -40,6 +41,26 @@ function NuevoProducto() {
             Number(producto.stock) < 0
         ) {
             mostrarAlerta("El precio debe ser mayor que cero y el stock no puede ser negativo.", { icono: "advertencia" })
+            return
+        }
+
+        const vacio = {
+            nombre: "",
+            categoria: "",
+            precio: "",
+            stock: "",
+            descripcion: "",
+            imagen: ""
+        }
+
+        // Con backend: POST /api/productos + PUT /api/inventario/{id} (requiere rol ADMIN)
+        if (apiHabilitada()) {
+            guardarProductoApi({ ...producto, nuevo: true })
+                .then(() => {
+                    mostrarAlerta("Producto creado correctamente.")
+                    setProducto(vacio)
+                })
+                .catch(error => mostrarAlerta(error.message, { icono: "error" }))
             return
         }
 

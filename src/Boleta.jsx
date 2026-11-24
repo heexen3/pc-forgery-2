@@ -4,7 +4,8 @@ import "./Carrito.css"
 import "./Boleta.css"
 import TimbreSimulado from "./components/carrito/TimbreSimulado.jsx"
 import { formatearPrecio } from "./components/carrito/Carrito.js"
-import { obtenerBoleta, formatearNumeroBoleta } from "./components/carrito/Boletas.js"
+import { obtenerBoleta, formatearNumeroBoleta, sincronizarBoletas } from "./components/carrito/Boletas.js"
+import { useSincronizacion } from "./utils/api.js"
 
 function formatearSoloFecha(fechaISO) {
     return new Date(fechaISO).toLocaleDateString("es-CL", {
@@ -24,6 +25,8 @@ function formatearHora(fechaISO) {
 function Boleta() {
     // Lógica
     const [searchParams] = useSearchParams()
+    // con backend: boletas desde pedidos-service (vuelve a renderizar al llegar)
+    useSincronizacion(sincronizarBoletas)
     const boleta = obtenerBoleta(searchParams.get("numero"))
 
     if (!boleta) {

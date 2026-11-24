@@ -1,11 +1,16 @@
 import { useEffect, useRef } from "react"
 import { Navigate } from "react-router-dom"
 import { mostrarAlerta } from "./dialogo/Dialogo.js"
+import { apiHabilitada, haySesion } from "../utils/api.js"
 
 // Lee la sesión guardada por ValidacionLogin (localStorage "usuarioActual")
+// Con backend además debe existir la sesión JWT (access + refresh token); el rol real
+// lo vuelve a validar el API Gateway en cada petición, así que editar localStorage no da permisos.
 function obtenerSesion() {
     try {
-        return JSON.parse(localStorage.getItem("usuarioActual"))
+        const usuario = JSON.parse(localStorage.getItem("usuarioActual"))
+        if (usuario && apiHabilitada() && !haySesion()) return null
+        return usuario
     } catch {
         return null
     }

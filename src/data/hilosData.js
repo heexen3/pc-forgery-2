@@ -1,3 +1,5 @@
+import { apiHabilitada, peticion } from "../utils/api.js"
+
 // Hilos base de la comunidad (se cargan solo la primera vez que se ejecuta la app).
 // Si ya existen hilos en localStorage ("hilos"), se respetan esos datos.
 
@@ -104,4 +106,31 @@ export function obtenerHilosRecientes(cantidad = 3) {
     return [...hilos]
         .sort((a, b) => new Date(b.fecha) - new Date(a.fecha))
         .slice(0, cantidad)
+}
+
+// ---------- Backend (comunidad-service) ----------
+
+// Trae los hilos (con sus respuestas) y los deja en la caché local "hilos".
+export async function sincronizarHilos() {
+    if (!apiHabilitada()) return leerHilosGuardados() || []
+    const hilos = await peticion("/hilos")
+    localStorage.setItem(CLAVE_HILOS, JSON.stringify(hilos))
+    localStorage.setItem(CLAVE_VERSION_HILOS, String(VERSION_HILOS))
+    return hilos
+}
+
+function guardarHiloEnCache(hilo) {
+    const hilos = (leerHilosGuardados() || []).filter(item => item.id !== hilo.id)
+    localStorage.setItem(CLAVE_HILOS, JSON.stringify([hilo, ...hilos]))
+    return hilo
+}
+
+// Publica un hilo (POST /api/hilos). El autor lo pone el backend a partir del JWT.
+export async function crearHiloApi({ titulo, categoria, mensaje }) {
+    return guardarHiloEnCache(await peticion("/hilos", { metodo: "POST", cuerpo: { titulo, categoria, mensaje } }))
+}
+
+// Responde un hilo (POST /api/hilos/{id}/respuestas) y devuelve el hilo actualizado.
+export async function responderHiloApi(id, texto) {
+    return guardarHiloEnCache(await peticion(`/hilos/${encodeURIComponent(id)}/respuestas`, { metodo: "POST", cuerpo: { texto } }))
 }

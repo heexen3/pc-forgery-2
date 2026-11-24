@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "titulo": "Nueva generación de tarjetas gráficas llega a la tienda",
+    "resumen": "Ya disponibles los nuevos modelos con mejor rendimiento por precio, ideales para actualizar tu setup sin gastar de más.",
+    "texto": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore. Excepturi reprehenderit, quae quia maiores nesciunt saepe soluta iure natus exercitationem amet.\n\nLorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore.",
+    "imagen": "/noticia1.webp",
+    "fecha": "2026-09-03"
+  },
+  {
+    "id": 2,
+    "titulo": "PC Forgery suma la sección Comunidad",
+    "resumen": "Ahora puedes compartir tus armados, hacer preguntas y ayudar a otros usuarios en nuestro nuevo espacio de foro.",
+    "texto": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore. Excepturi reprehenderit, quae quia maiores nesciunt saepe soluta iure natus exercitationem amet.\n\nLorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore.",
+    "imagen": "/noticia2.webp",
+    "fecha": "2026-09-06"
+  },
+  {
+    "id": 3,
+    "titulo": "Guía rápida: cómo elegir tu primera fuente de poder",
+    "resumen": "Te explicamos qué significa el wattage, la certificación 80 Plus y qué debes considerar antes de comprar.",
+    "texto": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore. Excepturi reprehenderit, quae quia maiores nesciunt saepe soluta iure natus exercitationem amet.\n\nLorem ipsum dolor sit amet consectetur adipisicing elit. Iure natus veritatis ullam praesentium voluptas perspiciatis voluptatem, nihil inventore.",
+    "imagen": "/computer.png",
+    "fecha": "2026-09-01"
+  }
+]

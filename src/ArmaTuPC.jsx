@@ -24,10 +24,12 @@ import {
     obtenerArmados,
     guardarArmado,
     eliminarArmado,
-    cargarSeleccion
+    cargarSeleccion,
+    sincronizarArmados
 } from "./components/armado/ArmadosGuardados.js"
 import { agregarAlCarrito, formatearPrecio } from "./components/carrito/Carrito.js"
 import { mostrarAlerta } from "./components/dialogo/Dialogo.js"
+import { cuandoListo, useSincronizacion } from "./utils/api.js"
 
 // Textos de ayuda del asistente para cada paso
 const AYUDA_PASOS = {
@@ -76,6 +78,8 @@ function ArmaTuPC() {
     const [aviso, setAviso] = useState("")
     const [nombreArmado, setNombreArmado] = useState(() => (armadoInicial?.nombre || ""))
     const [armados, setArmados] = useState(() => obtenerArmados(usuario))
+    // con backend: armados guardados del usuario desde pedidos-service
+    useSincronizacion(() => sincronizarArmados(usuario), () => setArmados(obtenerArmados(usuario)))
     const [mensajeArmados, setMensajeArmados] = useState(() => (armadoInicial ? `Armado "${armadoInicial.nombre}" cargado desde tu perfil.` : ""))
 
     const paso = PASOS[pasoActual]
@@ -144,12 +148,13 @@ function ArmaTuPC() {
 
     function guardarArmadoActual(event) {
         event.preventDefault()
-        const resultado = guardarArmado(usuario, nombreArmado, seleccion, plataforma)
-        setArmados(resultado.armados)
-        setMensajeArmados(resultado.mensaje)
-        if (resultado.ok) {
-            setNombreArmado("")
-        }
+        cuandoListo(guardarArmado(usuario, nombreArmado, seleccion, plataforma), resultado => {
+            setArmados(resultado.armados)
+            setMensajeArmados(resultado.mensaje)
+            if (resultado.ok) {
+                setNombreArmado("")
+            }
+        })
     }
 
     function cargarArmado(armado) {
@@ -161,7 +166,7 @@ function ArmaTuPC() {
     }
 
     function borrarArmado(armado) {
-        setArmados(eliminarArmado(usuario, armado.id))
+        cuandoListo(eliminarArmado(usuario, armado.id), setArmados)
         setMensajeArmados(`Armado "${armado.nombre}" eliminado.`)
     }
 

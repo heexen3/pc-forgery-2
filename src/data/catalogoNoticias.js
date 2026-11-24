@@ -1,3 +1,5 @@
+import { apiHabilitada, peticion } from "../utils/api.js"
+
 // Catalogo de noticias. Mismo patron que catalogoProductos.js:
 // el admin crea/elimina noticias y quedan guardadas en localStorage.
 // Si el admin elimina todas, se vuelve a las noticias base (no se pierde la seccion).
@@ -70,6 +72,12 @@ export function obtenerNoticia(noticiaId) {
 // Crea una noticia nueva a partir de los datos del formulario del admin
 // (titulo, resumen, texto, imagen) y la deja guardada en localStorage.
 export function crearNoticia({ titulo, resumen, texto, imagen }) {
+    // Con backend: POST /api/noticias (solo ADMIN). Devuelve una promesa con la lista actualizada.
+    if (apiHabilitada()) {
+        return peticion("/noticias", { metodo: "POST", cuerpo: { titulo, resumen, texto, imagen } })
+            .then(() => sincronizarNoticias())
+    }
+
     const noticiasActuales = [...(leerNoticiasGuardadas() || noticiasBase)]
 
     const nuevaNoticia = {
@@ -92,6 +100,11 @@ export function crearNoticia({ titulo, resumen, texto, imagen }) {
 // Elimina una noticia por id. Si no queda ninguna, se vuelve al catálogo base
 // en vez de dejar la seccion de noticias vacia.
 export function eliminarNoticia(noticiaId) {
+    // Con backend: DELETE /api/noticias/{id} (solo ADMIN). Devuelve una promesa.
+    if (apiHabilitada()) {
+        return peticion(`/noticias/${noticiaId}`, { metodo: "DELETE" }).then(() => sincronizarNoticias())
+    }
+
     const noticiasActuales = (leerNoticiasGuardadas() || noticiasBase).filter(
         noticia => Number(noticia.id) !== Number(noticiaId)
     )
@@ -116,4 +129,11 @@ export function formatearFecha(fechaISO) {
     })
 
     return `Publicado el ${formateada}`
+}
+// Trae las noticias del backend (comunidad-service) y las deja en la caché local "noticias".
+export async function sincronizarNoticias() {
+    if (!apiHabilitada()) return obtenerNoticias()
+    const noticias = await peticion("/noticias")
+    localStorage.setItem(CLAVE_NOTICIAS, JSON.stringify(noticias))
+    return obtenerNoticias()
 }

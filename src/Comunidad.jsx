@@ -4,6 +4,8 @@ import "./comunidad.css"
 import HiloCard from "./components/HiloCard"
 import MarcoCorreo from "./components/escritorio/MarcoCorreo.jsx"
 import { rutaPublica } from "./utils/rutaPublica.js"
+import { sincronizarHilos } from "./data/hilosData.js"
+import { useSincronizacion } from "./utils/api.js"
 
 function Comunidad() {
     // Lógica
@@ -30,11 +32,12 @@ function Comunidad() {
 
     // primero va el hilo con la actividad mas reciente
     // (un hilo nuevo, o con una respuesta nueva, sube hasta arriba)
-    const [hilos] = useState(() =>
-        [...leerHilos()].sort(
-            (a, b) => new Date(b.ultimaActividad) - new Date(a.ultimaActividad)
-        )
+    const ordenarHilos = () => [...leerHilos()].sort(
+        (a, b) => new Date(b.ultimaActividad) - new Date(a.ultimaActividad)
     )
+    const [hilos, setHilos] = useState(ordenarHilos)
+    // con backend: hilos desde comunidad-service
+    useSincronizacion(sincronizarHilos, () => setHilos(ordenarHilos()))
 
     // Renderizado
     return (

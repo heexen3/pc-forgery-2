@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { crearNoticia } from "../../data/catalogoNoticias.js"
+import { cuandoListo } from "../../utils/api.js"
 import { mostrarAlerta } from "../dialogo/Dialogo.js"
 
 // Limite del resumen
@@ -54,19 +55,20 @@ function NuevaNoticia() {
             return
         }
 
-        crearNoticia({
+        const formulario = event.target
+        Promise.resolve(cuandoListo(crearNoticia({
             titulo: noticia.titulo.trim(),
             resumen: noticia.resumen.trim(),
             texto: noticia.texto.trim(),
             imagen
-        })
+        }), () => {
+            mostrarAlerta("Noticia creada correctamente.")
 
-        mostrarAlerta("Noticia creada correctamente.")
-
-        setNoticia({ titulo: "", resumen: "", texto: "" })
-        setImagen("")
-        setPrevisualizacion("")
-        event.target.reset()
+            setNoticia({ titulo: "", resumen: "", texto: "" })
+            setImagen("")
+            setPrevisualizacion("")
+            formulario.reset()
+        })).catch(error => mostrarAlerta(error.message, { icono: "error" }))
     }
 
     return (

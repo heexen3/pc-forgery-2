@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom"
 import "./HiloDetalle.css"
 import MarcoCorreo from "./components/escritorio/MarcoCorreo.jsx"
 import MensajeForo from "./components/MensajeForo.jsx"
+import { responderHiloApi, sincronizarHilos } from "./data/hilosData.js"
+import { apiHabilitada, useSincronizacion } from "./utils/api.js"
 
 const LARGO_MINIMO_RESPUESTA = 3
 
@@ -52,6 +54,8 @@ function DetalleHilo({ id }) {
     const [texto, setTexto] = useState("")
     const [aviso, setAviso] = useState("")
     const [exito, setExito] = useState(false)
+    // con backend: hilo y respuestas actualizados desde comunidad-service
+    useSincronizacion(sincronizarHilos, () => setHilo(leerHilos().find(item => item.id === id) || null))
 
     function avisar(ok, mensaje) {
         setExito(ok)
@@ -76,6 +80,18 @@ function DetalleHilo({ id }) {
         const textoLimpio = texto.trim()
         if (textoLimpio.length < LARGO_MINIMO_RESPUESTA) {
             avisar(false, `La respuesta debe tener al menos ${LARGO_MINIMO_RESPUESTA} caracteres.`)
+            return
+        }
+
+        // Con backend: POST /api/hilos/{id}/respuestas
+        if (apiHabilitada()) {
+            responderHiloApi(id, textoLimpio)
+                .then(actualizado => {
+                    setHilo(actualizado)
+                    setTexto("")
+                    avisar(true, "Tu respuesta fue publicada.")
+                })
+                .catch(error => avisar(false, error.message))
             return
         }
 
