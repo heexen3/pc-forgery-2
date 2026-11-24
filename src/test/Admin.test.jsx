@@ -15,22 +15,21 @@ describe("Pruebas de Administración", () => {
 
         expect(screen.getByRole("heading", { name: "Administración" })).toBeTruthy()
         expect(screen.getByRole("button", { name: "Comandos Admin" })).toBeTruthy()
-        expect(screen.getByRole("button", { name: "Historial" })).toBeTruthy()
+        expect(screen.getByRole("button", { name: "Dashboard" })).toBeTruthy()
         expect(screen.getByRole("button", { name: "Ver Reportes" })).toBeTruthy()
         expect(screen.getByRole("button", { name: "Ver Usuarios" })).toBeTruthy()
         expect(screen.getByRole("button", { name: "Ver Perfil Admin" })).toBeTruthy()
     })
 
-    // PRUEBA UNITARIA 2: Cambiar a la vista de historial
-    test("muestra el historial al pulsar el botón correspondiente", async () => {
+    // PRUEBA UNITARIA 2: Cambiar a la vista de Dashboard
+    test("muestra el Dashboard al pulsar el botón correspondiente", async () => {
         const user = userEvent.setup()
         render(<Admin />)
 
-        await user.click(screen.getByRole("button", { name: "Historial" }))
+        await user.click(screen.getByRole("button", { name: "Dashboard" }))
 
-        expect(screen.getByRole("heading", { name: "Historial" })).toBeTruthy()
-        expect(screen.getByRole("columnheader", { name: "Fecha" })).toBeTruthy()
-        expect(screen.getByRole("columnheader", { name: "Acción" })).toBeTruthy()
-        expect(screen.getByRole("columnheader", { name: "Usuario" })).toBeTruthy()
+        expect(screen.getByRole("heading", { name: /Dashboard del Sistema/i })).toBeTruthy()
+        expect(screen.getByText("Resumen General del Negocio")).toBeTruthy()
+        expect(screen.getByText("Ganancias Totales")).toBeTruthy()
     })
 })
