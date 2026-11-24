@@ -1,0 +1,116 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth
+              uri: ${AUTH_URL:http://localhost:8081}
+              predicates:
+                - Path=/api/auth/**,/api/usuarios/**
+              filters:
+                - StripPrefix=1
+            - id: productos
+              uri: ${PRODUCTOS_URL:http://localhost:8082}
+              predicates:
+                - Path=/api/productos/**,/api/categorias/**,/api/componentes/**
+              filters:
+                - StripPrefix=1
+            - id: inventario
+              uri: ${INVENTARIO_URL:http://localhost:8083}
+              predicates:
+                - Path=/api/inventario/**
+              filters:
+                - StripPrefix=1
+            - id: pedidos
+              uri: ${PEDIDOS_URL:http://localhost:8084}
+              predicates:
+                - Path=/api/pedidos/**,/api/boletas/**,/api/armados/**
+              filters:
+                - StripPrefix=1
+            - id: pagos
+              uri: ${PAGOS_URL:http://localhost:8085}
+              predicates:
+                - Path=/api/pagos/**
+              filters:
+                - StripPrefix=1
+            - id: comunidad
+              uri: ${COMUNIDAD_URL:http://localhost:8086}
+              predicates:
+                - Path=/api/hilos/**,/api/resenas/**,/api/noticias/**
+              filters:
+                - StripPrefix=1
+            - id: docs-auth
+              uri: ${AUTH_URL:http://localhost:8081}
+              predicates:
+                - Path=/docs/auth/v3/api-docs
+              filters:
+                - SetPath=/v3/api-docs
+            - id: docs-productos
+              uri: ${PRODUCTOS_URL:http://localhost:8082}
+              predicates:
+                - Path=/docs/productos/v3/api-docs
+              filters:
+                - SetPath=/v3/api-docs
+            - id: docs-inventario
+              uri: ${INVENTARIO_URL:http://localhost:8083}
+              predicates:
+                - Path=/docs/inventario/v3/api-docs
+              filters:
+                - SetPath=/v3/api-docs
+            - id: docs-pedidos
+              uri: ${PEDIDOS_URL:http://localhost:8084}
+              predicates:
+                - Path=/docs/pedidos/v3/api-docs
+              filters:
+                - SetPath=/v3/api-docs
+            - id: docs-pagos
+              uri: ${PAGOS_URL:http://localhost:8085}
+              predicates:
+                - Path=/docs/pagos/v3/api-docs
+              filters:
+                - SetPath=/v3/api-docs
+            - id: docs-comunidad
+              uri: ${COMUNIDAD_URL:http://localhost:8086}
+              predicates:
+                - Path=/docs/comunidad/v3/api-docs
+              filters:
+                - SetPath=/v3/api-docs
+
+app:
+  jwt:
+    # Mismo secreto que auth-service (variable JWT_SECRET en docker-compose).
+    secret: ${JWT_SECRET:pc-forgery-secreto-de-desarrollo-cambiar-en-produccion-2026}
+  cors:
+    origenes: ${CORS_ORIGINS:http://localhost:5173,https://heexen3.github.io}
+
+# Swagger UI unificado: http://localhost:8080/swagger-ui.html (selector arriba a la derecha)
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: auth-service
+        url: /docs/auth/v3/api-docs
+      - name: productos-service
+        url: /docs/productos/v3/api-docs
+      - name: inventario-service
+        url: /docs/inventario/v3/api-docs
+      - name: pedidos-service
+        url: /docs/pedidos/v3/api-docs
+      - name: pagos-service
+        url: /docs/pagos/v3/api-docs
+      - name: comunidad-service
+        url: /docs/comunidad/v3/api-docs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway

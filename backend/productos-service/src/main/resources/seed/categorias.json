@@ -1,0 +1,52 @@
+[
+  {
+    "valor": "Procesadores",
+    "etiqueta": "Procesadores",
+    "icono": "/productos/cpu.svg"
+  },
+  {
+    "valor": "Placas madre",
+    "etiqueta": "Placas madre",
+    "icono": "/productos/placa.svg"
+  },
+  {
+    "valor": "Memorias RAM",
+    "etiqueta": "Memorias RAM",
+    "icono": "/productos/ram.svg"
+  },
+  {
+    "valor": "Tarjetas de video",
+    "etiqueta": "Tarjetas de video",
+    "icono": "/productos/gpu.svg"
+  },
+  {
+    "valor": "Almacenamiento",
+    "etiqueta": "Almacenamiento",
+    "icono": "/productos/disco.svg"
+  },
+  {
+    "valor": "Fuentes de poder",
+    "etiqueta": "Fuentes de poder",
+    "icono": "/productos/fuente.svg"
+  },
+  {
+    "valor": "Gabinetes",
+    "etiqueta": "Gabinetes",
+    "icono": "/productos/gabinete.svg"
+  },
+  {
+    "valor": "Perifericos",
+    "etiqueta": "Periféricos",
+    "icono": "/productos/periferico.svg"
+  },
+  {
+    "valor": "Monitores",
+    "etiqueta": "Monitores",
+    "icono": "/computer.png"
+  },
+  {
+    "valor": "Componentes",
+    "etiqueta": "Otros componentes",
+    "icono": "/tools.png"
+  }
+]

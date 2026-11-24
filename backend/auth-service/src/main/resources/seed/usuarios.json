@@ -1,0 +1,16 @@
+[
+  {
+    "nombre": "Administrador",
+    "usuario": "admin",
+    "email": "admin@admin.com",
+    "passwordHash": "$2b$10$yxSbSprcnZFo4Lx2KD8dTuRBiMuDVHqGgI7AjboAENsYv.ilGdrMe",
+    "rol": "ADMIN"
+  },
+  {
+    "nombre": "Cliente Ejemplo",
+    "usuario": "cliente",
+    "email": "cliente@duocuc.cl",
+    "passwordHash": "$2b$10$hcfxbPu7aOT1I33HAje/2OCgHbw/n5ilP3gj.dW9RXs2kRxmmODoK",
+    "rol": "CLIENTE"
+  }
+]

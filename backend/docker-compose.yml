@@ -1,0 +1,109 @@
+# PC Forgery - backend completo (PostgreSQL + 6 microservicios + API Gateway)
+# Uso:  docker compose up --build      (desde la carpeta backend)
+# Frontend: npm run dev en la raíz del repo -> http://localhost:5173 (usa http://localhost:8080)
+name: pc-forgery
+
+x-servicio: &servicio
+  restart: unless-stopped
+  environment: &entorno
+    DB_USER: ${POSTGRES_USER:-postgres}
+    DB_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    GATEWAY_URL: http://localhost:8080
+    JWT_SECRET: ${JWT_SECRET:-pc-forgery-secreto-de-desarrollo-cambiar-en-produccion-2026}
+    JWT_ACCESS_MINUTOS: ${JWT_ACCESS_MINUTOS:-15}
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  auth-service:
+    <<: *servicio
+    build: ./auth-service
+    environment:
+      <<: *entorno
+      DB_URL: jdbc:postgresql://postgres:5432/auth_db
+    ports:
+      - "8081:8081"
+  productos-service:
+    <<: *servicio
+    build: ./productos-service
+    environment:
+      <<: *entorno
+      DB_URL: jdbc:postgresql://postgres:5432/productos_db
+    ports:
+      - "8082:8082"
+  inventario-service:
+    <<: *servicio
+    build: ./inventario-service
+    environment:
+      <<: *entorno
+      DB_URL: jdbc:postgresql://postgres:5432/inventario_db
+    ports:
+      - "8083:8083"
+  pagos-service:
+    <<: *servicio
+    build: ./pagos-service
+    environment:
+      <<: *entorno
+      DB_URL: jdbc:postgresql://postgres:5432/pagos_db
+    ports:
+      - "8085:8085"
+  pedidos-service:
+    <<: *servicio
+    build: ./pedidos-service
+    environment:
+      <<: *entorno
+      DB_URL: jdbc:postgresql://postgres:5432/pedidos_db
+      PRODUCTOS_URL: http://productos-service:8082
+      INVENTARIO_URL: http://inventario-service:8083
+      PAGOS_URL: http://pagos-service:8085
+    ports:
+      - "8084:8084"
+  comunidad-service:
+    <<: *servicio
+    build: ./comunidad-service
+    environment:
+      <<: *entorno
+      DB_URL: jdbc:postgresql://postgres:5432/comunidad_db
+    ports:
+      - "8086:8086"
+  api-gateway:
+    build: ./api-gateway
+    restart: unless-stopped
+    environment:
+      JWT_SECRET: ${JWT_SECRET:-pc-forgery-secreto-de-desarrollo-cambiar-en-produccion-2026}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,https://heexen3.github.io}
+      AUTH_URL: http://auth-service:8081
+      PRODUCTOS_URL: http://productos-service:8082
+      INVENTARIO_URL: http://inventario-service:8083
+      PEDIDOS_URL: http://pedidos-service:8084
+      PAGOS_URL: http://pagos-service:8085
+      COMUNIDAD_URL: http://comunidad-service:8086
+    ports:
+      - "8080:8080"
+    depends_on:
+      - auth-service
+      - productos-service
+      - inventario-service
+      - pedidos-service
+      - pagos-service
+      - comunidad-service
+
+volumes:
+  pgdata:

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  POM agregador: permite compilar y probar todos los microservicios con un solo comando
+  (./mvnw test desde la carpeta backend). Cada servicio sigue siendo un proyecto Maven
+  independiente con su propio pom.xml (padre: spring-boot-starter-parent).
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cl.pcforgery</groupId>
+    <artifactId>pc-forgery-backend</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <name>PC Forgery - Backend (microservicios)</name>
+
+    <modules>
+        <module>api-gateway</module>
+        <module>auth-service</module>
+        <module>productos-service</module>
+        <module>inventario-service</module>
+        <module>pedidos-service</module>
+        <module>pagos-service</module>
+        <module>comunidad-service</module>
+    </modules>
+</project>
