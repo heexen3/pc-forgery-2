@@ -111,9 +111,6 @@ function Admin() {
                             <BarraTitulo titulo="Comandos Admin" icono="/tools.png" como="h2" />
 
                             <div className="contenido-botones p-3">
-<<<<<<< HEAD
-                                <button className="btn btn-admin me-2 mb-2">
-=======
                                 <button
                                     className="btn btn-admin me-2 mb-2"
                                     onClick={() => {
@@ -126,7 +123,6 @@ function Admin() {
                                         alert("LocalStorage borrado correctamente.")
                                     }}
                                 >
->>>>>>> Frontend: integración con el backend vía API Gateway
                                     Borrar LocalStorage
                                 </button>
 
